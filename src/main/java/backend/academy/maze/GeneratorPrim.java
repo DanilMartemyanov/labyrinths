@@ -1,8 +1,10 @@
 package backend.academy.maze;
 
+import lombok.extern.log4j.Log4j2;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashSet;
+
 
 public class GeneratorPrim implements Generator {
 
@@ -25,8 +27,8 @@ public class GeneratorPrim implements Generator {
         HashSet<Cell> visited = new HashSet<>();
         visited.add(startPoint);
 
-        // Вывод начальной точки
-        System.out.println("startPoint: " + startPoint.row + ", " + startPoint.column);
+
+
 
         // Добавляем начальных соседей
         addNeighbor(startPoint, directions, neighbours, maze.grid, visited);
@@ -36,9 +38,7 @@ public class GeneratorPrim implements Generator {
             int indexNeighbour = random.nextInt(neighbours.size());
             Cell randomNeighbor = neighbours.stream().toList().get(indexNeighbour);
 
-            // Вывод случайного соседа
-            System.out.println("рандомный сосед");
-            System.out.println("row: " + randomNeighbor.row + " column: " + randomNeighbor.column);
+
 
             // Находим посещённую клетку, которая находится на 2 клетки дальше от выбранного соседа
             Cell visitedCell = findVisitedNeighbor(randomNeighbor, directions, maze.grid, visited);
@@ -52,10 +52,7 @@ public class GeneratorPrim implements Generator {
                 // Создаём проход между посещённой клеткой и соседом
                 addPassageBetween(visitedCell, randomNeighbor, maze.grid);
 
-                // Вывод прохода между посещённой клеткой и соседом
-                System.out.println("Создаём проход между клетками");
-                System.out.println("visitedCell: " + visitedCell.row + ", " + visitedCell.column);
-                System.out.println("randomNeighbor: " + randomNeighbor.row + ", " + randomNeighbor.column);
+
 
                 // Добавляем новых соседей
                 addNeighbor(randomNeighbor, directions, neighbours, maze.grid, visited);
@@ -66,8 +63,7 @@ public class GeneratorPrim implements Generator {
 
             // Вывод текущего состояния лабиринта
             maze.printMaze();
-            System.out.println();
-            System.out.println("---------------------");
+
         }
 
         // Финальный вывод лабиринта
@@ -112,15 +108,14 @@ public class GeneratorPrim implements Generator {
             if (checkBounds(new Coordinate(newRow, newCol), grid)) {
                 Cell neighbor = grid[newRow][newCol];
                 if (!visited.contains(neighbor) && !neighbours.contains(neighbor)) {
-                    // Вывод добавленного соседа
-                    System.out.println("neighbour: " + neighbor.row + ", " + neighbor.column);
-                    neighbours.add(neighbor); // Добавляем только непосещённые клетки
+                    // Добавляем только непосещённые клетки
+                    neighbours.add(neighbor);
                 }
             }
         }
     }
 
-    // Проверяем границы лабиринта (оставлен прежний метод)
+    // Проверяем границы лабиринта
     public static boolean checkBounds(Coordinate cell, Cell[][] grid) {
         if (cell.row() >= 0 && cell.row() < grid.length && cell.column() >= 0 && cell.column() < grid[0].length) {
             return true;
@@ -128,15 +123,10 @@ public class GeneratorPrim implements Generator {
         return false;
     }
 
-    // Добавляем проход между клетками (удаляем стену)
+    // Добавляем проход между клетками
     public static void addPassageBetween(Cell current, Cell neighbor, Cell[][] grid) {
-        System.out.println("текущая клетка");
-        System.out.println("current: " + current.row + ", " + current.column);
-        System.out.println("neighbor: " + neighbor.row + ", " + neighbor.column);
         int passageRow = (current.row() + neighbor.row()) / 2;
         int passageColumn = (current.column() + neighbor.column()) / 2;
-        System.out.println("Создался проход на позиции");
-        System.out.println("row: " + passageRow + " column: " + passageColumn);
         grid[passageRow][passageColumn] = new Cell(passageRow, passageColumn, Type.PASSAGE);  // Устанавливаем проход
     }
 }

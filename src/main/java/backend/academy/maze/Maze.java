@@ -1,6 +1,5 @@
 package backend.academy.maze;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +34,5 @@ public final class Maze {
             System.out.println();
         }
     }
-
-
 
 }

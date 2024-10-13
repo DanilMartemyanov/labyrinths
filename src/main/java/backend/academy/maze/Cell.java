@@ -1,7 +1,6 @@
 package backend.academy.maze;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
