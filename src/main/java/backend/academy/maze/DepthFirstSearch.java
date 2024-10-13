@@ -1,5 +1,6 @@
 package backend.academy.maze;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -7,6 +8,7 @@ public class DepthFirstSearch implements PathFinding {
     private HashSet<Cell> visited;
     private ArrayList<Coordinate> path;
     private Cell[][] grid;
+
 
     public DepthFirstSearch(Cell[][] grid) {
         this.grid = grid;
@@ -23,21 +25,19 @@ public class DepthFirstSearch implements PathFinding {
     }
 
     public boolean dfs(Coordinate current, Coordinate end) {
-        if (visited.contains(current) || !GeneratorPrim.checkBounds(current, grid) ||
-            grid[current.row()][current.column()].type == Type.WALL) {
-            System.out.println("первый этап");
+        if (visited.contains(current) || !GeneratorPrim.checkBounds(current, grid)
+            || grid[current.row()][current.column()].type == Type.WALL) {
             return false;
         }
         path.add(current);
 
         if (current.equals(end)) {
-            System.out.println("второй этап");
             return true;
         }
         visited.add(new Cell(current.row(), current.column(), Type.PASSAGE));
 
         HashSet<Cell> neighbours = new HashSet<>();
-        ArrayList<Coordinate> directions = Coordinate.generateDirections(1);
+        ArrayList<Coordinate> directions = Coordinate.generateDirections(Constant.STEP_1);
 
         addNeighborDFS(directions, current, visited, neighbours);
         for (Cell neighbour : neighbours) {
@@ -46,7 +46,6 @@ public class DepthFirstSearch implements PathFinding {
             }
 
         }
-        System.out.println("третий этап");
         path.remove(current);
         return false;
     }
@@ -61,8 +60,8 @@ public class DepthFirstSearch implements PathFinding {
             int rowNeighbor = current.row() + direction.row();
             int columnNeighbor = current.column() + direction.column();
 
-            if (GeneratorPrim.checkBounds(new Coordinate(rowNeighbor, columnNeighbor), grid) &&
-                grid[rowNeighbor][columnNeighbor].type == Type.PASSAGE) {
+            if (GeneratorPrim.checkBounds(new Coordinate(rowNeighbor, columnNeighbor), grid)
+                && grid[rowNeighbor][columnNeighbor].type == Type.PASSAGE) {
                 Cell neighbour = new Cell(rowNeighbor, columnNeighbor, Type.PASSAGE);
                 if (!visited.contains(neighbour) && !neigbours.contains(neighbour)) {
                     neigbours.add(neighbour);

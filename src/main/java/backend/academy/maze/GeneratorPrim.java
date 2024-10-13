@@ -1,6 +1,6 @@
 package backend.academy.maze;
 
-import lombok.extern.log4j.Log4j2;
+
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,7 +13,7 @@ public class GeneratorPrim implements Generator {
         Maze maze = new Maze(height, width);
 
         // Направления движения через 2 клетки (чтобы прыгать через стены)
-        ArrayList<Coordinate> directions = Coordinate.generateDirections(2);
+        ArrayList<Coordinate> directions = Coordinate.generateDirections(Constant.STEP_2);
 
         // Начальная точка
         int randomRow = random.nextInt(height / 2) * 2 + 1;
