@@ -1,9 +1,10 @@
 package backend.academy.maze;
 
-import lombok.experimental.UtilityClass;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class Main {
