@@ -22,14 +22,16 @@ public class DepthFirstSearch implements PathFinding {
         return null;
     }
 
-    private boolean dfs(Coordinate current, Coordinate end) {
-        if (visited.contains(current) || GeneratorPrim.checkBounds(current, grid) ||
+    public boolean dfs(Coordinate current, Coordinate end) {
+        if (visited.contains(current) || !GeneratorPrim.checkBounds(current, grid) ||
             grid[current.row()][current.column()].type == Type.WALL) {
+            System.out.println("первый этап");
             return false;
         }
         path.add(current);
 
         if (current.equals(end)) {
+            System.out.println("второй этап");
             return true;
         }
         visited.add(new Cell(current.row(), current.column(), Type.PASSAGE));
@@ -37,20 +39,36 @@ public class DepthFirstSearch implements PathFinding {
         HashSet<Cell> neighbours = new HashSet<>();
         ArrayList<Coordinate> directions = Coordinate.generateDirections(1);
 
-        GeneratorPrim.addNeighbour
-            (new Cell(current.row(), current.column(), Type.PASSAGE),
-                directions,
-                neighbours,
-                grid,
-                visited
-            );
-        for(Cell neighbour : neighbours) {
-            if(dfs(new Coordinate(neighbour.row, neighbour.column), end)){
+        addNeighborDFS(directions, current, visited, neighbours);
+        for (Cell neighbour : neighbours) {
+            if (dfs(new Coordinate(neighbour.row, neighbour.column), end)) {
                 return true;
             }
 
         }
+        System.out.println("третий этап");
         path.remove(current);
         return false;
+    }
+
+    private void addNeighborDFS(
+        ArrayList<Coordinate> directions,
+        Coordinate current,
+        HashSet<Cell> visited,
+        HashSet<Cell> neigbours
+    ) {
+        for (Coordinate direction : directions) {
+            int rowNeighbor = current.row() + direction.row();
+            int columnNeighbor = current.column() + direction.column();
+
+            if (GeneratorPrim.checkBounds(new Coordinate(rowNeighbor, columnNeighbor), grid) &&
+                grid[rowNeighbor][columnNeighbor].type == Type.PASSAGE) {
+                Cell neighbour = new Cell(rowNeighbor, columnNeighbor, Type.PASSAGE);
+                if (!visited.contains(neighbour) && !neigbours.contains(neighbour)) {
+                    neigbours.add(neighbour);
+                }
+            }
+        }
+
     }
 }
