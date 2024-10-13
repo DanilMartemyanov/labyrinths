@@ -6,6 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public final class Maze {
     private final int height;
     private final int width;
@@ -30,7 +31,8 @@ public final class Maze {
     public void printMaze() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                printStream.println(grid[i][j].type == Type.WALL ? "\u26D4" : "\u2705");
+                printStream.print(grid[i][j].type == Type.WALL ? "\u26D4" : "\u2705");
+
             }
             printStream.println();
         }

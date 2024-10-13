@@ -63,6 +63,7 @@ public class GeneratorPrim implements Generator {
 
             // Вывод текущего состояния лабиринта
             maze.printMaze();
+            System.out.println("----------------------");
 
         }
 
