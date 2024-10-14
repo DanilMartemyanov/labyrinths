@@ -37,6 +37,12 @@ public class GenratorPrimTest {
     }
 
     @Test
+    void checkBounds(){
+        boolean check = GeneratorPrim.checkBounds(new Coordinate(0,2), maze.grid);
+        Assertions.assertFalse(check);
+    }
+
+    @Test
     void addNeighbourPrim(){
         GeneratorPrim.addNeighbor(new Cell(5,5, Type.PASSAGE), directionsPrim, neighbors, maze.grid, visited);
         GeneratorPrim.addNeighbor(new Cell(3,5, Type.PASSAGE), directionsPrim, neighbors, maze.grid, visited);

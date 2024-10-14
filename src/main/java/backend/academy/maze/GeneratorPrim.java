@@ -109,7 +109,7 @@ public class GeneratorPrim implements Generator {
 
     // Проверяем границы лабиринта
     public static boolean checkBounds(Coordinate cell, Cell[][] grid) {
-        if (cell.row() >= 0 && cell.row() < grid.length && cell.column() >= 0 && cell.column() < grid[0].length) {
+        if (cell.row() > 0 && cell.row() < grid.length && cell.column() > 0 && cell.column() < grid[0].length) {
             return true;
         }
         return false;

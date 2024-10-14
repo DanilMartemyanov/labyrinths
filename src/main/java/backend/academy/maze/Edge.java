@@ -11,13 +11,14 @@ import java.util.ArrayList;
 public class Edge {
     private Coordinate firstNode;
     private Coordinate secondNode;
-    private ArrayList<Coordinate> directons;
 
     public Edge(Coordinate firstNode, Coordinate secondNode) {
         this.firstNode = firstNode;
         this.secondNode = secondNode;
-        this.directons = Coordinate.generateDirections(Constant.STEP_1);
     }
 
-
+    @Override
+    public String toString() {
+        return "Edge firstNode: " + firstNode + ", secondNode: " + secondNode + "";
+    }
 }
