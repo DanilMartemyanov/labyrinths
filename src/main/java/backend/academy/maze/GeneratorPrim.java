@@ -1,10 +1,8 @@
 package backend.academy.maze;
 
-
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashSet;
-
 
 public class GeneratorPrim implements Generator {
 
@@ -27,9 +25,6 @@ public class GeneratorPrim implements Generator {
         HashSet<Cell> visited = new HashSet<>();
         visited.add(startPoint);
 
-
-
-
         // Добавляем начальных соседей
         addNeighbor(startPoint, directions, neighbours, maze.grid, visited);
 
@@ -37,8 +32,6 @@ public class GeneratorPrim implements Generator {
             // Берём случайного соседа
             int indexNeighbour = random.nextInt(neighbours.size());
             Cell randomNeighbor = neighbours.stream().toList().get(indexNeighbour);
-
-
 
             // Находим посещённую клетку, которая находится на 2 клетки дальше от выбранного соседа
             Cell visitedCell = findVisitedNeighbor(randomNeighbor, directions, maze.grid, visited);
@@ -51,8 +44,6 @@ public class GeneratorPrim implements Generator {
 
                 // Создаём проход между посещённой клеткой и соседом
                 addPassageBetween(visitedCell, randomNeighbor, maze.grid);
-
-
 
                 // Добавляем новых соседей
                 addNeighbor(randomNeighbor, directions, neighbours, maze.grid, visited);
