@@ -1,6 +1,7 @@
 package backend.academy.maze;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class EdgeHandler {
@@ -24,5 +25,11 @@ public class EdgeHandler {
                 addEdge(coordinate, grid, edges);
             }
         }
+    }
+
+    public static ArrayList<Edge> sortEdges(HashSet<Edge> edges) {
+        ArrayList<Edge> sortedEdges = new ArrayList<>(edges);
+        Collections.sort(sortedEdges);
+        return sortedEdges;
     }
 }
