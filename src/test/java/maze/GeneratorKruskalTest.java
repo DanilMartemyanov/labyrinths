@@ -22,12 +22,10 @@ public class GeneratorKruskalTest {
     }
 
     @Test
-    void addEdge(){
-        Coordinate from = new Coordinate(1, 1);
-        generatorKruskal.addEdge(from, edges, maze.grid );
-        for (Edge edge : edges) {
-            System.out.println(edge.toString());
-        }
-        maze.printMaze();
+    void initEdges(){
+        generatorKruskal.initSetEdges(maze.grid, edges);
+//        generatorKruskal.addEdge(new Coordinate(1,1), maze.grid, edges);
+        System.out.println(edges.size());
+        System.out.println(new Edge(new Coordinate(0, 0), new Coordinate(0, 1)));
     }
 }
