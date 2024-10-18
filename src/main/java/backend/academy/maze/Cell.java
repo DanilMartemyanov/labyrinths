@@ -11,6 +11,4 @@ public class Cell {
     int row;
     int column;
     Type type;
-
-
 }

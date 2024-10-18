@@ -9,6 +9,9 @@ public class EdgeHandler {
 
     public static void addEdge(Coordinate from, Cell[][] grid, HashSet<Edge> edges) {
         for (Coordinate direction : DIRECTIONS) {
+            if(!GeneratorPrim.checkBounds(from, grid)){
+                continue;
+            }
             int newRow = from.row() + direction.row();
             int newColumn = from.column() + direction.column();
             Edge edge = new Edge(from, new Coordinate(newRow, newColumn));
@@ -19,8 +22,8 @@ public class EdgeHandler {
     }
 
     public static  void initSetEdges(Cell[][] grid, HashSet<Edge> edges) {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
+        for (int i = 1; i < grid.length - 1; i++) {
+            for (int j = 1; j < grid[0].length -1; j++) {
                 Coordinate coordinate = new Coordinate(i, j);
                 addEdge(coordinate, grid, edges);
             }
@@ -32,4 +35,7 @@ public class EdgeHandler {
         Collections.sort(sortedEdges);
         return sortedEdges;
     }
+//    public static boolean checkCycle(){
+//
+//    }
 }
