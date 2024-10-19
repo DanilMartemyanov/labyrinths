@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 public class EdgeHandler {
-    private static final ArrayList<Coordinate> DIRECTIONS = Coordinate.generateDirections(Constant.STEP_1);
+    private static final ArrayList<Coordinate> DIRECTIONS = Coordinate.generateDirections(Constant.STEP_2);
 
     public static void addEdge(Coordinate from, Cell[][] grid, HashSet<Edge> edges) {
         for (Coordinate direction : DIRECTIONS) {
@@ -22,8 +22,8 @@ public class EdgeHandler {
     }
 
     public static  void initSetEdges(Cell[][] grid, HashSet<Edge> edges) {
-        for (int i = 1; i < grid.length - 1; i++) {
-            for (int j = 1; j < grid[0].length -1; j++) {
+        for (int i = 1; i < grid.length; i = i + 2) {
+            for (int j = 1; j < grid[0].length; j = j + 2) {
                 Coordinate coordinate = new Coordinate(i, j);
                 addEdge(coordinate, grid, edges);
             }

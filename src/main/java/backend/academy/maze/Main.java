@@ -29,7 +29,7 @@ public class Main {
 //        }
 
          GeneratorKruskal generator = new GeneratorKruskal();
-         generator.generateMaze(11,11);
+         generator.generateMaze(21,11);
 
     }
 }
