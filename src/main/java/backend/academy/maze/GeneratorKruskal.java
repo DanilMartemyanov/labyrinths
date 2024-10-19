@@ -1,6 +1,6 @@
 package backend.academy.maze;
 
-import java.security.SecureRandom;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -13,14 +13,15 @@ public class GeneratorKruskal implements Generator {
         UnionFindImpl unionFind = new UnionFindImpl(height * width);
         // Создаем и заполняем ребра
         EdgeHandler.initSetEdges(maze.grid, edges);
-        for (Edge edge : edges) {
-            System.out.println(edge);
-        }
+
         // Сортируем ребра
         ArrayList<Edge> sortedEdges = EdgeHandler.sortEdges(edges);
 
-        unionCell(sortedEdges,unionFind, maze);
+        // строим лабиринт
+        unionCell(sortedEdges, unionFind, maze);
+
         maze.printMaze();
+
         return maze;
     }
 

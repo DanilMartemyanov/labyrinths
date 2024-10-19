@@ -59,11 +59,12 @@ public class UnionFindImpl implements UnionFind {
 
     //  Возвращает корень дерева - представителя множества
     public int root(int p) {
-        while (p != nodes[p]) {
-            nodes[p] = nodes[nodes[p]];
-            p = nodes[p];
+        int parent = p;
+        while (parent != nodes[parent]) {
+            nodes[parent] = nodes[nodes[parent]];
+            parent = nodes[parent];
         }
-        return p;
+        return parent;
     }
 }
 

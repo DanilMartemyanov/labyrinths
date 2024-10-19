@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class GeneratorPrim implements Generator {
+    private final SecureRandom random = new SecureRandom();
+
 
     public Maze generateMaze(int height, int width) {
-        SecureRandom random = new SecureRandom();
+
         Maze maze = new Maze(height, width);
 
         // Направления движения через 2 клетки (чтобы прыгать через стены)
@@ -52,11 +54,6 @@ public class GeneratorPrim implements Generator {
 
             // Удаляем соседа из множества, так как он уже обработан
             neighbours.remove(randomNeighbor);
-
-            // Вывод текущего состояния лабиринта
-            maze.printMaze();
-            System.out.println("----------------------");
-
         }
 
         // Финальный вывод лабиринта
@@ -110,19 +107,12 @@ public class GeneratorPrim implements Generator {
 
     // Проверяем границы лабиринта
     public static boolean checkBounds(Coordinate cell, Cell[][] grid) {
-        if (cell.row() > 0 && cell.row() < (grid.length - 1) && cell.column() > 0 &&
-            cell.column() < (grid[0].length - 1)) {
+        if (cell.row() > 0 && cell.row() < (grid.length - 1) && cell.column() > 0
+            && cell.column() < (grid[0].length - 1)) {
             return true;
         }
         return false;
     }
-
-    // Добавляем проход между клетками
-//    public static void addPassageBetween(Coordinate current, Coordinate neighbor, Cell[][] grid) {
-//        int passageRow = (current.row() + neighbor.row()) / 2;
-//        int passageColumn = (current.column() + neighbor.column()) / 2;
-//        grid[passageRow][passageColumn] = new Cell(passageRow, passageColumn, Type.PASSAGE);  // Устанавливаем проход
-//    }
 }
 
 

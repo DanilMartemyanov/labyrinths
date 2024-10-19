@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
+@SuppressWarnings("checkstyle:FinalClass")
 public class EdgeHandler {
     /**
      * EdgeHandler - класс для работы с рёбрами
      */
-
-
     private static final ArrayList<Coordinate> DIRECTIONS = Coordinate.generateDirections(Constant.STEP_2);
 
-
+    private EdgeHandler() {
+        throw new IllegalStateException("Utility class");
+    }
     /**
      * Проход по направлениям клетки
      * Создание ребра, при условии, что оно находится в зоне сетки

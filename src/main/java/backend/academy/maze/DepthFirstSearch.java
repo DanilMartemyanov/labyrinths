@@ -1,6 +1,5 @@
 package backend.academy.maze;
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -8,7 +7,6 @@ public class DepthFirstSearch implements PathFinding {
     private HashSet<Cell> visited;
     private ArrayList<Coordinate> path;
     private Cell[][] grid;
-
 
     public DepthFirstSearch(Cell[][] grid) {
         this.grid = grid;

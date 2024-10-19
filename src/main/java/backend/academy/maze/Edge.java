@@ -1,11 +1,8 @@
 package backend.academy.maze;
 
-
+import java.security.SecureRandom;
 import lombok.Getter;
 import lombok.Setter;
-import java.security.SecureRandom;
-
-
 
 @Getter
 @Setter
@@ -18,7 +15,7 @@ public class Edge implements Comparable<Edge> {
     public Edge(Coordinate firstNode, Coordinate secondNode) {
         this.firstNode = firstNode;
         this.secondNode = secondNode;
-        this.weight = random.nextInt(1,20) ;
+        this.weight = random.nextInt(1, Constant.BOUND_20);
     }
 
     @Override
