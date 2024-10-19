@@ -15,7 +15,7 @@ public class Edge implements Comparable<Edge> {
     public Edge(Coordinate firstNode, Coordinate secondNode) {
         this.firstNode = firstNode;
         this.secondNode = secondNode;
-        this.weight = random.nextInt(1, Constant.BOUND_20);
+        this.weight = random.nextInt(1, Constant.BOUND_3);
     }
 
     @Override

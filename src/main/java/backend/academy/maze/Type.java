@@ -1,6 +1,6 @@
 package backend.academy.maze;
 
 public enum Type {
-    WALL, PASSAGE;
+    WALL, PASSAGE, CAKE, FIRE;
 
 }

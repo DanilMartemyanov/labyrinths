@@ -7,7 +7,7 @@ import java.util.HashSet;
 public class GeneratorKruskal implements Generator {
 
     @Override
-    public Maze generateMaze(int height, int width) {
+    public  Maze generateMaze(int height, int width) {
         Maze maze = new Maze(width, height);
         HashSet<Edge> edges = new HashSet<>();
         UnionFindImpl unionFind = new UnionFindImpl(height * width);

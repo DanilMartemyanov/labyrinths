@@ -8,7 +8,7 @@ public class GeneratorPrim implements Generator {
     private final SecureRandom random = new SecureRandom();
 
 
-    public Maze generateMaze(int height, int width) {
+    public  Maze generateMaze(int height, int width) {
 
         Maze maze = new Maze(height, width);
 

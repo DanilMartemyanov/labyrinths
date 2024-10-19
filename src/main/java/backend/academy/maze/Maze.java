@@ -30,8 +30,20 @@ public final class Maze {
     public void printMaze() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                printStream.print(grid[i][j].type == Type.WALL ? "\u26D4" : "\u2705");
-
+                switch (grid[i][j].type){
+                    case PASSAGE:
+                        printStream.print("\u2705");
+                        break;
+                    case WALL:
+                        printStream.print("\u26D4");
+                        break;
+                    case CAKE:
+                        printStream.print("\uD83C\uDF82");
+                        break;
+                    case FIRE:
+                        printStream.print("\uD83D\uDD25");
+                        break;
+                }
             }
             printStream.println();
         }
