@@ -8,6 +8,11 @@ import lombok.extern.log4j.Log4j2;
 @Setter
 @Log4j2
 public class UnionFindImpl implements UnionFind {
+    /**
+     * UnionFindImpl - класс, который представляет реализацию структуры данных UnionFind
+     * для работы с непересекающимися множествами
+     */
+
     private int[] nodes;
     private int[] size;
 
@@ -22,7 +27,11 @@ public class UnionFindImpl implements UnionFind {
         int rootX = root(cellX);
         int rootY = root(cellY);
 
-        // Объединяем меньший корень под больший (по размеру)
+        /**
+         * Объединяем меньший корень под больший (по размеру)
+         * Меньшее поддерево обхединяем с большим
+         */
+
         if (rootX != rootY) {
             if (size[rootX] < size[rootY]) {
                 nodes[rootX] = rootY;
@@ -39,6 +48,8 @@ public class UnionFindImpl implements UnionFind {
         return root(cellX) == root(cellY);
     }
 
+
+    // Инициализация: каждый представитель (клетка) - множество
     public void initialize(int size) {
         for (int i = 0; i < size; i++) {
             nodes[i] = i;
@@ -46,6 +57,7 @@ public class UnionFindImpl implements UnionFind {
         }
     }
 
+    //  Возвращает корень дерева - представителя множества
     public int root(int p) {
         while (p != nodes[p]) {
             nodes[p] = nodes[nodes[p]];
