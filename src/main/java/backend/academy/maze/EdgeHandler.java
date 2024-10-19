@@ -5,11 +5,22 @@ import java.util.Collections;
 import java.util.HashSet;
 
 public class EdgeHandler {
+    /**
+     * EdgeHandler - класс для работы с рёбрами
+     */
+
+
     private static final ArrayList<Coordinate> DIRECTIONS = Coordinate.generateDirections(Constant.STEP_2);
+
+
+    /**
+     * Проход по направлениям клетки
+     * Создание ребра, при условии, что оно находится в зоне сетки
+     */
 
     public static void addEdge(Coordinate from, Cell[][] grid, HashSet<Edge> edges) {
         for (Coordinate direction : DIRECTIONS) {
-            if(!GeneratorPrim.checkBounds(from, grid)){
+            if (!GeneratorPrim.checkBounds(from, grid)) {
                 continue;
             }
             int newRow = from.row() + direction.row();
@@ -21,7 +32,8 @@ public class EdgeHandler {
         }
     }
 
-    public static  void initSetEdges(Cell[][] grid, HashSet<Edge> edges) {
+    // Инициализация ребер (создание ребер на сетке)
+    public static void initSetEdges(Cell[][] grid, HashSet<Edge> edges) {
         for (int i = 1; i < grid.length; i = i + 2) {
             for (int j = 1; j < grid[0].length; j = j + 2) {
                 Coordinate coordinate = new Coordinate(i, j);
@@ -30,12 +42,12 @@ public class EdgeHandler {
         }
     }
 
+
+    // Сортировка ребер
     public static ArrayList<Edge> sortEdges(HashSet<Edge> edges) {
         ArrayList<Edge> sortedEdges = new ArrayList<>(edges);
         Collections.sort(sortedEdges);
         return sortedEdges;
     }
-//    public static boolean checkCycle(){
-//
-//    }
+
 }

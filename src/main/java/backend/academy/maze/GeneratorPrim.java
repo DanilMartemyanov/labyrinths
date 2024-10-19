@@ -43,7 +43,7 @@ public class GeneratorPrim implements Generator {
                 visited.add(randomNeighbor); // Отмечаем текущую клетку как посещённую
 
                 // Создаём проход между посещённой клеткой и соседом
-                addPassageBetween(new Coordinate(visitedCell.row, visitedCell.column),
+                Generator.addPassageBetween(new Coordinate(visitedCell.row, visitedCell.column),
                     new Coordinate(randomNeighbor.row, randomNeighbor.column), maze.grid);
 
                 // Добавляем новых соседей
@@ -118,11 +118,11 @@ public class GeneratorPrim implements Generator {
     }
 
     // Добавляем проход между клетками
-    public static void addPassageBetween(Coordinate current, Coordinate neighbor, Cell[][] grid) {
-        int passageRow = (current.row() + neighbor.row()) / 2;
-        int passageColumn = (current.column() + neighbor.column()) / 2;
-        grid[passageRow][passageColumn] = new Cell(passageRow, passageColumn, Type.PASSAGE);  // Устанавливаем проход
-    }
+//    public static void addPassageBetween(Coordinate current, Coordinate neighbor, Cell[][] grid) {
+//        int passageRow = (current.row() + neighbor.row()) / 2;
+//        int passageColumn = (current.column() + neighbor.column()) / 2;
+//        grid[passageRow][passageColumn] = new Cell(passageRow, passageColumn, Type.PASSAGE);  // Устанавливаем проход
+//    }
 }
 
 

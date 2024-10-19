@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class GeneratorKruskal implements Generator {
-    public final SecureRandom random = new SecureRandom();
 
     @Override
     public Maze generateMaze(int height, int width) {
@@ -20,34 +19,37 @@ public class GeneratorKruskal implements Generator {
         // Сортируем ребра
         ArrayList<Edge> sortedEdges = EdgeHandler.sortEdges(edges);
 
-        unionCell(sortedEdges, width, unionFind, maze);
+        unionCell(sortedEdges,unionFind, maze);
+        maze.printMaze();
         return maze;
     }
 
-    public static void unionCell(ArrayList<Edge> edges, int width, UnionFindImpl unionFind, Maze maze) {
+    // Объединяем множества точек
+    public static void unionCell(ArrayList<Edge> edges, UnionFindImpl unionFind, Maze maze) {
+        // Кандидаты на ребра в остовное дерево
         for (Edge edge : edges) {
-            int indexCellRow = edge.firstNode().toIndex(width);
-            int indexCellCol = edge.secondNode().toIndex(width);
+            // Координаты ребер
+            Coordinate from = edge.firstNode();
+            Coordinate to = edge.secondNode();
+
+            // Перевод координат клетки из двумерного массива в одномерный для структуры данных UnionFind
+            int indexCellRow = from.toIndex(maze.width());
+            int indexCellCol = to.toIndex(maze.width());
+
+            /**
+             * Проверка: состоят ли клетки в одном множестве ?
+             * Если нет, объединяем множества и красим клетки в проход и ломаем стену между ними
+              */
+
             if (!unionFind.find(indexCellRow, indexCellCol)) {
+
                 unionFind.union(indexCellRow, indexCellCol);
-                GeneratorPrim.addPassageBetween(edge.firstNode(), edge.secondNode(), maze.grid);
-                maze.grid[edge.firstNode().row()][edge.firstNode().column()].type = Type.PASSAGE;
-                maze.grid[edge.secondNode().row()][edge.secondNode().column()].type = Type.PASSAGE;
+
+                Generator.addPassageBetween(edge.firstNode(), edge.secondNode(), maze.grid);
+
+                maze.grid[from.row()][from.column()].type = Type.PASSAGE;
+                maze.grid[to.row()][to.column()].type = Type.PASSAGE;
             }
-            System.out.println("------------------------");
-            maze.printMaze();
         }
     }
-
-    public void addWall(Maze maze) {
-        for (int i = 0; i < 11; i++) {
-            int row = random.nextInt(1, maze.height() -1) ;
-            int column = random.nextInt(1, maze.width() -1) ;
-            System.out.println(row);
-            System.out.println(column);
-            maze.grid[row][column].type = Type.WALL;
-        }
-
-    }
-
 }
