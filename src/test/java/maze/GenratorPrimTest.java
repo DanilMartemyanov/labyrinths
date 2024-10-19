@@ -20,7 +20,7 @@ public class GenratorPrimTest {
 
     @BeforeEach
     void setUp() {
-        maze = new Maze(11,11);
+        maze = new Maze(10,10);
         directionsPrim = Coordinate.generateDirections(2);
         visited = new HashSet<>();
         neighbors = new HashSet<>();
@@ -38,7 +38,7 @@ public class GenratorPrimTest {
 
     @Test
     void checkBounds(){
-        boolean check = GeneratorPrim.checkBounds(new Coordinate(0,2), maze.grid);
+        boolean check = GeneratorPrim.checkBounds(new Coordinate(9,9), maze.grid);
         Assertions.assertFalse(check);
     }
 

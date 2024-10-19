@@ -39,4 +39,30 @@ public class GeneratorKruskalTest {
             System.out.println(edge);
         }
     }
+    @Test
+    void unionFind(){
+        UnionFindImpl unionFind = new UnionFindImpl(maze.width() * maze.height());
+        Coordinate coordinate1 = new Coordinate(1, 1);
+        Coordinate coordinate2 = new Coordinate(1, 2);
+        Coordinate coordinate3 = new Coordinate(2, 1);
+        Coordinate coordinate4 = new Coordinate(2, 2);
+        int index1 = coordinate1.toIndex(11);
+        System.out.println(index1);
+        int index2 = coordinate2.toIndex(11);
+        System.out.println(index2);
+        int index3 = coordinate3.toIndex(11);
+        System.out.println(index3);
+        int index4 = coordinate4.toIndex(11);
+        System.out.println(index4);
+        unionFind.union(index1, index2);
+        unionFind.union(index1, index3);
+        unionFind.union(index1, index4);
+        System.out.println(unionFind.find(index1, index2));
+        System.out.println(unionFind.find(index1, index3));
+        System.out.println(unionFind.find(index1, index4));
+        System.out.println(unionFind.root(index2));
+        System.out.println(unionFind.root(index3));
+        System.out.println(unionFind.root(index4));
+        maze.printMaze();
+    }
 }

@@ -43,7 +43,8 @@ public class GeneratorPrim implements Generator {
                 visited.add(randomNeighbor); // Отмечаем текущую клетку как посещённую
 
                 // Создаём проход между посещённой клеткой и соседом
-                addPassageBetween(visitedCell, randomNeighbor, maze.grid);
+                addPassageBetween(new Coordinate(visitedCell.row, visitedCell.column),
+                    new Coordinate(randomNeighbor.row, randomNeighbor.column), maze.grid);
 
                 // Добавляем новых соседей
                 addNeighbor(randomNeighbor, directions, neighbours, maze.grid, visited);
@@ -109,14 +110,15 @@ public class GeneratorPrim implements Generator {
 
     // Проверяем границы лабиринта
     public static boolean checkBounds(Coordinate cell, Cell[][] grid) {
-        if (cell.row() > 0 && cell.row() < grid.length && cell.column() > 0 && cell.column() < grid[0].length) {
+        if (cell.row() > 0 && cell.row() < (grid.length - 1) && cell.column() > 0 &&
+            cell.column() < (grid[0].length - 1)) {
             return true;
         }
         return false;
     }
 
     // Добавляем проход между клетками
-    public static void addPassageBetween(Cell current, Cell neighbor, Cell[][] grid) {
+    public static void addPassageBetween(Coordinate current, Coordinate neighbor, Cell[][] grid) {
         int passageRow = (current.row() + neighbor.row()) / 2;
         int passageColumn = (current.column() + neighbor.column()) / 2;
         grid[passageRow][passageColumn] = new Cell(passageRow, passageColumn, Type.PASSAGE);  // Устанавливаем проход
