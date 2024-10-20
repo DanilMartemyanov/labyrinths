@@ -11,4 +11,9 @@ public class Cell {
     int row;
     int column;
     Type type;
+
+    @Override
+    public String toString() {
+        return "row: " + row + " column: " + column + " type: " + type;
+    }
 }

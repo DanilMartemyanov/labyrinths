@@ -8,9 +8,11 @@ public class GeneratorKruskal implements Generator {
 
     @Override
     public  Maze generateMaze(int height, int width) {
-        Maze maze = new Maze(width, height);
+        int heightMaze = Generator.generateOdd(height);
+        int widthMaze = Generator.generateOdd(width);
+        Maze maze = new Maze(heightMaze, widthMaze);
         HashSet<Edge> edges = new HashSet<>();
-        UnionFindImpl unionFind = new UnionFindImpl(height * width);
+        UnionFindImpl unionFind = new UnionFindImpl(heightMaze * widthMaze);
         // Создаем и заполняем ребра
         EdgeHandler.initSetEdges(maze.grid, edges);
 
