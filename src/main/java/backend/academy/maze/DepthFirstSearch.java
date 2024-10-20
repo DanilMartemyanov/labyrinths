@@ -1,10 +1,8 @@
 package backend.academy.maze;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -22,7 +20,7 @@ public class DepthFirstSearch implements PathFinding {
     @Override
     public ArrayList<Coordinate> findPath(Coordinate start, Coordinate end) {
         Stack<Coordinate> stack = new Stack<>();
-        Map<Coordinate, Coordinate> parentMap = new HashMap<>();  // Родители клеток
+        Map<Coordinate, Coordinate> parentMap = new HashMap<>();// Родители клеток
 
         stack.push(start);
         visited.add(start);
@@ -33,12 +31,12 @@ public class DepthFirstSearch implements PathFinding {
             // Добавляем клетку в путь, если она еще не была посещена
             if (current.equals(end)) {
                 // Восстанавливаем путь от конечной точки до начальной
-                reconstructPath(start, end, parentMap);
+                PathFinding.reconstructPath(start, end, parentMap, path);
                 return path;
             }
 
             // Получаем соседей текущей клетки
-            for (Coordinate neighbor : getNeighbors(current)) {
+            for (Coordinate neighbor : PathFinding.getNeighbors(current, maze)) {
                 if (!visited.contains(neighbor)) {
                     visited.add(neighbor);  // Отмечаем соседа как посещённого
                     parentMap.put(neighbor, current);  // Запоминаем родителя для восстановления пути
@@ -47,48 +45,5 @@ public class DepthFirstSearch implements PathFinding {
             }
         }
         return null;  // Путь не найден
-    }
-
-    // Восстановление пути по родителю, который записывается в Map
-    private void reconstructPath(Coordinate start, Coordinate end, Map<Coordinate, Coordinate> parentMap) {
-        Coordinate current = end;
-        while (!current.equals(start)) {
-            path.add(current);
-            current = parentMap.get(current);
-        }
-        path.add(start);
-        Collections.reverse(path);
-    }
-
-    // Метод для получения соседей текущей клетки
-    private List<Coordinate> getNeighbors(Coordinate current) {
-        ArrayList<Coordinate> directions = Coordinate.generateDirections(Constant.STEP_1);
-        List<Coordinate> neighbors = new ArrayList<>();
-
-        for (Coordinate direction : directions) {
-            int newRow = current.row() + direction.row();
-            int newCol = current.column() + direction.column();
-
-            if (Generator.checkBounds(new Coordinate(newRow, newCol), maze.grid)
-                && maze.grid[newRow][newCol].type == Type.PASSAGE) {
-                neighbors.add(new Coordinate(newRow, newCol));
-            }
-        }
-        return neighbors;
-    }
-
-    // Метод для вывода пути на сетку
-    public void printPath(ArrayList<Coordinate> path, Coordinate start, Coordinate end) {
-
-        maze.grid[start.row()][start.column()].type = Type.A;
-        maze.grid[end.row()][end.column()].type = Type.B;
-
-        path.remove(start);
-        path.remove(end);
-
-        for (Coordinate coordinate : path) {
-            maze.grid[coordinate.row()][coordinate.column()].type = Type.GLASS;
-        }
-        maze.printMaze();
     }
 }

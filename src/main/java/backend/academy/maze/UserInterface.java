@@ -68,7 +68,7 @@ public class UserInterface {
                 }
 
                 if (path != null) {
-                    depthFirstSearch.printPath(path, startPoint, endPoint);
+                    PathFinding.printPath(path, startPoint, endPoint, maze);
                 }else {
                     printStream.println("Упс :( похоже путь не найден, попробуйте указать другие точки");
                 }
