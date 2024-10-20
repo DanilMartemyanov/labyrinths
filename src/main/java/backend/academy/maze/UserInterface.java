@@ -3,14 +3,17 @@ package backend.academy.maze;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class UserInterface {
-    private final PrintStream printStream = new PrintStream(System.out);
-    private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    private final PrintStream printStream = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+    private final BufferedReader bufferedReader =
+        new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
     private final GeneratorPrim generatorPrim = new GeneratorPrim();
     private final GeneratorKruskal generatorKruskal = new GeneratorKruskal();
-    private  DepthFirstSearch depthFirstSearch;
+    private DepthFirstSearch depthFirstSearch;
+    private BreadthFirstSearch breadthFirstSearch;
     private ArrayList<Coordinate> path;
 
     public UserInterface() {
@@ -20,11 +23,11 @@ public class UserInterface {
         while (true) {
 
             printStream.println("Хэй хэй хэй ! Готовы сгенерировать лабиринт ?");
-            printStream.println("Введите y/n");
+            printStream.println(Constant.YESNO);
 
             String ready = InputUser.startGame(bufferedReader, printStream);
 
-            if (ready.equals(Constant.YES)) {
+            if (Constant.YES.equals(ready)) {
 
                 printStream.println("Укажите размер лабиринта");
                 printStream.print("Введите длину: ");
@@ -35,13 +38,14 @@ public class UserInterface {
                 printStream.println("Выберите алгоритм для генерации лабиринта:");
                 printStream.println("[1] - алгоритм Прима");
                 printStream.println("[2] - алгоритм Крускала");
-                printStream.println("Ваш выбор: ");
+                printStream.println(Constant.CHOSE);
 
                 AlgorithmType algorithmType = InputUser.algorithmGenerateMazeType(bufferedReader, printStream);
 
                 printStream.println("Выберите алгоритм для поиска пути: ");
-                printStream.println("[1] - алгоритм поиска в глубину");
-                printStream.println("Ваш выбор: ");
+                printStream.println("[1] - алгоритм поиска в глубину (DFS)");
+                printStream.println("[2] - алгоритм поиска в ширину (BFS)");
+                printStream.println(Constant.CHOSE);
 
                 FindPathType findPathType = InputUser.findPathMazeType(bufferedReader, printStream);
 
@@ -54,25 +58,39 @@ public class UserInterface {
                     default -> maze = null;
 
                 }
-                depthFirstSearch = new DepthFirstSearch(maze);
+                String answer = Constant.YES;
+                while (Constant.YES.equals(answer)) {
+                    printStream.println("Укажите конечную точку, где изображено: " + Constant.PASSAGE);
+                    printStream.println("Начальная точка \"A\":  ");
+                    Coordinate startPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
+                    printStream.println("Конечная точка \"B\":  ");
+                    Coordinate endPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
 
-                printStream.println("Укажите точки, где изображено: " + Constant.PASSAGE);
-                printStream.println("Начальная точка \"A\":  ");
-                Coordinate startPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
-                printStream.println("Конечная точка \"B\":  ");
-                Coordinate endPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
+                    switch (findPathType) {
+                        case DFS -> {
+                            depthFirstSearch = new DepthFirstSearch(maze);
+                            path = depthFirstSearch.findPath(startPoint, endPoint);
+                        }
 
-                switch (findPathType) {
-                    case DFS -> path = depthFirstSearch.findPath(startPoint, endPoint);
-                    default -> path = null;
+                        case BFS -> {
+                            breadthFirstSearch = new BreadthFirstSearch(maze);
+                            path = breadthFirstSearch.findPath(startPoint, endPoint);
+                        }
+                        default -> path = null;
+                    }
+
+                    if (path != null) {
+                        PathFinding.printPath(path, startPoint, endPoint, maze);
+                    } else {
+                        printStream.println("Упс :( похоже путь не найден, попробуйте указать другие точки");
+                    }
+                    printStream.println("Хотите найти другой путь ?");
+                    printStream.println(Constant.YESNO);
+                    answer = InputUser.startGame(bufferedReader, printStream);
+                    if (Constant.NO.equals(answer)) {
+                        break;
+                    }
                 }
-
-                if (path != null) {
-                    PathFinding.printPath(path, startPoint, endPoint, maze);
-                }else {
-                    printStream.println("Упс :( похоже путь не найден, попробуйте указать другие точки");
-                }
-
             } else {
                 break;
             }

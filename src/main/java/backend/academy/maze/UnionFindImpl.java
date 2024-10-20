@@ -2,11 +2,10 @@ package backend.academy.maze;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
+
 
 @Getter
 @Setter
-@Log4j2
 public class UnionFindImpl implements UnionFind {
     /**
      * UnionFindImpl - класс, который представляет реализацию структуры данных UnionFind
@@ -50,7 +49,7 @@ public class UnionFindImpl implements UnionFind {
 
 
     // Инициализация: каждый представитель (клетка) - множество
-    public void initialize(int size) {
+    public final void initialize(int size) {
         for (int i = 0; i < size; i++) {
             nodes[i] = i;
             this.size[i] = 1;

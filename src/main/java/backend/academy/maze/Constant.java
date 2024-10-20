@@ -13,6 +13,10 @@ public final class Constant {
     public static final String CAKE = "\uD83C\uDF82";
     public static final String PERSON = "\uD83C\uDFC3\u200D♂\uFE0F";
     public static final String GLASS = "\uD83D\uDD0E";
+    public static final String CHOSE = "Ваш выбор: ";
+    public static final String YESNO = "Введите y/n";
+
+
     private Constant() {
         throw new IllegalStateException("Utility class");
     }

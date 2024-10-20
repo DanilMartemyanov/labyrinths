@@ -11,9 +11,7 @@ public class EdgeHandler {
      */
     private static final ArrayList<Coordinate> DIRECTIONS = Coordinate.generateDirections(Constant.STEP_2);
 
-    private EdgeHandler() {
-        throw new IllegalStateException("Utility class");
-    }
+    private EdgeHandler() {}
     /**
      * Проход по направлениям клетки
      * Создание ребра, при условии, что оно находится в зоне сетки
@@ -35,8 +33,10 @@ public class EdgeHandler {
 
     // Инициализация ребер (создание ребер на сетке)
     public static void initSetEdges(Cell[][] grid, HashSet<Edge> edges) {
-        for (int i = 1; i < grid.length; i = i + 2) {
-            for (int j = 1; j < grid[0].length; j = j + 2) {
+        int rows = grid.length;
+        int columns = grid[0].length;
+        for (int i = 1; i < rows; i = i + 2) {
+            for (int j = 1; j < columns; j = j + 2) {
                 Coordinate coordinate = new Coordinate(i, j);
                 addEdge(coordinate, grid, edges);
             }

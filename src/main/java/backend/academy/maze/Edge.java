@@ -10,12 +10,12 @@ public class Edge implements Comparable<Edge> {
     private Coordinate firstNode;
     private Coordinate secondNode;
     private int weight;
-    private final SecureRandom random = new SecureRandom();
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     public Edge(Coordinate firstNode, Coordinate secondNode) {
         this.firstNode = firstNode;
         this.secondNode = secondNode;
-        this.weight = random.nextInt(1, Constant.BOUND_3);
+        this.weight = RANDOM.nextInt(1, Constant.BOUND_3);
     }
 
     @Override
@@ -25,7 +25,29 @@ public class Edge implements Comparable<Edge> {
 
     @Override
     public int compareTo(Edge edge) {
-        return this.weight - edge.weight;
+        return Integer.compare(weight, edge.weight);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Edge edge = (Edge) obj;
+        return weight == edge.weight
+            && firstNode.equals(edge.firstNode)
+            && secondNode.equals(edge.secondNode);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstNode.hashCode();
+        result = 31 * result + secondNode.hashCode();
+        result = 31 * result + weight;
+        return result;
     }
 
 }

@@ -6,10 +6,12 @@ import java.io.PrintStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InputUser {
+public final class InputUser {
     static final Pattern PATTERNSTARTGAME = Pattern.compile("^[ynYN]$");
     static final Pattern PATTERNNUMBERALGORITHM = Pattern.compile("^[12]$");
-    static final Pattern PATTERNNUMBERUSER = Pattern.compile("^-?\\d+$");
+    static final Pattern PATTERNNUMBERUSER = Pattern.compile("^[1-9]\\d*$");
+
+    private InputUser() {}
 
     public  static String startGame(BufferedReader bufferedReader, PrintStream printStream) {
         try {
@@ -44,7 +46,7 @@ public class InputUser {
     }
 
     public static AlgorithmType algorithmGenerateMazeType(BufferedReader bufferedReader, PrintStream printStream) {
-        switch (numberAlgorithm(bufferedReader, printStream)){
+        switch (numberAlgorithm(bufferedReader, printStream)) {
             case "1":
                 return AlgorithmType.PRIM;
             case "2":
@@ -70,9 +72,11 @@ public class InputUser {
     }
 
     public static FindPathType findPathMazeType(BufferedReader bufferedReader, PrintStream printStream) {
-        switch (numberAlgorithm(bufferedReader, printStream)){
+        switch (numberAlgorithm(bufferedReader, printStream)) {
             case "1":
                 return FindPathType.DFS;
+            case "2":
+                return FindPathType.BFS;
             default:
                 return  null;
         }

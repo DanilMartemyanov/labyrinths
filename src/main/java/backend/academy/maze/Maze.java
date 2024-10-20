@@ -1,6 +1,8 @@
 package backend.academy.maze;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +12,7 @@ public final class Maze {
     private final int height;
     private final int width;
     public Cell[][] grid;
-    private final PrintStream printStream = new PrintStream(System.out);
+    private final PrintStream printStream = new PrintStream(System.out, true, StandardCharsets.UTF_8);
 
     public Maze(int height, int width) {
         this.height = height;
@@ -27,10 +29,11 @@ public final class Maze {
         }
     }
 
+    @SuppressFBWarnings("UCPM_USE_CHARACTER_PARAMETERIZED_METHOD")
     public void printMaze() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                switch (grid[i][j].type){
+                switch (grid[i][j].type) {
                     case PASSAGE:
                         printStream.print(Constant.PASSAGE);
                         break;
@@ -45,6 +48,8 @@ public final class Maze {
                         break;
                     case GLASS:
                         printStream.print(Constant.GLASS); // лупа
+                        break;
+                    default:
                         break;
                 }
             }
