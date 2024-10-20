@@ -8,8 +8,8 @@ public class GeneratorKruskal implements Generator {
 
     @Override
     public  Maze generateMaze(int height, int width) {
-        int heightMaze = Generator.generateOdd(height);
-        int widthMaze = Generator.generateOdd(width);
+        int heightMaze = Generator.getNumberOdd(height);
+        int widthMaze = Generator.getNumberOdd(width);
         Maze maze = new Maze(heightMaze, widthMaze);
         HashSet<Edge> edges = new HashSet<>();
         UnionFindImpl unionFind = new UnionFindImpl(heightMaze * widthMaze);

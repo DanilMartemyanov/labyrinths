@@ -7,23 +7,18 @@ import java.util.HashSet;
 public class GeneratorPrim implements Generator {
     private final SecureRandom random = new SecureRandom();
 
-
-    public Maze generateMaze(int height, int width) {
-
-        int heightMaze = Generator.generateOdd(height);
-        int widthMaze = Generator.generateOdd(width);
+    @Override
+    public  Maze generateMaze(int height, int width) {
+        int heightMaze = Generator.getNumberOdd(height);
+        int widthMaze = Generator.getNumberOdd(width);
         Maze maze = new Maze(heightMaze, widthMaze);
 
         // Направления движения через 2 клетки (чтобы прыгать через стены)
         ArrayList<Coordinate> directions = Coordinate.generateDirections(Constant.STEP_2);
 
+        // Начальная точка
         int randomRow = random.nextInt(heightMaze / 2) * 2 + 1;
         int randomColumn = random.nextInt(widthMaze / 2) * 2 + 1;
-        // Начальная точка
-
-        System.out.println(randomRow);
-
-        System.out.println(randomColumn);
         Cell startPoint = new Cell(randomRow, randomColumn, Type.PASSAGE);
         maze.grid[randomRow][randomColumn] = startPoint;
 
@@ -40,7 +35,7 @@ public class GeneratorPrim implements Generator {
             // Берём случайного соседа
             int indexNeighbour = random.nextInt(neighbours.size());
             Cell randomNeighbor = neighbours.stream().toList().get(indexNeighbour);
-            System.out.println(randomNeighbor);
+
             // Находим посещённую клетку, которая находится на 2 клетки дальше от выбранного соседа
             Cell visitedCell = findVisitedNeighbor(randomNeighbor, directions, maze.grid, visited);
 
@@ -60,8 +55,6 @@ public class GeneratorPrim implements Generator {
 
             // Удаляем соседа из множества, так как он уже обработан
             neighbours.remove(randomNeighbor);
-            maze.printMaze();
-            System.out.println("-----------------------");
         }
 
         // Финальный вывод лабиринта
@@ -101,15 +94,12 @@ public class GeneratorPrim implements Generator {
         for (Coordinate direction : directions) {
             int newRow = cell.row() + direction.row();
             int newCol = cell.column() + direction.column();
-            System.out.println("Кандидат на соседа");
+
             // Проверяем, что клетка в пределах лабиринта и непосещена
             if (checkBounds(new Coordinate(newRow, newCol), grid)) {
                 Cell neighbor = grid[newRow][newCol];
-                System.out.println(neighbor);
                 if (!visited.contains(neighbor) && !neighbours.contains(neighbor)) {
                     // Добавляем только непосещённые клетки
-                    System.out.println("Добавляем соседа");
-                    System.out.println(neighbor);
                     neighbours.add(neighbor);
                 }
             }
@@ -124,8 +114,6 @@ public class GeneratorPrim implements Generator {
         }
         return false;
     }
-
-
 }
 
 

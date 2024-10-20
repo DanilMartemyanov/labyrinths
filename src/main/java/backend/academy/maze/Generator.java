@@ -1,7 +1,5 @@
 package backend.academy.maze;
 
-import java.security.SecureRandom;
-
 public interface Generator {
     Maze generateMaze(int height, int width);
 
@@ -12,8 +10,8 @@ public interface Generator {
         grid[passageRow][passageColumn] = new Cell(passageRow, passageColumn, Type.PASSAGE);  // Устанавливаем проход
     }
 
-    static int generateOdd(int parametr) {
-        if (parametr % 2 == 0) {
+    static int getNumberOdd(int parametr){
+        if(parametr % 2 == 0){
             return parametr + 1;
         }else {
             return parametr;
