@@ -25,8 +25,10 @@ public class Main {
         int x2 = Integer.parseInt(bufferedReader.readLine());
         System.out.println("Введите координату");
         int y2 = Integer.parseInt(bufferedReader.readLine());
-        ArrayList<Coordinate> path = depthFirstSearch.findPath(new Coordinate(x1, y1), new Coordinate(x2, y2));
-        depthFirstSearch.printPath(path);
+        Coordinate start = new Coordinate(x1, y1);
+        Coordinate end = new Coordinate(x2, y2);
+        ArrayList<Coordinate> path = depthFirstSearch.findPath(start, end);
+        depthFirstSearch.printPath(path,start, end );
         maze.printMaze();
 
     }

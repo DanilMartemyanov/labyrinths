@@ -37,11 +37,14 @@ public final class Maze {
                     case WALL:
                         printStream.print("\u26D4");
                         break;
-                    case CAKE:
-                        printStream.print("\uD83D\uDD0E");
+                    case A:
+                        printStream.print("\uD83C\uDFC3\u200D♂\uFE0F"); // бегущий человек
                         break;
-                    case FIRE:
-                        printStream.print("\uD83D\uDD25");
+                    case B:
+                        printStream.print("\uD83C\uDF82"); // бегущий человек
+                        break;
+                    case GLASS:
+                        printStream.print("\uD83D\uDD0E"); // лупа
                         break;
                 }
             }

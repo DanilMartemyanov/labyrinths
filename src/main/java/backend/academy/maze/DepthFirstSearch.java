@@ -67,9 +67,16 @@ public class DepthFirstSearch implements PathFinding {
     }
 
     // Метод для вывода пути на сетку
-    public void printPath(ArrayList<Coordinate> path) {
+    public void printPath(ArrayList<Coordinate> path, Coordinate start, Coordinate end) {
+
+        maze.grid[start.row()][start.column()].type = Type.A;
+        maze.grid[end.row()][end.column()].type = Type.B;
+
+        path.remove(start);
+        path.remove(end);
+
         for (Coordinate coordinate : path) {
-            maze.grid[coordinate.row()][coordinate.column()].type = Type.CAKE;
+            maze.grid[coordinate.row()][coordinate.column()].type = Type.GLASS;
         }
     }
 }
