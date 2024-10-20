@@ -1,8 +1,11 @@
 package backend.academy.maze;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 public class DepthFirstSearch implements PathFinding {
@@ -18,35 +21,43 @@ public class DepthFirstSearch implements PathFinding {
 
     @Override
     public ArrayList<Coordinate> findPath(Coordinate start, Coordinate end) {
-        // Используем явный стек вместо рекурсии
         Stack<Coordinate> stack = new Stack<>();
+        Map<Coordinate, Coordinate> parentMap = new HashMap<>();  // Родители клеток
+
         stack.push(start);
+        visited.add(start);
 
         while (!stack.isEmpty()) {
             Coordinate current = stack.pop();
 
-            if (visited.contains(current) || !Generator.checkBounds(current, maze.grid)
-                || maze.grid[current.row()][current.column()].type == Type.WALL) {
-                continue;
-            }
-
-            path.add(current);
-
-            // Если мы достигли конечной точки
+            // Добавляем клетку в путь, если она еще не была посещена
             if (current.equals(end)) {
+                // Восстанавливаем путь от конечной точки до начальной
+                reconstructPath(start, end, parentMap);
                 return path;
             }
 
-            visited.add(current);
-
-            // Добавляем соседей
+            // Получаем соседей текущей клетки
             for (Coordinate neighbor : getNeighbors(current)) {
                 if (!visited.contains(neighbor)) {
-                    stack.push(neighbor);
+                    visited.add(neighbor);  // Отмечаем соседа как посещённого
+                    parentMap.put(neighbor, current);  // Запоминаем родителя для восстановления пути
+                    stack.push(neighbor);  // Добавляем соседа в стек
                 }
             }
         }
-        return null;
+        return null;  // Путь не найден
+    }
+
+    // Восстановление пути по родителю, который записывается в Map
+    private void reconstructPath(Coordinate start, Coordinate end, Map<Coordinate, Coordinate> parentMap) {
+        Coordinate current = end;
+        while (!current.equals(start)) {
+            path.add(current);
+            current = parentMap.get(current);
+        }
+        path.add(start);
+        Collections.reverse(path);
     }
 
     // Метод для получения соседей текущей клетки
