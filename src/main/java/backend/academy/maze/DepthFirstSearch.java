@@ -89,5 +89,6 @@ public class DepthFirstSearch implements PathFinding {
         for (Coordinate coordinate : path) {
             maze.grid[coordinate.row()][coordinate.column()].type = Type.GLASS;
         }
+        maze.printMaze();
     }
 }

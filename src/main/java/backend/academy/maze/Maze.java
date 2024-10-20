@@ -32,19 +32,19 @@ public final class Maze {
             for (int j = 0; j < width; j++) {
                 switch (grid[i][j].type){
                     case PASSAGE:
-                        printStream.print("\u2705");
+                        printStream.print(Constant.PASSAGE);
                         break;
                     case WALL:
-                        printStream.print("\u26D4");
+                        printStream.print(Constant.WALL);
                         break;
                     case A:
-                        printStream.print("\uD83C\uDFC3\u200D♂\uFE0F"); // бегущий человек
+                        printStream.print(Constant.PERSON); // бегущий человек
                         break;
                     case B:
-                        printStream.print("\uD83C\uDF82"); // бегущий человек
+                        printStream.print(Constant.CAKE); //
                         break;
                     case GLASS:
-                        printStream.print("\uD83D\uDD0E"); // лупа
+                        printStream.print(Constant.GLASS); // лупа
                         break;
                 }
             }

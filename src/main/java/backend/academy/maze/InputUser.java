@@ -61,7 +61,7 @@ public class InputUser {
             while (!matcherAlgorithm.find()) {
                 printStream.println(Constant.INCORRECTINPUT);
                 numberUser = bufferedReader.readLine();
-                matcherAlgorithm = PATTERNSTARTGAME.matcher(numberUser);
+                matcherAlgorithm = PATTERNNUMBERUSER.matcher(numberUser);
             }
             return Integer.parseInt(numberUser);
         } catch (IOException e) {
@@ -76,5 +76,13 @@ public class InputUser {
             default:
                 return  null;
         }
+    }
+
+    public  static Coordinate getUserCoordinate(BufferedReader bufferedReader, PrintStream printStream) {
+        printStream.println(Constant.COORDINATE + "x:");
+        int userInputX  = getNumberUser(bufferedReader, printStream);
+        printStream.println(Constant.COORDINATE + "y:");
+        int userInputY  = getNumberUser(bufferedReader, printStream);
+        return new Coordinate(userInputX, userInputY);
     }
 }
