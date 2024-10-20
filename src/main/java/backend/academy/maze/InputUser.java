@@ -35,7 +35,7 @@ public class InputUser {
             while (!matcherAlgorithm.find()) {
                 printStream.println(Constant.INCORRECTINPUT);
                 answerAlgorithm = bufferedReader.readLine();
-                matcherAlgorithm = PATTERNSTARTGAME.matcher(answerAlgorithm);
+                matcherAlgorithm = PATTERNNUMBERALGORITHM.matcher(answerAlgorithm);
             }
             return answerAlgorithm;
         } catch (IOException e) {
