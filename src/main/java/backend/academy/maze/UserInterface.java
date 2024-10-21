@@ -41,14 +41,14 @@ public class UserInterface {
                 printStream.println("[2] - алгоритм Крускала");
                 printStream.println(Constant.CHOSE);
 
-                AlgorithmType algorithmType = InputUser.algorithmGenerateMazeType(bufferedReader, printStream);
+                AlgorithmType algorithmType = InputUser.getAlgorithmGenerateMazeType(bufferedReader, printStream);
 
                 printStream.println("Выберите алгоритм для поиска пути: ");
                 printStream.println("[1] - алгоритм поиска в глубину (DFS)");
                 printStream.println("[2] - алгоритм поиска в ширину (BFS)");
                 printStream.println(Constant.CHOSE);
 
-                FindPathType findPathType = InputUser.findPathMazeType(bufferedReader, printStream);
+                FindPathType findPathType = InputUser.getFindPathMazeType(bufferedReader, printStream);
 
                 Maze maze;
 
@@ -119,6 +119,10 @@ public class UserInterface {
                 printStream.println("[2] - нижняя");
                 printStream.println("[3] - правая");
                 printStream.println("[4] - левая");
+
+                BoundType boundType = InputUser.getBoundType(bufferedReader, printStream);
+
+
 
 
             }else {

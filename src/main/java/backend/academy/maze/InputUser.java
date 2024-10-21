@@ -31,7 +31,7 @@ public final class InputUser {
 
     }
 
-    public static String numberAlgorithm(BufferedReader bufferedReader, PrintStream printStream) {
+    public static String getNumberAlgorithm(BufferedReader bufferedReader, PrintStream printStream) {
         try {
             String answerAlgorithm = bufferedReader.readLine();
             Matcher matcherAlgorithm = PATTERNNUMBERALGORITHM.matcher(answerAlgorithm);
@@ -46,8 +46,8 @@ public final class InputUser {
         }
     }
 
-    public static AlgorithmType algorithmGenerateMazeType(BufferedReader bufferedReader, PrintStream printStream) {
-        switch (numberAlgorithm(bufferedReader, printStream)) {
+    public static AlgorithmType getAlgorithmGenerateMazeType(BufferedReader bufferedReader, PrintStream printStream) {
+        switch (getNumberAlgorithm(bufferedReader, printStream)) {
             case "1":
                 return AlgorithmType.PRIM;
             case "2":
@@ -72,8 +72,8 @@ public final class InputUser {
         }
     }
 
-    public static FindPathType findPathMazeType(BufferedReader bufferedReader, PrintStream printStream) {
-        switch (numberAlgorithm(bufferedReader, printStream)) {
+    public static FindPathType getFindPathMazeType(BufferedReader bufferedReader, PrintStream printStream) {
+        switch (getNumberAlgorithm(bufferedReader, printStream)) {
             case "1":
                 return FindPathType.DFS;
             case "2":
@@ -89,5 +89,35 @@ public final class InputUser {
         printStream.println(Constant.COORDINATE + "y:");
         int userInputY  = getNumberUser(bufferedReader, printStream);
         return new Coordinate(userInputY, userInputX);
+    }
+
+    public static int getNumberUserBound(BufferedReader bufferedReader, PrintStream printStream) {
+        try {
+            String numberUser = bufferedReader.readLine();
+            Matcher matcher = PATTERNNUMBERBOUND.matcher(numberUser);
+            while (!matcher.find()) {
+                printStream.println(Constant.INCORRECTINPUT);
+                numberUser = bufferedReader.readLine();
+                matcher = PATTERNNUMBERBOUND.matcher(numberUser);
+            }
+            return Integer.parseInt(numberUser);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static BoundType getBoundType(BufferedReader bufferedReader, PrintStream printStream) {
+        switch (getNumberUserBound(bufferedReader, printStream)) {
+            case 1:
+                return BoundType.UP;
+            case 2:
+                return BoundType.DOWN;
+            case 3:
+                return BoundType.RIGHT;
+            case 4:
+                return BoundType.LEFT;
+            default:
+                return  null;
+        }
     }
 }
