@@ -1,6 +1,5 @@
 package backend.academy.maze;
 
-import org.checkerframework.checker.units.qual.A;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -55,8 +54,8 @@ public class GeneratorKruskal implements Generator {
 
                 Generator.addPassageBetween(edge.firstNode(), edge.secondNode(), maze.grid);
 
-                maze.grid[from.row()][from.column()].type = Type.PASSAGE;
-                maze.grid[to.row()][to.column()].type = Type.PASSAGE;
+                maze.grid[from.row()][from.column()].type = CellType.PASSAGE;
+                maze.grid[to.row()][to.column()].type = CellType.PASSAGE;
             }
         }
         return mst;

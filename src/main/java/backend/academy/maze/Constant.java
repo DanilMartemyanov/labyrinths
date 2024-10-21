@@ -17,6 +17,9 @@ public final class Constant {
     public static final String YESNO = "Введите y/n";
     public static final String BOMB = "\uD83D\uDCA3";
     public static final String GIFT = "\uD83C\uDF81";
+    public static final String INPUTSIZEMAZE = "Укажите размер лабиринта: ";
+    public static final String INPUTHEIGHT = "Введите длину: ";
+    public static final String INPUTWIDTH = "Введите ширину: ";
 
     private Constant() {
         throw new IllegalStateException("Utility class");

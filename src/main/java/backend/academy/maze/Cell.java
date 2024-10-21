@@ -10,7 +10,7 @@ import lombok.Setter;
 public class Cell {
     int row;
     int column;
-    Type type;
+    CellType type;
 
     @Override
     public String toString() {

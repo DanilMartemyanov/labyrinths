@@ -1,5 +1,6 @@
 package backend.academy.maze;
 
+import com.sun.source.tree.ConstantCaseLabelTree;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -29,10 +30,10 @@ public class UserInterface {
 
             if (Constant.YES.equals(ready)) {
 
-                printStream.println("Укажите размер лабиринта");
-                printStream.print("Введите длину: ");
+                printStream.println(Constant.INPUTSIZEMAZE);
+                printStream.print(Constant.INPUTHEIGHT);
                 int height = InputUser.getNumberUser(bufferedReader, printStream);
-                printStream.print("Введите ширину: ");
+                printStream.print(Constant.INPUTWIDTH);
                 int width = InputUser.getNumberUser(bufferedReader, printStream);
 
                 printStream.println("Выберите алгоритм для генерации лабиринта:");
@@ -104,6 +105,21 @@ public class UserInterface {
 
             String ready = InputUser.startGame(bufferedReader, printStream);
             if (Constant.YES.equals(ready)) {
+
+                printStream.println(Constant.INPUTSIZEMAZE);
+                printStream.print(Constant.INPUTHEIGHT);
+                int height = InputUser.getNumberUser(bufferedReader, printStream);
+                printStream.print(Constant.INPUTWIDTH);
+                int width = InputUser.getNumberUser(bufferedReader, printStream);
+
+                Maze maze = generatorKruskal.generateMaze(height, width);
+
+                printStream.println("Укажите границу");
+                printStream.println("[1] - верхняя");
+                printStream.println("[2] - нижняя");
+                printStream.println("[3] - правая");
+                printStream.println("[4] - левая");
+
 
             }else {
                 break;

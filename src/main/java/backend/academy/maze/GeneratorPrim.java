@@ -19,7 +19,7 @@ public class GeneratorPrim implements Generator {
         // Начальная точка
         int randomRow = random.nextInt(heightMaze / 2) * 2 + 1;
         int randomColumn = random.nextInt(widthMaze / 2) * 2 + 1;
-        Cell startPoint = new Cell(randomRow, randomColumn, Type.PASSAGE);
+        Cell startPoint = new Cell(randomRow, randomColumn, CellType.PASSAGE);
         maze.grid[randomRow][randomColumn] = startPoint;
 
         // Множество соседей
@@ -42,7 +42,7 @@ public class GeneratorPrim implements Generator {
             // Если нашли посещённую клетку
             if (visitedCell != null) {
                 // Меняем тип случайного соседа на проход
-                randomNeighbor.type = Type.PASSAGE;
+                randomNeighbor.type = CellType.PASSAGE;
                 visited.add(randomNeighbor); // Отмечаем текущую клетку как посещённую
 
                 // Создаём проход между посещённой клеткой и соседом

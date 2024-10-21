@@ -18,7 +18,7 @@ public interface PathFinding {
             int newCol = current.column() + direction.column();
 
             if (Generator.checkBounds(new Coordinate(newRow, newCol), maze.grid)
-                && maze.grid[newRow][newCol].type == Type.PASSAGE) {
+                && maze.grid[newRow][newCol].type == CellType.PASSAGE) {
                 neighbors.add(new Coordinate(newRow, newCol));
             }
         }
@@ -44,14 +44,14 @@ public interface PathFinding {
     // Метод для вывода пути на сетку
     static void printPath(ArrayList<Coordinate> path, Coordinate start, Coordinate end, Maze maze) {
 
-        maze.grid[start.row()][start.column()].type = Type.A;
-        maze.grid[end.row()][end.column()].type = Type.B;
+        maze.grid[start.row()][start.column()].type = CellType.A;
+        maze.grid[end.row()][end.column()].type = CellType.B;
 
         path.remove(start);
         path.remove(end);
 
         for (Coordinate coordinate : path) {
-            maze.grid[coordinate.row()][coordinate.column()].type = Type.GLASS;
+            maze.grid[coordinate.row()][coordinate.column()].type = CellType.GLASS;
         }
         maze.printMaze();
     }

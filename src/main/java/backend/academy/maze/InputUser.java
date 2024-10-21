@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public final class InputUser {
     static final Pattern PATTERNSTARTGAME = Pattern.compile("^[ynYN]$");
     static final Pattern PATTERNNUMBERALGORITHM = Pattern.compile("^[12]$");
+    static final Pattern PATTERNNUMBERBOUND = Pattern.compile("^[1234]$");
     static final Pattern PATTERNNUMBERUSER = Pattern.compile("^[1-9]\\d*$");
 
     private InputUser() {}

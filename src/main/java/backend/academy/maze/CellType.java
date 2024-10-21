@@ -1,6 +1,6 @@
 package backend.academy.maze;
 
-public enum Type {
+public enum CellType {
     WALL, PASSAGE, GLASS, BOMB, A, B, GIFT;
 
 }

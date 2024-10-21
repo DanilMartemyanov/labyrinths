@@ -25,7 +25,7 @@ public final class Maze {
     public void initializeGrid() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                grid[i][j] = new Cell(i, j, Type.WALL);
+                grid[i][j] = new Cell(i, j, CellType.WALL);
             }
         }
     }
@@ -72,13 +72,13 @@ public final class Maze {
             int column = from.column() + (to.column() - from.column()) / 2;
             switch (edge.weight() % 2) {
                 case 1:
-                    grid[row][column].type = Type.GIFT;
+                    grid[row][column].type = CellType.GIFT;
                     break;
                 case 0:
-                    grid[row][column].type = Type.BOMB;
+                    grid[row][column].type = CellType.BOMB;
                     break;
                 default:
-                    grid[row][column].type = Type.PASSAGE;
+                    grid[row][column].type = CellType.PASSAGE;
             }
         }
 
