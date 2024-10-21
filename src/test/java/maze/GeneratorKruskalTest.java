@@ -12,12 +12,14 @@ public class GeneratorKruskalTest {
     private Maze maze;
     private GeneratorKruskal generatorKruskal;
     private HashSet<Edge> edges;
+    private UnionFindImpl   unionFind;
 
     @BeforeEach
     void setUp() {
         maze = new Maze(11, 11);
         generatorKruskal = new GeneratorKruskal();
         edges = new HashSet<>();
+        unionFind = new UnionFindImpl(121);
     }
 
     @Test
@@ -64,5 +66,18 @@ public class GeneratorKruskalTest {
         System.out.println(unionFind.root(index3));
         System.out.println(unionFind.root(index4));
         maze.printMaze();
+    }
+
+    @Test
+    void getMst(){
+        // Создаем и заполняем ребра
+        EdgeHandler.initSetEdges(maze.grid, edges);
+
+        // Сортируем ребра
+        ArrayList<Edge> sortedEdges = EdgeHandler.sortEdges(edges);
+
+        ArrayList<Edge> mst = GeneratorKruskal.unionCell(sortedEdges, unionFind, maze);
+        System.out.println(mst.size());
+
     }
 }

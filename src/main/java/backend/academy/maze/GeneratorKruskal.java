@@ -1,13 +1,13 @@
 package backend.academy.maze;
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class GeneratorKruskal implements Generator {
+    private static ArrayList<Edge> mst = new ArrayList<>();
 
     @Override
-    public  Maze generateMaze(int height, int width) {
+    public Maze generateMaze(int height, int width) {
         int heightMaze = Generator.getNumberOdd(height);
         int widthMaze = Generator.getNumberOdd(width);
         Maze maze = new Maze(heightMaze, widthMaze);
@@ -28,7 +28,7 @@ public class GeneratorKruskal implements Generator {
     }
 
     // Объединяем множества точек
-    public static void unionCell(ArrayList<Edge> edges, UnionFindImpl unionFind, Maze maze) {
+    public static ArrayList<Edge> unionCell(ArrayList<Edge> edges, UnionFindImpl unionFind, Maze maze) {
         // Кандидаты на ребра в остовное дерево
         for (Edge edge : edges) {
             // Координаты ребер
@@ -42,10 +42,10 @@ public class GeneratorKruskal implements Generator {
             /**
              * Проверка: состоят ли клетки в одном множестве ?
              * Если нет, объединяем множества и красим клетки в проход и ломаем стену между ними
-              */
+             */
 
             if (!unionFind.find(indexCellRow, indexCellCol)) {
-
+                mst.add(edge);
                 unionFind.union(indexCellRow, indexCellCol);
 
                 Generator.addPassageBetween(edge.firstNode(), edge.secondNode(), maze.grid);
@@ -54,5 +54,6 @@ public class GeneratorKruskal implements Generator {
                 maze.grid[to.row()][to.column()].type = Type.PASSAGE;
             }
         }
+        return mst;
     }
 }
