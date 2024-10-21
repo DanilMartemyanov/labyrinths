@@ -6,49 +6,43 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class PrintMaze {
-    private final PrintStream printStream = new PrintStream(System.out, true, StandardCharsets.UTF_8);
-
-    private Maze maze;
-
-    public PrintMaze(Maze maze) {
-        this.maze = maze;
-    }
+    private static final PrintStream PRINT_STREAM = new PrintStream(System.out, true, StandardCharsets.UTF_8);
 
     @SuppressFBWarnings("UCPM_USE_CHARACTER_PARAMETERIZED_METHOD")
-    public void printMaze() {
+    public static void printMaze(Maze maze) {
         for (int i = 0; i < maze.height(); i++) {
             for (int j = 0; j < maze.width(); j++) {
                 switch (maze.grid[i][j].type) {
                     case PASSAGE:
-                        printStream.print(Constant.PASSAGE);
+                        PRINT_STREAM.print(Constant.PASSAGE);
                         break;
                     case WALL:
-                        printStream.print(Constant.WALL);
+                        PRINT_STREAM.print(Constant.WALL);
                         break;
                     case A:
-                        printStream.print(Constant.PERSON);
+                        PRINT_STREAM.print(Constant.PERSON);
                         break;
                     case B:
-                        printStream.print(Constant.CAKE);
+                        PRINT_STREAM.print(Constant.CAKE);
                         break;
                     case GLASS:
-                        printStream.print(Constant.GLASS);
+                        PRINT_STREAM.print(Constant.GLASS);
                         break;
                     case BOMB:
-                        printStream.print(Constant.BOMB);
+                        PRINT_STREAM.print(Constant.BOMB);
                         break;
                     case GIFT:
-                        printStream.print(Constant.GIFT);
+                        PRINT_STREAM.print(Constant.GIFT);
                         break;
                     default:
                         break;
                 }
             }
-            printStream.println();
+            PRINT_STREAM.println();
         }
     }
 
-    public void printMazeWithWeight(ArrayList<Edge> edges) {
+    public static void printMazeWithWeight(ArrayList<Edge> edges, Maze maze) {
         for (Edge edge : edges) {
             Coordinate from = edge.firstNode();
             Coordinate to = edge.secondNode();

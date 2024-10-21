@@ -7,13 +7,13 @@ import java.util.HashSet;
 public class GeneratorKruskal implements Generator {
     public ArrayList<Edge> mst;
     private static final SecureRandom RANDOM = new SecureRandom();
+    private PrintMaze printMaze;
 
     @Override
     public Maze generateMaze(int height, int width) {
         int heightMaze = Generator.getNumberOdd(height);
         int widthMaze = Generator.getNumberOdd(width);
         Maze maze = new Maze(heightMaze, widthMaze);
-        PrintMaze printMaze = new PrintMaze(maze);
         HashSet<Edge> edges = new HashSet<>();
         UnionFindImpl unionFind = new UnionFindImpl(heightMaze * widthMaze);
         // Создаем и заполняем ребра
@@ -25,7 +25,7 @@ public class GeneratorKruskal implements Generator {
         // строим лабиринт
         mst = unionCell(sortedEdges, unionFind, maze);
 
-        printMaze.printMaze();
+        printMaze.printMaze(maze);
 
         return maze;
     }

@@ -13,6 +13,7 @@ public class UserInterface {
         new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
     private final GeneratorPrim generatorPrim = new GeneratorPrim();
     private final GeneratorKruskal generatorKruskal = new GeneratorKruskal();
+    private final PrintMaze printMaze = new PrintMaze();
     private DepthFirstSearch depthFirstSearch;
     private BreadthFirstSearch breadthFirstSearch;
     private ArrayList<Coordinate> path;
@@ -59,6 +60,9 @@ public class UserInterface {
                     default -> maze = null;
 
                 }
+
+
+
                 String answer = Constant.YES;
                 while (Constant.YES.equals(answer)) {
                     printStream.println("Укажите конечную точку, где изображено: " + Constant.PASSAGE);
@@ -81,7 +85,7 @@ public class UserInterface {
                     }
 
                     if (path != null) {
-                        PathFinding.printPath(path, startPoint, endPoint, maze);
+                        PathFinding.printPath(path, startPoint, endPoint, maze, printMaze);
                     } else {
                         printStream.println("Упс :( похоже путь не найден, попробуйте указать другие точки");
                     }
@@ -122,10 +126,7 @@ public class UserInterface {
 
                 BoundType boundType = InputUser.getBoundType(bufferedReader, printStream);
 
-
-
-
-            }else {
+            } else {
                 break;
             }
         }

@@ -7,21 +7,17 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-public class Dijkstra implements PathFinding {
-    private HashMap<Coordinate, Coordinate> parentMap;
+public class Dijkstra extends Solver implements PathFinding {
     private ArrayList<Edge> mst;
-    private HashSet<Coordinate> visited;
-    private ArrayList<Coordinate> path;
     private PriorityQueue<Coordinate> pqueue;
     private Set<Coordinate> nodes;
     public Map<Coordinate, Integer> distance;
     public int distanceSum = 0;
+    private Maze maze;
 
-    public Dijkstra(ArrayList<Edge> mst) {
+    public Dijkstra(ArrayList<Edge> mst, Maze maze ) {
+        super(maze);
         this.mst = mst;
-        parentMap = new HashMap<>();
-        visited = new HashSet<>();
-        path = new ArrayList<>();
         pqueue = new PriorityQueue<>();
         nodes = new HashSet<>();
         distance = new HashMap<>();
@@ -62,15 +58,15 @@ public class Dijkstra implements PathFinding {
                     if(dist < distance.get(neighbour)) {
                         distance.put(neighbour, dist);
                         pqueue.add(neighbour);
-                        parentMap.put(neighbour, current);
+                        super.parentMap().put(neighbour, current);
                     }
                 }
             }
         }
         if(!distance.get(end).equals(Integer.MAX_VALUE)) {
-            PathFinding.reconstructPath(start, end, parentMap, path);
+            PathFinding.reconstructPath(start, end, super.parentMap(), super.path());
             distanceSum += distance.get(end);
         }
-        return path;
+        return super.path();
     }
 }

@@ -42,7 +42,7 @@ public interface PathFinding {
     }
 
     // Метод для вывода пути на сетку
-    static void printPath(ArrayList<Coordinate> path, Coordinate start, Coordinate end, Maze maze) {
+    static void printPath(ArrayList<Coordinate> path, Coordinate start, Coordinate end, Maze maze, PrintMaze printMaze) {
 
         maze.grid[start.row()][start.column()].type = CellType.A;
         maze.grid[end.row()][end.column()].type = CellType.B;
@@ -53,6 +53,6 @@ public interface PathFinding {
         for (Coordinate coordinate : path) {
             maze.grid[coordinate.row()][coordinate.column()].type = CellType.GLASS;
         }
-        maze.printMaze();
+        printMaze.printMaze(maze);
     }
 }

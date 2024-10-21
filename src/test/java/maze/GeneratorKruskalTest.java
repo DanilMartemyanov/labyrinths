@@ -47,7 +47,7 @@ public class GeneratorKruskalTest {
 
     @Test
     void unionFind() {
-        PrintMaze printMaze = new PrintMaze(maze);
+        PrintMaze printMaze = new PrintMaze();
         UnionFindImpl unionFind = new UnionFindImpl(maze.width() * maze.height());
         Coordinate coordinate1 = new Coordinate(1, 1);
         Coordinate coordinate2 = new Coordinate(1, 2);
@@ -70,7 +70,7 @@ public class GeneratorKruskalTest {
         System.out.println(unionFind.root(index2));
         System.out.println(unionFind.root(index3));
         System.out.println(unionFind.root(index4));
-        printMaze.printMaze();
+        printMaze.printMaze(maze);
     }
 
     @Test
@@ -94,18 +94,18 @@ public class GeneratorKruskalTest {
 
     @Test
     void imageMaze() {
-        PrintMaze printMaze;
+        PrintMaze printMaze = new PrintMaze();
         Maze maze1 = generatorKruskal.generateMaze(21, 21);
         System.out.println();
         ArrayList<Edge> mst = generatorKruskal.mst;
         for (Edge edge : mst) {
             System.out.println(edge);
         }
-        printMaze = new PrintMaze(maze1);
-        printMaze.printMazeWithWeight(mst);
+
+        printMaze.printMazeWithWeight(mst, maze1);
         System.out.println();
-        printMaze.printMaze();
-        Dijkstra dijkstra = new Dijkstra(mst);
+        printMaze.printMaze(maze1);
+        Dijkstra dijkstra = new Dijkstra(mst, maze1);
 //        System.out.println(mst);
 //        ArrayList<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
 //        PathFinding.printPath(path, new Coordinate(1, 1), new Coordinate(9, 9), maze1);

@@ -39,7 +39,7 @@ public class DijkstraTest {
         ArrayList<Edge> mst = GeneratorKruskal.unionCell(sortedEdges, unionFind, maze);
         System.out.println(mst.size());
 
-        dijkstra = new Dijkstra(mst);
+        dijkstra = new Dijkstra(mst, maze);
         ArrayList<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
         System.out.println(dijkstra.distanceSum);
     }

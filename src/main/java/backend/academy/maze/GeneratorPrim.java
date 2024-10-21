@@ -6,14 +6,14 @@ import java.util.HashSet;
 
 public class GeneratorPrim implements Generator {
     private final SecureRandom random = new SecureRandom();
-
+    private final PrintMaze printMaze = new PrintMaze();
 
     @Override
     public  Maze generateMaze(int height, int width) {
         int heightMaze = Generator.getNumberOdd(height);
         int widthMaze = Generator.getNumberOdd(width);
         Maze maze = new Maze(heightMaze, widthMaze);
-        PrintMaze printMaze = new PrintMaze(maze);
+
 
         // Направления движения через 2 клетки (чтобы прыгать через стены)
         ArrayList<Coordinate> directions = Coordinate.generateDirections(Constant.STEP_2);
@@ -60,7 +60,7 @@ public class GeneratorPrim implements Generator {
         }
 
         // Финальный вывод лабиринта
-        printMaze.printMaze();
+        printMaze.printMaze(maze);
         return maze;
     }
 
