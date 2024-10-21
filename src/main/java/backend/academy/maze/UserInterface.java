@@ -19,7 +19,7 @@ public class UserInterface {
     public UserInterface() {
     }
 
-    public void startGame() {
+    public void gameVersion1() {
         while (true) {
 
             printStream.println("Хэй хэй хэй ! Готовы сгенерировать лабиринт ?");
@@ -92,6 +92,20 @@ public class UserInterface {
                     }
                 }
             } else {
+                break;
+            }
+        }
+    }
+
+    public void gameVersion2() {
+        while (true) {
+            printStream.println("Хэй хэй хэй ! Новая концепция игры. Готовы продолжить ?");
+            printStream.println(Constant.YESNO);
+
+            String ready = InputUser.startGame(bufferedReader, printStream);
+            if (Constant.YES.equals(ready)) {
+
+            }else {
                 break;
             }
         }

@@ -15,6 +15,7 @@ public class Dijkstra implements PathFinding {
     private PriorityQueue<Coordinate> pqueue;
     private Set<Coordinate> nodes;
     public Map<Coordinate, Integer> distance;
+    public int distanceSum = 0;
 
     public Dijkstra(ArrayList<Edge> mst) {
         this.mst = mst;
@@ -68,6 +69,7 @@ public class Dijkstra implements PathFinding {
         }
         if(!distance.get(end).equals(Integer.MAX_VALUE)) {
             PathFinding.reconstructPath(start, end, parentMap, path);
+            distanceSum += distance.get(end);
         }
         return path;
     }

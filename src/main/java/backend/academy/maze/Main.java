@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
 public class Main {
     public static void main(String[] args) {
         UserInterface userInterface = new UserInterface();
-        userInterface.startGame();
+        userInterface.gameVersion1();
         // TODO: сделать разные типы поверхности, сделать несколько проходов
     }
 }

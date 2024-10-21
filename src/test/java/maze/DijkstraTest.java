@@ -41,6 +41,6 @@ public class DijkstraTest {
 
         dijkstra = new Dijkstra(mst);
         ArrayList<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
-        System.out.println(dijkstra.distance);
+        System.out.println(dijkstra.distanceSum);
     }
 }

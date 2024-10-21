@@ -87,6 +87,6 @@ public final class InputUser {
         int userInputX  = getNumberUser(bufferedReader, printStream);
         printStream.println(Constant.COORDINATE + "y:");
         int userInputY  = getNumberUser(bufferedReader, printStream);
-        return new Coordinate(userInputX, userInputY);
+        return new Coordinate(userInputY, userInputX);
     }
 }

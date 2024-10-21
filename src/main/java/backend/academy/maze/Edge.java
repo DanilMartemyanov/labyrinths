@@ -10,12 +10,12 @@ public class Edge implements Comparable<Edge> {
     private Coordinate firstNode;
     private Coordinate secondNode;
     private int weight;
-    private static final SecureRandom RANDOM = new SecureRandom();
+
 
     public Edge(Coordinate firstNode, Coordinate secondNode) {
         this.firstNode = firstNode;
         this.secondNode = secondNode;
-        this.weight = RANDOM.nextInt(1, Constant.BOUND_3);
+        this.weight = 0;
     }
 
     @Override

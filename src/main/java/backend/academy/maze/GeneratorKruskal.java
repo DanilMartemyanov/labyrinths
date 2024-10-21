@@ -1,10 +1,13 @@
 package backend.academy.maze;
 
+import org.checkerframework.checker.units.qual.A;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class GeneratorKruskal implements Generator {
-    private static ArrayList<Edge> mst = new ArrayList<>();
+    public ArrayList<Edge> mst;
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     @Override
     public Maze generateMaze(int height, int width) {
@@ -20,7 +23,7 @@ public class GeneratorKruskal implements Generator {
         ArrayList<Edge> sortedEdges = EdgeHandler.sortEdges(edges);
 
         // строим лабиринт
-        unionCell(sortedEdges, unionFind, maze);
+        mst = unionCell(sortedEdges, unionFind, maze);
 
         maze.printMaze();
 
@@ -29,6 +32,8 @@ public class GeneratorKruskal implements Generator {
 
     // Объединяем множества точек
     public static ArrayList<Edge> unionCell(ArrayList<Edge> edges, UnionFindImpl unionFind, Maze maze) {
+        ArrayList<Edge> mst = new ArrayList<>();
+
         // Кандидаты на ребра в остовное дерево
         for (Edge edge : edges) {
             // Координаты ребер
@@ -43,8 +48,8 @@ public class GeneratorKruskal implements Generator {
              * Проверка: состоят ли клетки в одном множестве ?
              * Если нет, объединяем множества и красим клетки в проход и ломаем стену между ними
              */
-
             if (!unionFind.find(indexCellRow, indexCellCol)) {
+                edge.weight(RANDOM.nextInt(0, Constant.BOUND_4));
                 mst.add(edge);
                 unionFind.union(indexCellRow, indexCellCol);
 

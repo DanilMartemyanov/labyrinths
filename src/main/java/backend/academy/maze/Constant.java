@@ -3,7 +3,7 @@ package backend.academy.maze;
 public final class Constant {
     public static final int STEP_1 = 1;
     public static final int STEP_2 = 2;
-    public static final int BOUND_3 = 3;
+    public static final int BOUND_4 = 4;
     public static final String YES = "y";
     public static final String NO = "n";
     public static final String INCORRECTINPUT = "Некорректный ввод, введите значение заново";
@@ -15,7 +15,8 @@ public final class Constant {
     public static final String GLASS = "\uD83D\uDD0E";
     public static final String CHOSE = "Ваш выбор: ";
     public static final String YESNO = "Введите y/n";
-
+    public static final String BOMB = "\uD83D\uDCA3";
+    public static final String GIFT = "\uD83C\uDF81";
 
     private Constant() {
         throw new IllegalStateException("Utility class");

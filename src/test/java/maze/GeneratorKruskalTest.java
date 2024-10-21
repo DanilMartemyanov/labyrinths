@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 
 public class GeneratorKruskalTest {
     private Maze maze;
@@ -77,7 +78,30 @@ public class GeneratorKruskalTest {
         ArrayList<Edge> sortedEdges = EdgeHandler.sortEdges(edges);
 
         ArrayList<Edge> mst = GeneratorKruskal.unionCell(sortedEdges, unionFind, maze);
-        System.out.println(mst.size());
+        HashSet<Edge> mstSet = new HashSet<>(mst);
+        System.out.println(mstSet.size());
+        for (Edge edge : mstSet) {
+            if (edge.secondNode().equals(new Coordinate(9, 1))){
+                System.out.println(edge);
+            }
+        }
 
+    }
+
+    @Test
+    void imageMaze(){
+        Maze maze1 = generatorKruskal.generateMaze(21, 21);
+        System.out.println();
+        ArrayList<Edge> mst = generatorKruskal.mst;
+        for (Edge edge : mst) {
+            System.out.println(edge);
+        }
+        maze1.printMazeWithWeight(mst);
+        System.out.println();
+        maze1.printMaze();
+        Dijkstra dijkstra = new Dijkstra(mst);
+//        System.out.println(mst);
+//        ArrayList<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
+//        PathFinding.printPath(path, new Coordinate(1, 1), new Coordinate(9, 9), maze1);
     }
 }

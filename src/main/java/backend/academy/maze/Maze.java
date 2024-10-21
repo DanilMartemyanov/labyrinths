@@ -3,6 +3,7 @@ package backend.academy.maze;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,13 +42,19 @@ public final class Maze {
                         printStream.print(Constant.WALL);
                         break;
                     case A:
-                        printStream.print(Constant.PERSON); // бегущий человек
+                        printStream.print(Constant.PERSON);
                         break;
                     case B:
-                        printStream.print(Constant.CAKE); //
+                        printStream.print(Constant.CAKE);
                         break;
                     case GLASS:
-                        printStream.print(Constant.GLASS); // лупа
+                        printStream.print(Constant.GLASS);
+                        break;
+                    case BOMB:
+                        printStream.print(Constant.BOMB);
+                        break;
+                    case GIFT:
+                        printStream.print(Constant.GIFT);
                         break;
                     default:
                         break;
@@ -55,6 +62,26 @@ public final class Maze {
             }
             printStream.println();
         }
+    }
+
+    public void printMazeWithWeight(ArrayList<Edge> edges) {
+        for (Edge edge : edges) {
+            Coordinate from = edge.firstNode();
+            Coordinate to = edge.secondNode();
+            int row = from.row() + (to.row() - from.row()) / 2;
+            int column = from.column() + (to.column() - from.column()) / 2;
+            switch (edge.weight() % 2) {
+                case 1:
+                    grid[row][column].type = Type.GIFT;
+                    break;
+                case 0:
+                    grid[row][column].type = Type.BOMB;
+                    break;
+                default:
+                    grid[row][column].type = Type.PASSAGE;
+            }
+        }
+
     }
 
 }
