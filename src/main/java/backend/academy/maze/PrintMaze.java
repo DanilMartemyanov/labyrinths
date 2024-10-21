@@ -61,4 +61,51 @@ public class PrintMaze {
         }
 
     }
+
+    // Метод для вывода пути на сетку
+    public static void printPath(ArrayList<Coordinate> path, Coordinate start, Coordinate end, Maze maze) {
+
+        maze.grid[start.row()][start.column()].type = CellType.A;
+        maze.grid[end.row()][end.column()].type = CellType.B;
+
+        path.remove(start);
+        path.remove(end);
+
+        for (Coordinate coordinate : path) {
+            maze.grid[coordinate.row()][coordinate.column()].type = CellType.GLASS;
+        }
+        printMaze(maze);
+    }
+
+    public static void createManyPassage(BoundType boundType, Maze maze) {
+
+    }
+
+    public ArrayList<Coordinate> getLine(Maze maze, BoundType boundType) {
+        ArrayList<Coordinate> line = new ArrayList<>();
+        switch (boundType) {
+            case BoundType.UP:
+                for (int i = 0; i < maze.width(); i++) {
+                    line.add(new Coordinate(0, i));
+                }
+                return line;
+            case BoundType.DOWN:
+                for (int i = 0; i < maze.width(); i++) {
+                    line.add(new Coordinate(maze.height() - 1, i));
+                }
+                return line;
+            case BoundType.RIGHT:
+                for (int i = 0; i < maze.height(); i++) {
+                    line.add(new Coordinate(i, maze.width() - 1));
+                }
+                return line;
+            case BoundType.LEFT:
+                for (int i = 0; i < maze.height(); i++) {
+                    line.add(new Coordinate(0, i));
+                }
+                return line;
+            default:
+                return null;
+        }
+    }
 }

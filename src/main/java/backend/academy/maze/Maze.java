@@ -1,9 +1,8 @@
 package backend.academy.maze;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 

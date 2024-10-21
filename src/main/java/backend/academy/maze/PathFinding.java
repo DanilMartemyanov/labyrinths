@@ -41,18 +41,5 @@ public interface PathFinding {
         Collections.reverse(path);
     }
 
-    // Метод для вывода пути на сетку
-    static void printPath(ArrayList<Coordinate> path, Coordinate start, Coordinate end, Maze maze, PrintMaze printMaze) {
 
-        maze.grid[start.row()][start.column()].type = CellType.A;
-        maze.grid[end.row()][end.column()].type = CellType.B;
-
-        path.remove(start);
-        path.remove(end);
-
-        for (Coordinate coordinate : path) {
-            maze.grid[coordinate.row()][coordinate.column()].type = CellType.GLASS;
-        }
-        printMaze.printMaze(maze);
-    }
 }

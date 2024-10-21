@@ -85,7 +85,7 @@ public class UserInterface {
                     }
 
                     if (path != null) {
-                        PathFinding.printPath(path, startPoint, endPoint, maze, printMaze);
+                        PrintMaze.printPath(path, startPoint, endPoint, maze);
                     } else {
                         printStream.println("Упс :( похоже путь не найден, попробуйте указать другие точки");
                     }

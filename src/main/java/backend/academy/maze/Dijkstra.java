@@ -3,13 +3,15 @@ package backend.academy.maze;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 
 public class Dijkstra extends Solver implements PathFinding {
-    private ArrayList<Edge> mst;
-    private PriorityQueue<Coordinate> pqueue;
+    private List<Edge> mst;
+    private Queue<Coordinate> pqueue;
     private Set<Coordinate> nodes;
     public Map<Coordinate, Integer> distance;
     public int distanceSum = 0;
