@@ -13,7 +13,8 @@ public class GeneratorKruskalTest {
     private Maze maze;
     private GeneratorKruskal generatorKruskal;
     private HashSet<Edge> edges;
-    private UnionFindImpl   unionFind;
+    private UnionFindImpl unionFind;
+
 
     @BeforeEach
     void setUp() {
@@ -21,10 +22,11 @@ public class GeneratorKruskalTest {
         generatorKruskal = new GeneratorKruskal();
         edges = new HashSet<>();
         unionFind = new UnionFindImpl(121);
+
     }
 
     @Test
-    void initEdges(){
+    void initEdges() {
         EdgeHandler.initSetEdges(maze.grid, edges);
 //        generatorKruskal.addEdge(new Coordinate(1,1), maze.grid, edges);
         System.out.println(edges.size());
@@ -32,7 +34,7 @@ public class GeneratorKruskalTest {
     }
 
     @Test
-    void sortEdges(){
+    void sortEdges() {
         edges.add(new Edge(new Coordinate(0, 0), new Coordinate(0, 1)));
         edges.add(new Edge(new Coordinate(1, 0), new Coordinate(1, 1)));
         edges.add(new Edge(new Coordinate(1, 1), new Coordinate(1, 2)));
@@ -42,8 +44,10 @@ public class GeneratorKruskalTest {
             System.out.println(edge);
         }
     }
+
     @Test
-    void unionFind(){
+    void unionFind() {
+        PrintMaze printMaze = new PrintMaze(maze);
         UnionFindImpl unionFind = new UnionFindImpl(maze.width() * maze.height());
         Coordinate coordinate1 = new Coordinate(1, 1);
         Coordinate coordinate2 = new Coordinate(1, 2);
@@ -66,11 +70,11 @@ public class GeneratorKruskalTest {
         System.out.println(unionFind.root(index2));
         System.out.println(unionFind.root(index3));
         System.out.println(unionFind.root(index4));
-        maze.printMaze();
+        printMaze.printMaze();
     }
 
     @Test
-    void getMst(){
+    void getMst() {
         // Создаем и заполняем ребра
         EdgeHandler.initSetEdges(maze.grid, edges);
 
@@ -81,7 +85,7 @@ public class GeneratorKruskalTest {
         HashSet<Edge> mstSet = new HashSet<>(mst);
         System.out.println(mstSet.size());
         for (Edge edge : mstSet) {
-            if (edge.secondNode().equals(new Coordinate(9, 1))){
+            if (edge.secondNode().equals(new Coordinate(9, 1))) {
                 System.out.println(edge);
             }
         }
@@ -89,16 +93,18 @@ public class GeneratorKruskalTest {
     }
 
     @Test
-    void imageMaze(){
+    void imageMaze() {
+        PrintMaze printMaze;
         Maze maze1 = generatorKruskal.generateMaze(21, 21);
         System.out.println();
         ArrayList<Edge> mst = generatorKruskal.mst;
         for (Edge edge : mst) {
             System.out.println(edge);
         }
-        maze1.printMazeWithWeight(mst);
+        printMaze = new PrintMaze(maze1);
+        printMaze.printMazeWithWeight(mst);
         System.out.println();
-        maze1.printMaze();
+        printMaze.printMaze();
         Dijkstra dijkstra = new Dijkstra(mst);
 //        System.out.println(mst);
 //        ArrayList<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));

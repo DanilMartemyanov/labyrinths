@@ -13,6 +13,7 @@ public class GeneratorKruskal implements Generator {
         int heightMaze = Generator.getNumberOdd(height);
         int widthMaze = Generator.getNumberOdd(width);
         Maze maze = new Maze(heightMaze, widthMaze);
+        PrintMaze printMaze = new PrintMaze(maze);
         HashSet<Edge> edges = new HashSet<>();
         UnionFindImpl unionFind = new UnionFindImpl(heightMaze * widthMaze);
         // Создаем и заполняем ребра
@@ -24,7 +25,7 @@ public class GeneratorKruskal implements Generator {
         // строим лабиринт
         mst = unionCell(sortedEdges, unionFind, maze);
 
-        maze.printMaze();
+        printMaze.printMaze();
 
         return maze;
     }

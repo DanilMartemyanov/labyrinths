@@ -22,7 +22,7 @@ public class InputUserTest {
         String inputUser = "1";
         BufferedReader bufferedReader =
             new BufferedReader(new InputStreamReader(new ByteArrayInputStream(inputUser.getBytes())));
-        Assertions.assertEquals(InputUser.algorithmGenerateMazeType(bufferedReader,printStream), AlgorithmType.PRIM);
+        Assertions.assertEquals(InputUser.getAlgorithmGenerateMazeType(bufferedReader,printStream), AlgorithmType.PRIM);
     }
 
     @Test
