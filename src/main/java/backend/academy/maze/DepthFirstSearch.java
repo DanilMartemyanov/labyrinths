@@ -5,14 +5,18 @@ import java.util.ArrayList;
 import java.util.Deque;
 
 public class DepthFirstSearch extends Solver implements PathFinding {
+    private Deque<Coordinate> dequeArray;
 
     public DepthFirstSearch(Maze maze) {
         super(maze);
+        dequeArray = new ArrayDeque<>();
     }
 
     @Override
     public ArrayList<Coordinate> findPath(Coordinate start, Coordinate end) {
-        Deque<Coordinate> dequeArray = new ArrayDeque<>();
+
+        super.clearCollections();
+        dequeArray.clear();
 
         dequeArray.push(start);
         super.visited().add(start);

@@ -1,6 +1,5 @@
 package backend.academy.maze;
 
-import backend.academy.Checker;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -36,9 +35,9 @@ public class UserInterface {
 
                 printStream.println(Constant.INPUTSIZEMAZE);
                 printStream.print(Constant.INPUTHEIGHT);
-                int height = InputUser.getNumberUser(bufferedReader, printStream);
+                int height = InputUser.getNumberUserSizeMaze(bufferedReader, printStream);
                 printStream.print(Constant.INPUTWIDTH);
-                int width = InputUser.getNumberUser(bufferedReader, printStream);
+                int width = InputUser.getNumberUserSizeMaze(bufferedReader, printStream);
 
                 printStream.println("Выберите алгоритм для генерации лабиринта:");
                 printStream.println("[1] - алгоритм Прима");
@@ -61,11 +60,12 @@ public class UserInterface {
                     case PRIM -> maze = generatorPrim.generateMaze(height, width);
                     case KRUSKAL -> maze = generatorKruskal.generateMaze(height, width);
                     default -> maze = null;
-
                 }
+                PrintMaze.printMaze(maze);
 
                 String answer = Constant.YES;
                 while (Constant.YES.equals(answer)) {
+                    Maze mazeAttempt = new Maze(maze);
                     printStream.println("Укажите конечную точку, где изображено: " + Constant.PASSAGE);
                     printStream.println("Начальная точка \"A\":  ");
                     Coordinate startPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
@@ -74,19 +74,19 @@ public class UserInterface {
 
                     switch (findPathType) {
                         case DFS -> {
-                            depthFirstSearch = new DepthFirstSearch(maze);
+                            depthFirstSearch = new DepthFirstSearch(mazeAttempt);
                             path = depthFirstSearch.findPath(startPoint, endPoint);
                         }
 
                         case BFS -> {
-                            breadthFirstSearch = new BreadthFirstSearch(maze);
+                            breadthFirstSearch = new BreadthFirstSearch(mazeAttempt);
                             path = breadthFirstSearch.findPath(startPoint, endPoint);
                         }
                         default -> path = null;
                     }
 
                     if (path != null) {
-                        PrintMaze.printPath(path, startPoint, endPoint, maze);
+                        PrintMaze.printPath(path, startPoint, endPoint, mazeAttempt);
                     } else {
                         printStream.println("Упс :( похоже путь не найден, попробуйте указать другие точки");
                     }
@@ -113,9 +113,9 @@ public class UserInterface {
 
                 printStream.println(Constant.INPUTSIZEMAZE);
                 printStream.print(Constant.INPUTHEIGHT);
-                int height = InputUser.getNumberUser(bufferedReader, printStream);
+                int height = InputUser.getNumberUserSizeMaze(bufferedReader, printStream);
                 printStream.print(Constant.INPUTWIDTH);
-                int width = InputUser.getNumberUser(bufferedReader, printStream);
+                int width = InputUser.getNumberUserSizeMaze(bufferedReader, printStream);
 
                 Maze maze = generatorKruskal.generateMaze(height, width);
                 ArrayList<Edge> mst = generatorKruskal.mst;
@@ -136,9 +136,18 @@ public class UserInterface {
 
                 PrintMaze.printMaze(maze);
                 //  TODO: сделать чек на вход, сделать
+
                 printStream.println("Выберите вход:");
-                Coordinate startEntrance = InputUser.getUserCoordinate(bufferedReader, printStream);
-                // чекер
+                boolean flag = true;
+                Coordinate startEntrance = null;
+                while (flag){
+                     startEntrance = InputUser.getUserCoordinate(bufferedReader, printStream);
+                    flag = Checker.checkOnEntrance(passages, startEntrance);
+                    if (!flag) {
+                        printStream.println("Укажите координаты дверки: " + Constant.ENTRANCE);
+                    }
+                }
+
                 printStream.println("Введите координаты, куда хотите прийти");
                 Coordinate endPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
                 // корректность координат

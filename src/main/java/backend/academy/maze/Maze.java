@@ -1,6 +1,5 @@
 package backend.academy.maze;
 
-
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import lombok.Getter;
@@ -19,6 +18,18 @@ public final class Maze {
         this.width = width;
         this.grid = new Cell[height][width];
         initializeGrid();
+    }
+
+    public Maze(Maze originalMaze) {
+        this.height = originalMaze.height;
+        this.width = originalMaze.width;
+        this.grid = new Cell[height][width];
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                this.grid[i][j] = new Cell(originalMaze.grid[i][j]);
+            }
+        }
     }
 
     public void initializeGrid() {

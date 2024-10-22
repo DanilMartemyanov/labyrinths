@@ -10,7 +10,8 @@ public final class InputUser {
     static final Pattern PATTERNSTARTGAME = Pattern.compile("^[ynYN]$");
     static final Pattern PATTERNNUMBERALGORITHM = Pattern.compile("^[12]$");
     static final Pattern PATTERNNUMBERBOUND = Pattern.compile("^[1234]$");
-    static final Pattern PATTERNNUMBERUSER = Pattern.compile("^[1-9]\\d*$");
+    static final Pattern PATTERNNUMBERUSER = Pattern.compile("^[0-9]\\d*$");
+    static final Pattern PATTERNNUMBERSIZEMAZE = Pattern.compile("^[4-9]\\d*$|^[1-9]\\d{1,}$$");
 
     private InputUser() {}
 
@@ -118,6 +119,20 @@ public final class InputUser {
                 return BoundType.LEFT;
             default:
                 return  null;
+        }
+    }
+    public static int getNumberUserSizeMaze(BufferedReader bufferedReader, PrintStream printStream) {
+        try {
+            String numberUser = bufferedReader.readLine();
+            Matcher matcher = PATTERNNUMBERSIZEMAZE.matcher(numberUser);
+            while (!matcher.find()) {
+                printStream.println(Constant.INCORRECTINPUT);
+                numberUser = bufferedReader.readLine();
+                matcher = PATTERNNUMBERSIZEMAZE.matcher(numberUser);
+            }
+            return Integer.parseInt(numberUser);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

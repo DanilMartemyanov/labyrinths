@@ -1,11 +1,10 @@
-package backend.academy;
+package backend.academy.maze;
 
-import backend.academy.maze.BoundType;
-import backend.academy.maze.Coordinate;
+import java.util.List;
 
 public class Checker {
-    public static Coordinate checkEntrance(BoundType boundType, Coordinate coordinate){
-        switch (boundType){
+    public static Coordinate checkEntrance(BoundType boundType, Coordinate coordinate) {
+        switch (boundType) {
             case UP -> {
                 return new Coordinate(coordinate.row() + 1, coordinate.column());
             }
@@ -18,10 +17,18 @@ public class Checker {
             case LEFT -> {
                 return new Coordinate(coordinate.row(), coordinate.column() + 1);
             }
-            default ->
-            {
+            default -> {
                 return null;
             }
         }
+    }
+
+    public static boolean checkOnEntrance(List<Coordinate> passages, Coordinate coordinate) {
+        for (Coordinate passage : passages) {
+            if (coordinate.equals(passage)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

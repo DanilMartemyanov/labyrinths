@@ -3,7 +3,6 @@ package backend.academy.maze;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lombok.Getter;
@@ -22,5 +21,11 @@ public abstract class Solver {
         this.visited = new HashSet<>();
         this.path = new ArrayList<>();
         this.parentMap = new HashMap<>();
+    }
+
+    public void clearCollections(){
+        visited.clear();
+        path.clear();
+        parentMap.clear();
     }
 }

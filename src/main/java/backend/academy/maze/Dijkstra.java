@@ -29,8 +29,7 @@ public class Dijkstra extends Solver implements PathFinding {
     @Override
     public ArrayList<Coordinate> findPath(Coordinate start, Coordinate end) {
         distanceSum = 0;
-        super.parentMap().clear();
-        super.path().clear();
+        super.clearCollections();
         pqueue.clear();
         distance.clear();
 
