@@ -1,5 +1,6 @@
 package backend.academy.maze;
 
+import backend.academy.Checker;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -140,18 +141,19 @@ public class UserInterface {
                 // чекер
                 printStream.println("Введите координаты, куда хотите прийти");
                 Coordinate endPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
-                // корректность координатов
+                // корректность координат
+                Coordinate startPoint = Checker.checkEntrance(boundType, startEntrance);
                 dijkstra = new Dijkstra(mst, maze);
-                ArrayList<Coordinate> pathUser = dijkstra.findPath(startEntrance, endPoint);
+                ArrayList<Coordinate> pathUser = dijkstra.findPath(startPoint, endPoint);
                 int distanceUser = dijkstra.distanceSum;
-                PrintMaze.printPath(pathUser, startEntrance, endPoint, maze);
+                PrintMaze.printPath(pathUser, startPoint, endPoint, maze);
                 passages.remove(startEntrance);
 
                 Map<Coordinate, Integer> possiblePath =
-                    WorkWithPath.getBestPath(pathUser, distanceUser, dijkstra, startEntrance, endPoint);
+                    WorkWithPath.getBestPath(passages, distanceUser, dijkstra, startPoint, endPoint, boundType);
                 Coordinate bestPoint = possiblePath.keySet().iterator().next();
 
-                if (bestPoint != startEntrance) {
+                if (bestPoint != startPoint) {
                     printStream.println("Был маршрут оптимальнее");
                     printStream.println("Вход: " + bestPoint + " со стоимостью пути: " + possiblePath.get(bestPoint));
                 } else {

@@ -1,5 +1,6 @@
 package backend.academy.maze;
 
+import backend.academy.Checker;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,15 +12,14 @@ public class WorkWithPath {
         int distanceUser,
         Dijkstra dijkstra,
         Coordinate end,
-        Coordinate start
+        Coordinate start,
+        BoundType boundType
     ) {
         int bestDistance = distanceUser;
         Coordinate bestPoint = start;
         for (Coordinate coordinate : passages) {
-            System.out.println("bestPath");
-            System.out.println(coordinate);
-            dijkstra.findPath(coordinate, end);
-            System.out.println(dijkstra.distanceSum);
+            Coordinate correctCoordinate = Checker.checkEntrance(boundType, coordinate);
+            dijkstra.findPath(correctCoordinate, end);
             if (dijkstra.distanceSum < bestDistance) {
                 bestDistance = dijkstra.distanceSum;
                 bestPoint = coordinate;

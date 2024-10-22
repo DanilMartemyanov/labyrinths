@@ -14,7 +14,7 @@ public class Dijkstra extends Solver implements PathFinding {
     private Queue<Coordinate> pqueue;
     private Set<Coordinate> nodes;
     public Map<Coordinate, Integer> distance;
-    public int distanceSum = 0;
+    public int distanceSum;
     private Maze maze;
 
     public Dijkstra(ArrayList<Edge> mst, Maze maze ) {
@@ -29,6 +29,11 @@ public class Dijkstra extends Solver implements PathFinding {
     @Override
     public ArrayList<Coordinate> findPath(Coordinate start, Coordinate end) {
         distanceSum = 0;
+        super.parentMap().clear();
+        super.path().clear();
+        pqueue.clear();
+        distance.clear();
+
         for (Edge edge : mst) {
             nodes.add(edge.firstNode());
             nodes.add(edge.secondNode());
