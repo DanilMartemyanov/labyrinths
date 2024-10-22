@@ -17,7 +17,7 @@ public class Dijkstra extends Solver implements PathFinding {
     public int distanceSum;
     private Maze maze;
 
-    public Dijkstra(ArrayList<Edge> mst, Maze maze ) {
+    public Dijkstra(ArrayList<Edge> mst, Maze maze) {
         super(maze);
         this.mst = mst;
         pqueue = new PriorityQueue<>();
@@ -60,9 +60,9 @@ public class Dijkstra extends Solver implements PathFinding {
                 } else if (edge.secondNode().equals(current)) {
                     neighbour = edge.firstNode();
                 }
-                if(neighbour != null) {
+                if (neighbour != null) {
                     int dist = distance.get(current) + edge.weight();
-                    if(dist < distance.get(neighbour)) {
+                    if (dist < distance.get(neighbour)) {
                         distance.put(neighbour, dist);
                         pqueue.add(neighbour);
                         super.parentMap().put(neighbour, current);
@@ -70,10 +70,37 @@ public class Dijkstra extends Solver implements PathFinding {
                 }
             }
         }
-        if(!distance.get(end).equals(Integer.MAX_VALUE)) {
+        if (!distance.get(end).equals(Integer.MAX_VALUE)) {
+            ArrayList<Coordinate> pathWithIntermediates = new ArrayList<>();
             PathFinding.reconstructPath(start, end, super.parentMap(), super.path());
+
+            // Добавляем промежуточные точки между ребрами
+            for (int i = 0; i < super.path().size() - 1; i++) {
+                Coordinate current = super.path().get(i);
+                Coordinate next = super.path().get(i + 1);
+
+                pathWithIntermediates.add(current);
+
+
+                Coordinate intermediate = getIntermediatePoint(current, next);
+                if (intermediate != null) {
+                    pathWithIntermediates.add(intermediate);
+                }
+            }
+
+
+            pathWithIntermediates.add(end);
+
             distanceSum += distance.get(end);
+            return pathWithIntermediates;
         }
+
         return super.path();
+    }
+
+    private Coordinate getIntermediatePoint(Coordinate first, Coordinate second) {
+        int row = first.row() + (second.row() - first.row()) / 2;
+        int column = first.column() + (second.column() - first.column()) / 2;
+        return new Coordinate(row, column);
     }
 }

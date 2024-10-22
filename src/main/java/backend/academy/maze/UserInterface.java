@@ -138,13 +138,14 @@ public class UserInterface {
                 //  TODO: сделать чек на вход, сделать
 
                 printStream.println("Выберите вход:");
-                boolean flag = true;
+                boolean flag = false;
                 Coordinate startEntrance = null;
-                while (flag){
+                while (!flag){
                      startEntrance = InputUser.getUserCoordinate(bufferedReader, printStream);
-                    flag = Checker.checkOnEntrance(passages, startEntrance);
+                    flag = Checker.checkOnEntrance(passages, startEntrance, boundType);
+                    System.out.println(flag);
                     if (!flag) {
-                        printStream.println("Укажите координаты дверки: " + Constant.ENTRANCE);
+                        printStream.println("Укажите правильные координаты дверки: " + Constant.ENTRANCE);
                     }
                 }
 

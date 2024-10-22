@@ -23,9 +23,10 @@ public class Checker {
         }
     }
 
-    public static boolean checkOnEntrance(List<Coordinate> passages, Coordinate coordinate) {
+    public static boolean checkOnEntrance(List<Coordinate> passages, Coordinate coordinate, BoundType boundType) {
+        Coordinate correctForCheck = checkEntrance(boundType, coordinate);
         for (Coordinate passage : passages) {
-            if (coordinate.equals(passage)) {
+            if (correctForCheck.equals(passage)) {
                 return true;
             }
         }

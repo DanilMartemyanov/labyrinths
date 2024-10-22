@@ -1,5 +1,6 @@
 package backend.academy.maze;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,4 +29,5 @@ public class WorkWithPath {
         path.put(bestPoint, distanceUser);
         return path;
     }
+
 }
