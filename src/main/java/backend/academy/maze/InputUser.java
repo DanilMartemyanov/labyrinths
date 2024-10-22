@@ -84,11 +84,11 @@ public final class InputUser {
     }
 
     public  static Coordinate getUserCoordinate(BufferedReader bufferedReader, PrintStream printStream) {
-        printStream.println(Constant.COORDINATE + "x:");
-        int userInputX  = getNumberUser(bufferedReader, printStream);
-        printStream.println(Constant.COORDINATE + "y:");
-        int userInputY  = getNumberUser(bufferedReader, printStream);
-        return new Coordinate(userInputX, userInputY);
+        printStream.println(Constant.COORDINATE + "y(строчка):");
+        int userInputRow  = getNumberUser(bufferedReader, printStream);
+        printStream.println(Constant.COORDINATE + "x(колонка):");
+        int userInputColumn = getNumberUser(bufferedReader, printStream);
+        return new Coordinate(userInputRow, userInputColumn);
     }
 
     public static int getNumberUserBound(BufferedReader bufferedReader, PrintStream printStream) {
