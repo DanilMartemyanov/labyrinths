@@ -28,6 +28,7 @@ public class Dijkstra extends Solver implements PathFinding {
 
     @Override
     public ArrayList<Coordinate> findPath(Coordinate start, Coordinate end) {
+        distanceSum = 0;
         for (Edge edge : mst) {
             nodes.add(edge.firstNode());
             nodes.add(edge.secondNode());

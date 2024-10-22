@@ -81,9 +81,10 @@ public class PrintMaze {
         printMaze(maze);
     }
 
-    public static void createManyPassage(Maze maze, BoundType boundType) {
+    public static List<Coordinate> createManyPassage(Maze maze, BoundType boundType) {
         SecureRandom random = new SecureRandom();
         List<Coordinate> line = getLine(maze, boundType);
+        List<Coordinate> passages = new ArrayList<>();
         int count = 0;
         while (count < 3) {
             Coordinate coordinate = line.get(random.nextInt(line.size()));
@@ -92,25 +93,29 @@ public class PrintMaze {
                 switch (boundType) {
                     case BoundType.UP:
                         maze.grid[coordinate.row() - 1][coordinate.column()].type = CellType.ENTRANCE;
+                        passages.add(coordinate);
                         count++;
                         break;
                     case BoundType.DOWN:
                         maze.grid[coordinate.row() + 1][coordinate.column()].type = CellType.ENTRANCE;
+                        passages.add(coordinate);
                         count++;
                         break;
                     case BoundType.RIGHT:
                         maze.grid[coordinate.row()][coordinate.column() + 1].type = CellType.ENTRANCE;
+                        passages.add(coordinate);
                         count++;
                         break;
                     case BoundType.LEFT:
                         maze.grid[coordinate.row()][coordinate.column() - 1].type = CellType.ENTRANCE;
+                        passages.add(coordinate);
                         count++;
                         break;
 
                 }
             }
         }
-
+        return passages;
     }
 
     public static List<Coordinate> getLine(Maze maze, BoundType boundType) {

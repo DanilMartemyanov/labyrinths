@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class UserInterface {
     private final PrintStream printStream = new PrintStream(System.out, true, StandardCharsets.UTF_8);
@@ -16,6 +18,7 @@ public class UserInterface {
     private DepthFirstSearch depthFirstSearch;
     private BreadthFirstSearch breadthFirstSearch;
     private ArrayList<Coordinate> path;
+    private Dijkstra dijkstra;
 
     public UserInterface() {
     }
@@ -128,14 +131,32 @@ public class UserInterface {
                 // подготовка поля с ловушками и подарками
                 PrintMaze.changeMazeWithWeight(mst, maze);
                 // подготовка входов для игры
-                PrintMaze.createManyPassage(maze, boundType);
+                List<Coordinate> passages = PrintMaze.createManyPassage(maze, boundType);
 
                 PrintMaze.printMaze(maze);
                 //  TODO: сделать чек на вход, сделать
                 printStream.println("Выберите вход:");
                 Coordinate startEntrance = InputUser.getUserCoordinate(bufferedReader, printStream);
                 // чекер
+                printStream.println("Введите координаты, куда хотите прийти");
+                Coordinate endPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
+                // корректность координатов
+                dijkstra = new Dijkstra(mst, maze);
+                ArrayList<Coordinate> pathUser = dijkstra.findPath(startEntrance, endPoint);
+                int distanceUser = dijkstra.distanceSum;
+                PrintMaze.printPath(pathUser, startEntrance, endPoint, maze);
+                passages.remove(startEntrance);
 
+                Map<Coordinate, Integer> possiblePath =
+                    WorkWithPath.getBestPath(pathUser, distanceUser, dijkstra, startEntrance, endPoint);
+                Coordinate bestPoint = possiblePath.keySet().iterator().next();
+
+                if (bestPoint != startEntrance) {
+                    printStream.println("Был маршрут оптимальнее");
+                    printStream.println("Вход: " + bestPoint + " со стоимостью пути: " + possiblePath.get(bestPoint));
+                } else {
+                    printStream.println("Ееееее, ваш маршрут самый крутой!");
+                }
 
             } else {
                 break;

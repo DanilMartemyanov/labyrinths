@@ -88,7 +88,7 @@ public final class InputUser {
         int userInputX  = getNumberUser(bufferedReader, printStream);
         printStream.println(Constant.COORDINATE + "y:");
         int userInputY  = getNumberUser(bufferedReader, printStream);
-        return new Coordinate(userInputY, userInputX);
+        return new Coordinate(userInputX, userInputY);
     }
 
     public static int getNumberUserBound(BufferedReader bufferedReader, PrintStream printStream) {

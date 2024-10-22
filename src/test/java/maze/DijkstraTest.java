@@ -1,12 +1,6 @@
 package maze;
 
-import backend.academy.maze.Coordinate;
-import backend.academy.maze.Dijkstra;
-import backend.academy.maze.Edge;
-import backend.academy.maze.EdgeHandler;
-import backend.academy.maze.GeneratorKruskal;
-import backend.academy.maze.Maze;
-import backend.academy.maze.UnionFindImpl;
+import backend.academy.maze.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -22,7 +16,6 @@ public class DijkstraTest {
     @BeforeEach
     public void setUp() {
         generatorKruskal = new GeneratorKruskal();
-        maze = new Maze(11, 11);
         edges = new HashSet<>();
         unionFind = new UnionFindImpl(121);
 
@@ -31,16 +24,14 @@ public class DijkstraTest {
     @Test
     void findPathDijkstra() {
 
-        EdgeHandler.initSetEdges(maze.grid, edges);
-
-        // Сортируем ребра
-        ArrayList<Edge> sortedEdges = EdgeHandler.sortEdges(edges);
-
-        ArrayList<Edge> mst = GeneratorKruskal.unionCell(sortedEdges, unionFind, maze);
-        System.out.println(mst.size());
-
-        dijkstra = new Dijkstra(mst, maze);
+        Maze maze = generatorKruskal.generateMaze(11, 11);
+        PrintMaze.printMaze(maze);
+        dijkstra = new Dijkstra(generatorKruskal.mst, maze);
         ArrayList<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
         System.out.println(dijkstra.distanceSum);
+        dijkstra.findPath(new Coordinate(1, 1), new Coordinate(1, 3));
+        System.out.println(dijkstra.distanceSum);
+
+
     }
 }

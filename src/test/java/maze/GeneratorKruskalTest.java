@@ -104,8 +104,8 @@ public class GeneratorKruskalTest {
         System.out.println();
         printMaze.printMaze(maze1);
         Dijkstra dijkstra = new Dijkstra(mst, maze1);
-//        System.out.println(mst);
-//        ArrayList<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
-//        PathFinding.printPath(path, new Coordinate(1, 1), new Coordinate(9, 9), maze1);
+        System.out.println(mst);
+        ArrayList<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
+        PrintMaze.printPath(path, new Coordinate(0, 0), new Coordinate(9, 9), maze1);
     }
 }
