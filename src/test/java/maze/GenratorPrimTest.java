@@ -1,11 +1,11 @@
 package maze;
 
-import backend.academy.maze.Cell;
-import backend.academy.maze.Coordinate;
-import backend.academy.maze.Generator;
-import backend.academy.maze.GeneratorPrim;
-import backend.academy.maze.Maze;
-import backend.academy.maze.CellType;
+import backend.academy.maze.models.Cell;
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.algorithms.generators.Generator;
+import backend.academy.maze.algorithms.generators.GeneratorPrim;
+import backend.academy.maze.models.Maze;
+import backend.academy.maze.enums.CellType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

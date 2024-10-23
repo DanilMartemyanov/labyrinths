@@ -1,4 +1,4 @@
-package backend.academy.maze;
+package backend.academy.maze.models;
 
 public interface UnionFind {
     // объединение множеств

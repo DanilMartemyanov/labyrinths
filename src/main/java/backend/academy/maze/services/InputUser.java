@@ -1,5 +1,9 @@
-package backend.academy.maze;
+package backend.academy.maze.services;
 
+import backend.academy.maze.enums.AlgorithmType;
+import backend.academy.maze.enums.BoundType;
+import backend.academy.maze.enums.FindPathType;
+import backend.academy.maze.models.Coordinate;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;

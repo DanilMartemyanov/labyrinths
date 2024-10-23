@@ -1,5 +1,7 @@
-package backend.academy.maze;
+package backend.academy.maze.services;
 
+import backend.academy.maze.algorithms.solvers.Dijkstra;
+import backend.academy.maze.models.Coordinate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

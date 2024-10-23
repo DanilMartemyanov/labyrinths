@@ -1,5 +1,16 @@
-package backend.academy.maze;
+package backend.academy.maze.services;
 
+import backend.academy.maze.algorithms.generators.GeneratorKruskal;
+import backend.academy.maze.algorithms.generators.GeneratorPrim;
+import backend.academy.maze.algorithms.solvers.BreadthFirstSearch;
+import backend.academy.maze.algorithms.solvers.DepthFirstSearch;
+import backend.academy.maze.algorithms.solvers.Dijkstra;
+import backend.academy.maze.enums.AlgorithmType;
+import backend.academy.maze.enums.BoundType;
+import backend.academy.maze.enums.FindPathType;
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.models.Edge;
+import backend.academy.maze.models.Maze;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -67,9 +78,9 @@ public class UserInterface {
                     Maze mazeAttempt = new Maze(maze);
                     printStream.println("Укажите конечную точку, где изображено: " + Constant.PASSAGE);
                     printStream.println("Начальная точка \"A\":  ");
-                    Coordinate startPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
+                    Coordinate startPoint = Checker.checkEdnPoint(bufferedReader, printStream, maze);
                     printStream.println("Конечная точка \"B\":  ");
-                    Coordinate endPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
+                    Coordinate endPoint = Checker.checkEdnPoint(bufferedReader, printStream, maze);
 
                     switch (findPathType) {
                         case DFS -> {
@@ -110,7 +121,7 @@ public class UserInterface {
             String ready = InputUser.startGame(bufferedReader, printStream);
             if (Constant.YES.equals(ready)) {
 
-                printStream.println(Constant.INPUTSIZEMAZE);
+                printStream.println(Constant.INPUTSIZEMAZE + " (число >4)");
                 printStream.print(Constant.INPUTHEIGHT);
                 int height = InputUser.getNumberUserSizeMaze(bufferedReader, printStream);
                 printStream.print(Constant.INPUTWIDTH);

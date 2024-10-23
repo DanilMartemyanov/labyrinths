@@ -1,7 +1,7 @@
 package maze;
 
-import backend.academy.maze.AlgorithmType;
-import backend.academy.maze.InputUser;
+import backend.academy.maze.enums.AlgorithmType;
+import backend.academy.maze.services.InputUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

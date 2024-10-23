@@ -1,6 +1,6 @@
 package maze;
 
-import backend.academy.maze.Coordinate;
+import backend.academy.maze.models.Coordinate;
 import org.junit.jupiter.api.Test;
 
 public class CoordinateTest {

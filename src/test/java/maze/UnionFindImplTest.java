@@ -1,6 +1,6 @@
 package maze;
 
-import backend.academy.maze.UnionFindImpl;
+import backend.academy.maze.models.UnionFindImpl;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

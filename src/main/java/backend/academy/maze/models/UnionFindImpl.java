@@ -1,4 +1,4 @@
-package backend.academy.maze;
+package backend.academy.maze.models;
 
 import lombok.Getter;
 import lombok.Setter;

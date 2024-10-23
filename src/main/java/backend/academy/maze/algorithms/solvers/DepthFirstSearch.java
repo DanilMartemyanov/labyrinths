@@ -1,5 +1,7 @@
-package backend.academy.maze;
+package backend.academy.maze.algorithms.solvers;
 
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.models.Maze;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;

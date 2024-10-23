@@ -1,5 +1,9 @@
-package backend.academy.maze;
+package backend.academy.maze.services;
 
+import backend.academy.maze.algorithms.generators.Generator;
+import backend.academy.maze.enums.BoundType;
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.models.Maze;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.util.List;
@@ -60,6 +64,9 @@ public class Checker {
         while (!checkEndPoint) {
             endPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
             checkEndPoint = Generator.checkBounds(endPoint, maze.grid());
+            if (!checkEndPoint) {
+                printStream.println("Укажите точку в границах лабиринта");
+            }
         }
         return endPoint;
     }

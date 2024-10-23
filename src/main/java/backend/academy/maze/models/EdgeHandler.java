@@ -1,5 +1,7 @@
-package backend.academy.maze;
+package backend.academy.maze.models;
 
+import backend.academy.maze.algorithms.generators.Generator;
+import backend.academy.maze.services.Constant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -44,7 +46,6 @@ public class EdgeHandler {
             }
         }
     }
-
 
     // Сортировка ребер
     public static ArrayList<Edge> sortEdges(HashSet<Edge> edges) {

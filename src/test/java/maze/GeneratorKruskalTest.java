@@ -1,6 +1,13 @@
 package maze;
 
-import backend.academy.maze.*;
+import backend.academy.maze.algorithms.generators.GeneratorKruskal;
+import backend.academy.maze.algorithms.solvers.Dijkstra;
+import backend.academy.maze.models.EdgeHandler;
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.models.Edge;
+import backend.academy.maze.models.Maze;
+import backend.academy.maze.models.UnionFindImpl;
+import backend.academy.maze.services.PrintMaze;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -92,17 +99,16 @@ public class GeneratorKruskalTest {
 
     @Test
     void imageMaze() {
-        PrintMaze printMaze = new PrintMaze();
         Maze maze1 = generatorKruskal.generateMaze(21, 21);
         System.out.println();
-        ArrayList<Edge> mst = generatorKruskal.mst;
+        ArrayList<Edge> mst = generatorKruskal.mst();
         for (Edge edge : mst) {
             System.out.println(edge);
         }
 
-        printMaze.changeMazeWithWeight(mst, maze1);
+        PrintMaze.changeMazeWithWeight(mst, maze1);
         System.out.println();
-        printMaze.printMaze(maze1);
+        PrintMaze.printMaze(maze1);
         Dijkstra dijkstra = new Dijkstra(mst, maze1);
         System.out.println(mst);
         ArrayList<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));

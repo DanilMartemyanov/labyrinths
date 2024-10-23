@@ -1,4 +1,9 @@
-package backend.academy.maze;
+package backend.academy.maze.algorithms.generators;
+
+import backend.academy.maze.enums.CellType;
+import backend.academy.maze.models.Cell;
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.models.Maze;
 
 public interface Generator {
     Maze generateMaze(int height, int width);

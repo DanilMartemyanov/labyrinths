@@ -1,4 +1,4 @@
-package backend.academy.maze;
+package backend.academy.maze.enums;
 
 public enum FindPathType {
     DFS, BFS;

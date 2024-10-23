@@ -1,5 +1,10 @@
-package backend.academy.maze;
+package backend.academy.maze.services;
 
+import backend.academy.maze.enums.BoundType;
+import backend.academy.maze.enums.CellType;
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.models.Edge;
+import backend.academy.maze.models.Maze;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;

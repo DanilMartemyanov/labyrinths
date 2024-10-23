@@ -1,12 +1,16 @@
-package backend.academy.maze;
+package backend.academy.maze.algorithms.generators;
 
+import backend.academy.maze.enums.CellType;
+import backend.academy.maze.models.Cell;
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.models.Maze;
+import backend.academy.maze.services.Constant;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class GeneratorPrim implements Generator {
     private final SecureRandom random = new SecureRandom();
-
 
     @Override
     public Maze generateMaze(int height, int width) {
@@ -47,8 +51,8 @@ public class GeneratorPrim implements Generator {
                 visited.add(randomNeighbor); // Отмечаем текущую клетку как посещённую
 
                 // Создаём проход между посещённой клеткой и соседом
-                Generator.addPassageBetween(new Coordinate(visitedCell.row, visitedCell.column),
-                    new Coordinate(randomNeighbor.row, randomNeighbor.column), maze.grid);
+                Generator.addPassageBetween(new Coordinate(visitedCell.row(), visitedCell.column()),
+                    new Coordinate(randomNeighbor.row(), randomNeighbor.column()), maze.grid);
 
                 // Добавляем новых соседей
                 addNeighbor(randomNeighbor, directions, neighbours, maze.grid, visited);

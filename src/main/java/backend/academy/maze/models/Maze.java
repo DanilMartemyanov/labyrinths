@@ -1,5 +1,6 @@
-package backend.academy.maze;
+package backend.academy.maze.models;
 
+import backend.academy.maze.enums.CellType;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import lombok.Getter;

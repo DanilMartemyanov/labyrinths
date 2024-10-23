@@ -1,16 +1,16 @@
-package backend.academy.maze;
+package backend.academy.maze.models;
 
+import backend.academy.maze.enums.CellType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
+
 
 @AllArgsConstructor
 @Getter
-@Setter
 public class Cell {
     int row;
     int column;
-    CellType type;
+    public CellType type;
 
     public Cell(Cell originalCell) {
         this.row = originalCell.row;

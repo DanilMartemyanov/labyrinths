@@ -1,11 +1,11 @@
 package maze;
 
-import backend.academy.maze.BoundType;
-import backend.academy.maze.Coordinate;
-import backend.academy.maze.DepthFirstSearch;
-import backend.academy.maze.GeneratorKruskal;
-import backend.academy.maze.Maze;
-import backend.academy.maze.PrintMaze;
+import backend.academy.maze.enums.BoundType;
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.algorithms.solvers.DepthFirstSearch;
+import backend.academy.maze.algorithms.generators.GeneratorKruskal;
+import backend.academy.maze.models.Maze;
+import backend.academy.maze.services.PrintMaze;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

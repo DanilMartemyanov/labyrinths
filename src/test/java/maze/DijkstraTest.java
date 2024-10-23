@@ -1,6 +1,12 @@
 package maze;
 
-import backend.academy.maze.*;
+import backend.academy.maze.algorithms.generators.GeneratorKruskal;
+import backend.academy.maze.algorithms.solvers.Dijkstra;
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.models.Edge;
+import backend.academy.maze.models.Maze;
+import backend.academy.maze.models.UnionFindImpl;
+import backend.academy.maze.services.PrintMaze;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -26,11 +32,11 @@ public class DijkstraTest {
 
         Maze maze = generatorKruskal.generateMaze(11, 11);
         PrintMaze.printMaze(maze);
-        dijkstra = new Dijkstra(generatorKruskal.mst, maze);
+        dijkstra = new Dijkstra(generatorKruskal.mst(), maze);
         ArrayList<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
-        System.out.println(dijkstra.distanceSum);
+        System.out.println(dijkstra.distanceSum());
         dijkstra.findPath(new Coordinate(1, 1), new Coordinate(1, 3));
-        System.out.println(dijkstra.distanceSum);
+        System.out.println(dijkstra.distanceSum());
 
 
     }

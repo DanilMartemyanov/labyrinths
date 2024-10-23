@@ -1,8 +1,7 @@
 package maze;
 
-import backend.academy.maze.DepthFirstSearch;
-import backend.academy.maze.Maze;
-import org.junit.jupiter.api.Assertions;
+import backend.academy.maze.algorithms.solvers.DepthFirstSearch;
+import backend.academy.maze.models.Maze;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

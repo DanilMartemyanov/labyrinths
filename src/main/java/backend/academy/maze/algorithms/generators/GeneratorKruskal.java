@@ -1,5 +1,12 @@
-package backend.academy.maze;
+package backend.academy.maze.algorithms.generators;
 
+import backend.academy.maze.enums.CellType;
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.models.Edge;
+import backend.academy.maze.models.EdgeHandler;
+import backend.academy.maze.models.Maze;
+import backend.academy.maze.models.UnionFindImpl;
+import backend.academy.maze.services.Constant;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashSet;

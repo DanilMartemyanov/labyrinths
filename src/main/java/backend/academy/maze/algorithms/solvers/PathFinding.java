@@ -1,5 +1,10 @@
-package backend.academy.maze;
+package backend.academy.maze.algorithms.solvers;
 
+import backend.academy.maze.algorithms.generators.Generator;
+import backend.academy.maze.enums.CellType;
+import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.models.Maze;
+import backend.academy.maze.services.Constant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
