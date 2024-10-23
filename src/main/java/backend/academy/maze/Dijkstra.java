@@ -8,13 +8,17 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Dijkstra extends Solver implements PathFinding {
     private List<Edge> mst;
     private Queue<Coordinate> pqueue;
     private Set<Coordinate> nodes;
     public Map<Coordinate, Integer> distance;
-    public int distanceSum;
+    private int distanceSum;
     private Maze maze;
 
     public Dijkstra(ArrayList<Edge> mst, Maze maze) {
@@ -32,8 +36,6 @@ public class Dijkstra extends Solver implements PathFinding {
         super.clearCollections();
         pqueue.clear();
         distance.clear();
-
-
 
         for (Edge edge : mst) {
             nodes.add(edge.firstNode());
@@ -83,13 +85,11 @@ public class Dijkstra extends Solver implements PathFinding {
 
                 pathWithIntermediates.add(current);
 
-
                 Coordinate intermediate = getIntermediatePoint(current, next);
                 if (intermediate != null) {
                     pathWithIntermediates.add(intermediate);
                 }
             }
-
 
             pathWithIntermediates.add(end);
 

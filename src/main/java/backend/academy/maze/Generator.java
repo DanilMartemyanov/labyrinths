@@ -11,7 +11,8 @@ public interface Generator {
          */
         int passageRow = current.row() + (neighbor.row() - current.row()) / 2;
         int passageColumn = current.column() + (neighbor.column() - current.column()) / 2;
-        grid[passageRow][passageColumn] = new Cell(passageRow, passageColumn, CellType.PASSAGE);  // Устанавливаем проход
+        grid[passageRow][passageColumn] =
+            new Cell(passageRow, passageColumn, CellType.PASSAGE);  // Устанавливаем проход
     }
 
     static int getNumberOdd(int parametr) {

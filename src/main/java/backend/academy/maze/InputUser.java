@@ -13,9 +13,10 @@ public final class InputUser {
     static final Pattern PATTERNNUMBERUSER = Pattern.compile("^[0-9]\\d*$");
     static final Pattern PATTERNNUMBERSIZEMAZE = Pattern.compile("^[4-9]\\d*$|^[1-9]\\d{1,}$$");
 
-    private InputUser() {}
+    private InputUser() {
+    }
 
-    public  static String startGame(BufferedReader bufferedReader, PrintStream printStream) {
+    public static String startGame(BufferedReader bufferedReader, PrintStream printStream) {
         try {
             String ready = bufferedReader.readLine();
             Matcher matcherReady = PATTERNSTARTGAME.matcher(ready);
@@ -54,7 +55,7 @@ public final class InputUser {
             case "2":
                 return AlgorithmType.KRUSKAL;
             default:
-                return  null;
+                return null;
         }
     }
 
@@ -80,13 +81,13 @@ public final class InputUser {
             case "2":
                 return FindPathType.BFS;
             default:
-                return  null;
+                return null;
         }
     }
 
-    public  static Coordinate getUserCoordinate(BufferedReader bufferedReader, PrintStream printStream) {
+    public static Coordinate getUserCoordinate(BufferedReader bufferedReader, PrintStream printStream) {
         printStream.println(Constant.COORDINATE + "y(строчка):");
-        int userInputRow  = getNumberUser(bufferedReader, printStream);
+        int userInputRow = getNumberUser(bufferedReader, printStream);
         printStream.println(Constant.COORDINATE + "x(колонка):");
         int userInputColumn = getNumberUser(bufferedReader, printStream);
         return new Coordinate(userInputRow, userInputColumn);
@@ -108,19 +109,18 @@ public final class InputUser {
     }
 
     public static BoundType getBoundType(BufferedReader bufferedReader, PrintStream printStream) {
+        BoundType boundType;
         switch (getNumberUserBound(bufferedReader, printStream)) {
-            case 1:
-                return BoundType.UP;
-            case 2:
-                return BoundType.DOWN;
-            case 3:
-                return BoundType.RIGHT;
-            case 4:
-                return BoundType.LEFT;
-            default:
-                return  null;
+            case Constant.NUMBER_1 -> boundType = BoundType.UP;
+            case Constant.NUMBER_2 -> boundType = BoundType.DOWN;
+            case Constant.NUMBER_3 -> boundType = BoundType.RIGHT;
+            case Constant.NUMBER_4 -> boundType = BoundType.LEFT;
+            default -> throw new RuntimeException("Invalid bound type");
+
         }
+        return boundType;
     }
+
     public static int getNumberUserSizeMaze(BufferedReader bufferedReader, PrintStream printStream) {
         try {
             String numberUser = bufferedReader.readLine();

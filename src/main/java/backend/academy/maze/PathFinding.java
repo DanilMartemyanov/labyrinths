@@ -41,5 +41,4 @@ public interface PathFinding {
         Collections.reverse(path);
     }
 
-
 }

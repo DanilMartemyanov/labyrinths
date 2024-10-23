@@ -1,10 +1,11 @@
 package backend.academy.maze;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class WorkWithPath {
 
     public static Map<Coordinate, Integer> getBestPath(
@@ -12,15 +13,14 @@ public class WorkWithPath {
         int distanceUser,
         Dijkstra dijkstra,
         Coordinate start,
-        Coordinate end,
-        BoundType boundType
+        Coordinate end
     ) {
         int bestDistance = distanceUser;
         Coordinate bestPoint = start;
         for (Coordinate coordinate : passages) {
             dijkstra.findPath(coordinate, end);
-            if (dijkstra.distanceSum < bestDistance) {
-                bestDistance = dijkstra.distanceSum;
+            if (dijkstra.distanceSum() < bestDistance) {
+                bestDistance = dijkstra.distanceSum();
                 bestPoint = coordinate;
             }
         }

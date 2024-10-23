@@ -3,11 +3,14 @@ package backend.academy.maze;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashSet;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class GeneratorKruskal implements Generator {
-    public ArrayList<Edge> mst;
+    private ArrayList<Edge> mst;
     private static final SecureRandom RANDOM = new SecureRandom();
-    private PrintMaze printMaze;
 
     @Override
     public Maze generateMaze(int height, int width) {
@@ -24,7 +27,6 @@ public class GeneratorKruskal implements Generator {
 
         // строим лабиринт
         mst = unionCell(sortedEdges, unionFind, maze);
-
 
         return maze;
     }

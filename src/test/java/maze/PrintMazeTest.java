@@ -33,7 +33,7 @@ public class PrintMazeTest {
         GeneratorKruskal generatorKruskal = new GeneratorKruskal();
         maze = generatorKruskal.generateMaze(11, 11);
         System.out.println();
-        PrintMaze.createManyPassage(maze, BoundType.UP);
+        PrintMaze.createManyEntrance(maze, BoundType.UP);
         PrintMaze.printMaze(maze);
     }
 

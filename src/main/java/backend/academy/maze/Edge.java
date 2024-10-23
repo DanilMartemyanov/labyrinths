@@ -1,6 +1,6 @@
 package backend.academy.maze;
 
-import java.security.SecureRandom;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +10,6 @@ public class Edge implements Comparable<Edge> {
     private Coordinate firstNode;
     private Coordinate secondNode;
     private int weight;
-
 
     public Edge(Coordinate firstNode, Coordinate secondNode) {
         this.firstNode = firstNode;

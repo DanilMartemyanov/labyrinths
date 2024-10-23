@@ -11,7 +11,9 @@ public class EdgeHandler {
      */
     private static final ArrayList<Coordinate> DIRECTIONS = Coordinate.generateDirections(Constant.STEP_2);
 
-    private EdgeHandler() {}
+    private EdgeHandler() {
+    }
+
     /**
      * Проход по направлениям клетки
      * Создание ребра, при условии, что оно находится в зоне сетки

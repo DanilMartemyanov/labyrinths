@@ -23,7 +23,7 @@ public abstract class Solver {
         this.parentMap = new HashMap<>();
     }
 
-    public void clearCollections(){
+    public void clearCollections() {
         visited.clear();
         path.clear();
         parentMap.clear();

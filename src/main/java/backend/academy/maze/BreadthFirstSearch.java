@@ -1,10 +1,7 @@
 package backend.academy.maze;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Queue;
 
 public class BreadthFirstSearch extends Solver implements PathFinding {
@@ -13,6 +10,7 @@ public class BreadthFirstSearch extends Solver implements PathFinding {
 
     public BreadthFirstSearch(Maze maze) {
         super(maze);
+        this.queue = new LinkedList<>();
     }
 
     @Override
@@ -28,8 +26,7 @@ public class BreadthFirstSearch extends Solver implements PathFinding {
             }
             // Получаем соседей текущей клетки
             for (Coordinate neighbor : PathFinding.getNeighbors(current, super.maze())) {
-                if (!super.visited().contains(neighbor)) {
-                    super.visited().add(neighbor);  // Отмечаем соседа как посещённого
+                if (super.visited().add(neighbor)) {
                     super.parentMap().put(neighbor, current);  // Запоминаем родителя для восстановления пути
                     queue.add(neighbor);  // Добавляем соседа в стек
                 }

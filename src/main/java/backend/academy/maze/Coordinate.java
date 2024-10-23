@@ -1,6 +1,5 @@
 package backend.academy.maze;
 
-
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -27,6 +26,7 @@ public record Coordinate(int row, int column) implements Comparable<Coordinate> 
         directions.add(new Coordinate(-stepSize, -stepSize));
         return directions;
     }
+
     @Override
     public int compareTo(Coordinate other) {
         if (this.row != other.row) {
@@ -38,8 +38,12 @@ public record Coordinate(int row, int column) implements Comparable<Coordinate> 
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         Coordinate that = (Coordinate) obj;
         return row == that.row && column == that.column;
     }

@@ -14,7 +14,6 @@ public class UserInterface {
         new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
     private final GeneratorPrim generatorPrim = new GeneratorPrim();
     private final GeneratorKruskal generatorKruskal = new GeneratorKruskal();
-    private final PrintMaze printMaze = new PrintMaze();
     private DepthFirstSearch depthFirstSearch;
     private BreadthFirstSearch breadthFirstSearch;
     private ArrayList<Coordinate> path;
@@ -59,7 +58,7 @@ public class UserInterface {
                 switch (algorithmType) {
                     case PRIM -> maze = generatorPrim.generateMaze(height, width);
                     case KRUSKAL -> maze = generatorKruskal.generateMaze(height, width);
-                    default -> maze = null;
+                    default -> throw new IllegalStateException("Unexpected value: " + algorithmType);
                 }
                 PrintMaze.printMaze(maze);
 
@@ -118,7 +117,7 @@ public class UserInterface {
                 int width = InputUser.getNumberUserSizeMaze(bufferedReader, printStream);
 
                 Maze maze = generatorKruskal.generateMaze(height, width);
-                ArrayList<Edge> mst = generatorKruskal.mst;
+                ArrayList<Edge> mst = generatorKruskal.mst();
                 PrintMaze.printMaze(maze);
 
                 printStream.println("Укажите границу");
@@ -132,42 +131,38 @@ public class UserInterface {
                 // подготовка поля с ловушками и подарками
                 PrintMaze.changeMazeWithWeight(mst, maze);
                 // подготовка входов для игры
-                List<Coordinate> passages = PrintMaze.createManyPassage(maze, boundType);
+                List<Coordinate> passages = PrintMaze.createManyEntrance(maze, boundType);
 
                 PrintMaze.printMaze(maze);
 
-
                 printStream.println("Выберите вход:");
-                boolean flag = false;
-                Coordinate startEntrance = null;
-
-                while (!flag){
-                     startEntrance = InputUser.getUserCoordinate(bufferedReader, printStream);
-                    flag = Checker.checkOnEntrance(passages, startEntrance, boundType);
-                    System.out.println(flag);
-                    if (!flag) {
-                        printStream.println("Укажите правильные координаты дверки: " + Constant.ENTRANCE);
-                    }
-                }
+                Coordinate startEntrance = Checker.checkEntrance(bufferedReader, printStream, passages, boundType);
 
                 printStream.println("Введите координаты, куда хотите прийти");
-                Coordinate endPoint = InputUser.getUserCoordinate(bufferedReader, printStream);
-                // корректность координат
-                Coordinate startPoint = Checker.checkEntrance(boundType, startEntrance);
-                dijkstra = new Dijkstra(mst, maze);
-                ArrayList<Coordinate> pathUser = dijkstra.findPath(startPoint, endPoint);
-                int distanceUser = dijkstra.distanceSum;
-                PrintMaze.changeMazeWithWeight(mst, maze);
-                PrintMaze.printPath(pathUser, startPoint, endPoint, maze);
-                passages.remove(startEntrance);
+                Coordinate endPoint = Checker.checkEdnPoint(bufferedReader, printStream, maze);
 
+                // корректность координат
+                Coordinate startPoint = Checker.makeCorrectCoordinateForEntrance(boundType, startEntrance);
+
+                // Инициализация алгоритма Дейкстры
+                dijkstra = new Dijkstra(mst, maze);
+                // Путь пользователя
+                ArrayList<Coordinate> pathUser = dijkstra.findPath(startPoint, endPoint);
+                // дистанция пути пользователя
+                int distanceUser = dijkstra.distanceSum();
+
+                // вывод конечного лабиринта вместе с путем пользователя
+                PrintMaze.printPath(pathUser, startPoint, endPoint, maze);
+                // удаление стартовой точки пользователя из проходов(дверок)
+                passages.remove(startEntrance);
+                // метод для сравнения путей пользователя и других возможных вариантах
                 Map<Coordinate, Integer> possiblePath =
-                    WorkWithPath.getBestPath(passages, distanceUser, dijkstra, startPoint, endPoint, boundType);
-                Coordinate bestPoint = possiblePath.keySet().iterator().next();
+                    WorkWithPath.getBestPath(passages, distanceUser, dijkstra, startPoint, endPoint);
+                Coordinate bestPoint = possiblePath.entrySet().iterator().next().getKey();
 
                 if (possiblePath.get(bestPoint) < distanceUser) {
                     printStream.println("Был маршрут оптимальнее");
-                    printStream.println("Вход: " + bestPoint + " со стоимостью пути: " +  possiblePath.get(bestPoint));
+                    printStream.println("Вход: " + bestPoint + " со стоимостью пути: " + possiblePath.get(bestPoint));
                     printStream.println("Ваш маршрут составил: " + distanceUser);
                 } else {
                     printStream.println("Ееееее, ваш маршрут самый крутой!");
@@ -176,6 +171,21 @@ public class UserInterface {
             } else {
                 break;
             }
+        }
+    }
+
+    public void startGame() {
+        printStream.println("Выберите версию игры: ");
+        printStream.println("[1] - версия 1");
+        printStream.println("[2]- версия 2");
+        printStream.println(Constant.CHOSE);
+
+        String choseUser = InputUser.getNumberAlgorithm(bufferedReader, printStream);
+
+        if ("1".equals(choseUser)) {
+            gameVersion1();
+        } else {
+            gameVersion2();
         }
     }
 }

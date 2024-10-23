@@ -1,6 +1,9 @@
 package backend.academy.maze;
 
-public final class Constant {
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
+public class Constant {
     public static final int STEP_1 = 1;
     public static final int STEP_2 = 2;
     public static final int BOUND_4 = 4;
@@ -21,8 +24,9 @@ public final class Constant {
     public static final String INPUTHEIGHT = "Введите длину: ";
     public static final String INPUTWIDTH = "Введите ширину: ";
     public static final String ENTRANCE = "\uD83D\uDEAA";
+    public static final int NUMBER_1 = 1;
+    public static final int NUMBER_2 = 2;
+    public static final int NUMBER_3 = 3;
+    public static final int NUMBER_4 = 4;
 
-    private Constant() {
-        throw new IllegalStateException("Utility class");
-    }
 }

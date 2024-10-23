@@ -33,8 +33,7 @@ public class DepthFirstSearch extends Solver implements PathFinding {
 
             // Получаем соседей текущей клетки
             for (Coordinate neighbor : PathFinding.getNeighbors(current, super.maze())) {
-                if (!super.visited().contains(neighbor)) {
-                    super.visited().add(neighbor);  // Отмечаем соседа как посещённого
+                if (super.visited().add(neighbor)) {
                     super.parentMap().put(neighbor, current);  // Запоминаем родителя для восстановления пути
                     dequeArray.push(neighbor);  // Добавляем соседа в стек
                 }

@@ -6,7 +6,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class PrintMaze {
     private static final PrintStream PRINT_STREAM = new PrintStream(System.out, true, StandardCharsets.UTF_8);
 
@@ -39,6 +41,7 @@ public class PrintMaze {
                         break;
                     case ENTRANCE:
                         PRINT_STREAM.print(Constant.ENTRANCE);
+                        break;
                     default:
                         break;
                 }
@@ -81,72 +84,72 @@ public class PrintMaze {
         printMaze(copyMaze);
     }
 
-    public static List<Coordinate> createManyPassage(Maze maze, BoundType boundType) {
+    public static List<Coordinate> createManyEntrance(Maze maze, BoundType boundType) {
         SecureRandom random = new SecureRandom();
         List<Coordinate> line = getLine(maze, boundType);
         List<Coordinate> passages = new ArrayList<>();
+        List<Coordinate> passagesForPrint = new ArrayList<>();
         int count = 0;
-        while (count < 3) {
+
+        while (count < Constant.NUMBER_3) {
             Coordinate coordinate = line.get(random.nextInt(line.size()));
-            System.out.println(coordinate);
+            Coordinate newEntrance = null;
             if (maze.grid[coordinate.row()][coordinate.column()].type == CellType.PASSAGE) {
                 switch (boundType) {
                     case BoundType.UP:
-                        maze.grid[coordinate.row() - 1][coordinate.column()].type = CellType.ENTRANCE;
-                        passages.add(coordinate);
-                        count++;
+                        newEntrance = new Coordinate(coordinate.row() - 1, coordinate.column());
                         break;
                     case BoundType.DOWN:
-                        maze.grid[coordinate.row() + 1][coordinate.column()].type = CellType.ENTRANCE;
-                        passages.add(coordinate);
-                        count++;
+                        newEntrance = new Coordinate(coordinate.row() + 1, coordinate.column());
                         break;
                     case BoundType.RIGHT:
-                        maze.grid[coordinate.row()][coordinate.column() + 1].type = CellType.ENTRANCE;
-                        passages.add(coordinate);
-                        count++;
+                        newEntrance = new Coordinate(coordinate.row(), coordinate.column() + 1);
                         break;
                     case BoundType.LEFT:
-                        maze.grid[coordinate.row()][coordinate.column() - 1].type = CellType.ENTRANCE;
-                        passages.add(coordinate);
-                        count++;
+                        newEntrance = new Coordinate(coordinate.row(), coordinate.column() - 1);
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + boundType);
+                }
 
+                // Устанавливаем тип клетки на ENTRANCE и добавляем в списки
+                if (newEntrance != null) {
+                    maze.grid[newEntrance.row()][newEntrance.column()].type = CellType.ENTRANCE;
+                    passages.add(coordinate);
+                    passagesForPrint.add(newEntrance);
+                    count++;
                 }
             }
         }
+        PRINT_STREAM.println("Координаты дверок");
+        PRINT_STREAM.println(passagesForPrint);
         return passages;
     }
 
     public static List<Coordinate> getLine(Maze maze, BoundType boundType) {
         List<Coordinate> line = new ArrayList<>();
         int start = 1;
-        int endWidth = maze.width() -2;
-        int endHeight = maze.height() -2;
+        int endWidth = maze.width() - 2;
+        int endHeight = maze.height() - 2;
         switch (boundType) {
-            case BoundType.UP:
-                return getHorizontalLine(start, endWidth, 1, line);
-            case BoundType.DOWN:
-                return getHorizontalLine(start, endWidth, endHeight, line);
-
-            case BoundType.RIGHT:
-                return getVerticalLine(start, endWidth, endHeight, line);
-            case BoundType.LEFT:
-                return getVerticalLine(start, endHeight, 1, line);
-            default:
-                return null;
+            case BoundType.UP -> line = getHorizontalLine(start, endWidth, 1, line);
+            case BoundType.DOWN -> line = getHorizontalLine(start, endWidth, endHeight, line);
+            case BoundType.RIGHT -> line = getVerticalLine(start, endHeight, endWidth, line);
+            case BoundType.LEFT -> line = getVerticalLine(start, endHeight, 1, line);
+            default -> line = null;
         }
+        return line;
     }
 
-    public static List<Coordinate> getHorizontalLine(int start, int end, int row,List<Coordinate> line) {
-        for(int i = start; i < end; i++) {
+    public static List<Coordinate> getHorizontalLine(int start, int end, int row, List<Coordinate> line) {
+        for (int i = start; i < end; i++) {
             line.add(new Coordinate(row, i));
         }
         return line;
     }
 
-    public static List<Coordinate> getVerticalLine(int start, int end, int column,List<Coordinate> line) {
-        for(int i = start; i < end; i++) {
+    public static List<Coordinate> getVerticalLine(int start, int end, int column, List<Coordinate> line) {
+        for (int i = start; i < end; i++) {
             line.add(new Coordinate(i, column));
         }
         return line;
