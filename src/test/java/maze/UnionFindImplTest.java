@@ -22,10 +22,10 @@ public class UnionFindImplTest {
     }
 
     @Test
-    void rootTest(){
+    void getRootTest(){
         unionFind.union(1, 2);
         unionFind.union(1, 9);
-        log.info(unionFind.root(9));
+        log.info(unionFind.getRoot(9));
     }
 
     @Test

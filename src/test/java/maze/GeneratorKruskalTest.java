@@ -72,9 +72,9 @@ public class GeneratorKruskalTest {
         System.out.println(unionFind.find(index1, index2));
         System.out.println(unionFind.find(index1, index3));
         System.out.println(unionFind.find(index1, index4));
-        System.out.println(unionFind.root(index2));
-        System.out.println(unionFind.root(index3));
-        System.out.println(unionFind.root(index4));
+        System.out.println(unionFind.getRoot(index2));
+        System.out.println(unionFind.getRoot(index3));
+        System.out.println(unionFind.getRoot(index4));
         printMaze.printMaze(maze);
     }
 

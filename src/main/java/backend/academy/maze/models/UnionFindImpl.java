@@ -23,8 +23,8 @@ public class UnionFindImpl implements UnionFind {
 
     @Override
     public void union(int cellX, int cellY) {
-        int rootX = root(cellX);
-        int rootY = root(cellY);
+        int rootX = getRoot(cellX);
+        int rootY = getRoot(cellY);
 
         /**
          * Объединяем меньший корень под больший (по размеру)
@@ -44,7 +44,7 @@ public class UnionFindImpl implements UnionFind {
 
     @Override
     public boolean find(int cellX, int cellY) {
-        return root(cellX) == root(cellY);
+        return getRoot(cellX) == getRoot(cellY);
     }
 
 
@@ -57,7 +57,7 @@ public class UnionFindImpl implements UnionFind {
     }
 
     //  Возвращает корень дерева - представителя множества
-    public int root(int p) {
+    public int getRoot(int p) {
         int parent = p;
         while (parent != nodes[parent]) {
             nodes[parent] = nodes[nodes[parent]];
