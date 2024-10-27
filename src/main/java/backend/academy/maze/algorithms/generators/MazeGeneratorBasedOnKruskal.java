@@ -16,7 +16,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GeneratorKruskal implements Generator {
+public class MazeGeneratorBasedOnKruskal implements Generator {
     private List<Edge> mst;
     private static final SecureRandom RANDOM = new SecureRandom();
     private static final int BOUND_4 = 4;

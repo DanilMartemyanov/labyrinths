@@ -3,7 +3,7 @@ package maze;
 import backend.academy.maze.models.Cell;
 import backend.academy.maze.models.Coordinate;
 import backend.academy.maze.algorithms.generators.Generator;
-import backend.academy.maze.algorithms.generators.GeneratorPrim;
+import backend.academy.maze.algorithms.generators.MazeGeneratorBasedOnPrim;
 import backend.academy.maze.models.Maze;
 import backend.academy.maze.enums.CellType;
 import org.junit.jupiter.api.Assertions;
@@ -47,13 +47,13 @@ public class GenratorPrimTest {
 
     @Test
     void addNeighbourPrim() {
-        GeneratorPrim.addNeighbor(new Cell(5, 5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid(), visited);
-        GeneratorPrim.addNeighbor(new Cell(3, 5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid(), visited);
+        MazeGeneratorBasedOnPrim.addNeighbor(new Cell(5, 5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid(), visited);
+        MazeGeneratorBasedOnPrim.addNeighbor(new Cell(3, 5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid(), visited);
     }
 
     @Test
     void addNeighbourDFS() {
-        GeneratorPrim.addNeighbor(new Cell(5, 5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid(), visited);
+        MazeGeneratorBasedOnPrim.addNeighbor(new Cell(5, 5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid(), visited);
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GeneratorPrim implements Generator {
+public class MazeGeneratorBasedOnPrim implements Generator {
     private final SecureRandom random = new SecureRandom();
 
     @Override

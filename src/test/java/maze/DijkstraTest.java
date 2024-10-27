@@ -1,6 +1,6 @@
 package maze;
 
-import backend.academy.maze.algorithms.generators.GeneratorKruskal;
+import backend.academy.maze.algorithms.generators.MazeGeneratorBasedOnKruskal;
 import backend.academy.maze.algorithms.solvers.Dijkstra;
 import backend.academy.maze.models.Coordinate;
 import backend.academy.maze.models.Maze;
@@ -9,15 +9,15 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DijkstraTest {
-    private GeneratorKruskal generatorKruskal;
+    private MazeGeneratorBasedOnKruskal mazeGeneratorBasedOnKruskal;
     private Maze maze;
     private Dijkstra dijkstra;
 
     @BeforeEach
     public void setUp() {
-        generatorKruskal = new GeneratorKruskal();
-        maze = generatorKruskal.generateMaze(11, 11);
-        dijkstra = new Dijkstra(generatorKruskal.mst(), maze);
+        mazeGeneratorBasedOnKruskal = new MazeGeneratorBasedOnKruskal();
+        maze = mazeGeneratorBasedOnKruskal.generateMaze(11, 11);
+        dijkstra = new Dijkstra(mazeGeneratorBasedOnKruskal.mst(), maze);
     }
 
     @Test

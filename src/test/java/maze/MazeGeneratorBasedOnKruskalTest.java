@@ -1,6 +1,6 @@
 package maze;
 
-import backend.academy.maze.algorithms.generators.GeneratorKruskal;
+import backend.academy.maze.algorithms.generators.MazeGeneratorBasedOnKruskal;
 import backend.academy.maze.models.EdgeHandler;
 import backend.academy.maze.models.Edge;
 import backend.academy.maze.models.Maze;
@@ -13,16 +13,16 @@ import java.util.List;
 import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GeneratorKruskalTest {
+public class MazeGeneratorBasedOnKruskalTest {
     private Maze maze;
-    private GeneratorKruskal generatorKruskal;
+    private MazeGeneratorBasedOnKruskal mazeGeneratorBasedOnKruskal;
     private HashSet<Edge> edges;
     private UnionFindImpl unionFind;
 
     @BeforeEach
     void setUp() {
         maze = new Maze(11, 11);
-        generatorKruskal = new GeneratorKruskal();
+        mazeGeneratorBasedOnKruskal = new MazeGeneratorBasedOnKruskal();
         edges = new HashSet<>();
         unionFind = new UnionFindImpl(121);
 
@@ -40,7 +40,7 @@ public class GeneratorKruskalTest {
 
         List<Edge> sortedEdges = EdgeHandler.sortEdges(edges);
 
-        List<Edge> mst = GeneratorKruskal.unionCell(sortedEdges, unionFind, maze);
+        List<Edge> mst = MazeGeneratorBasedOnKruskal.unionCell(sortedEdges, unionFind, maze);
         Set<Edge> mstSet = new HashSet<>(mst);
         Assertions.assertNotNull(mstSet);
 

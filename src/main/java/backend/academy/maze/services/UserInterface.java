@@ -1,7 +1,7 @@
 package backend.academy.maze.services;
 
-import backend.academy.maze.algorithms.generators.GeneratorKruskal;
-import backend.academy.maze.algorithms.generators.GeneratorPrim;
+import backend.academy.maze.algorithms.generators.MazeGeneratorBasedOnKruskal;
+import backend.academy.maze.algorithms.generators.MazeGeneratorBasedOnPrim;
 import backend.academy.maze.algorithms.solvers.BreadthFirstSearch;
 import backend.academy.maze.algorithms.solvers.DepthFirstSearch;
 import backend.academy.maze.algorithms.solvers.Dijkstra;
@@ -24,13 +24,13 @@ public class UserInterface {
     private final PrintStream printStream = new PrintStream(System.out, true, StandardCharsets.UTF_8);
     private final BufferedReader bufferedReader =
         new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
-    private final GeneratorKruskal generatorKruskal = new GeneratorKruskal();
+    private final MazeGeneratorBasedOnKruskal mazeGeneratorBasedOnKruskal = new MazeGeneratorBasedOnKruskal();
 
     public UserInterface() {
     }
 
     public void gameVersion1() {
-        GeneratorPrim generatorPrim = new GeneratorPrim();
+        MazeGeneratorBasedOnPrim mazeGeneratorBasedOnPrim = new MazeGeneratorBasedOnPrim();
         BreadthFirstSearch breadthFirstSearch;
         List<Coordinate> path;
         DepthFirstSearch depthFirstSearch;
@@ -67,8 +67,8 @@ public class UserInterface {
 
                 printStream.println("Ваш лабиринт: ");
                 switch (algorithmType) {
-                    case PRIM -> maze = generatorPrim.generateMaze(height, width);
-                    case KRUSKAL -> maze = generatorKruskal.generateMaze(height, width);
+                    case PRIM -> maze = mazeGeneratorBasedOnPrim.generateMaze(height, width);
+                    case KRUSKAL -> maze = mazeGeneratorBasedOnKruskal.generateMaze(height, width);
                     default -> throw new IllegalStateException("Unexpected value: " + algorithmType);
                 }
                 PrintMaze.printMaze(maze);
@@ -129,8 +129,8 @@ public class UserInterface {
                 printStream.print(Constant.INPUTWIDTH);
                 int width = CheckInputUser.getNumberUserSizeMaze(bufferedReader, printStream);
 
-                Maze maze = generatorKruskal.generateMaze(height, width);
-                List<Edge> mst = generatorKruskal.mst();
+                Maze maze = mazeGeneratorBasedOnKruskal.generateMaze(height, width);
+                List<Edge> mst = mazeGeneratorBasedOnKruskal.mst();
                 PrintMaze.printMaze(maze);
 
                 printStream.println("Укажите границу");

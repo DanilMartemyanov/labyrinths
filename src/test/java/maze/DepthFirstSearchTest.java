@@ -1,6 +1,6 @@
 package maze;
 
-import backend.academy.maze.algorithms.generators.GeneratorKruskal;
+import backend.academy.maze.algorithms.generators.MazeGeneratorBasedOnKruskal;
 import backend.academy.maze.algorithms.solvers.DepthFirstSearch;
 import backend.academy.maze.models.Coordinate;
 import backend.academy.maze.models.Maze;
@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class DepthFirstSearchTest {
-    private GeneratorKruskal generatorKruskal;
+    private MazeGeneratorBasedOnKruskal mazeGeneratorBasedOnKruskal;
     private DepthFirstSearch depthFirstSearch;
 
     @BeforeEach
     void setUp() {
-        generatorKruskal = new GeneratorKruskal();
-        Maze maze = generatorKruskal.generateMaze(11, 11);
+        mazeGeneratorBasedOnKruskal = new MazeGeneratorBasedOnKruskal();
+        Maze maze = mazeGeneratorBasedOnKruskal.generateMaze(11, 11);
         depthFirstSearch = new DepthFirstSearch(maze);
     }
 
