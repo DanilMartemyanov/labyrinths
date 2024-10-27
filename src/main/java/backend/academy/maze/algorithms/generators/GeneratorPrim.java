@@ -25,7 +25,7 @@ public class GeneratorPrim implements Generator {
         int randomRow = random.nextInt(heightMaze / 2) * 2 + 1;
         int randomColumn = random.nextInt(widthMaze / 2) * 2 + 1;
         Cell startPoint = new Cell(randomRow, randomColumn, CellType.PASSAGE);
-        maze.grid[randomRow][randomColumn] = startPoint;
+        maze.grid()[randomRow][randomColumn] = startPoint;
 
         // Множество соседей
         HashSet<Cell> neighbours = new HashSet<>();
@@ -34,7 +34,7 @@ public class GeneratorPrim implements Generator {
         visited.add(startPoint);
 
         // Добавляем начальных соседей
-        addNeighbor(startPoint, directions, neighbours, maze.grid, visited);
+        addNeighbor(startPoint, directions, neighbours, maze.grid(), visited);
 
         while (!neighbours.isEmpty()) {
             // Берём случайного соседа
@@ -42,7 +42,7 @@ public class GeneratorPrim implements Generator {
             Cell randomNeighbor = neighbours.stream().toList().get(indexNeighbour);
 
             // Находим посещённую клетку, которая находится на 2 клетки дальше от выбранного соседа
-            Cell visitedCell = findVisitedNeighbor(randomNeighbor, directions, maze.grid, visited);
+            Cell visitedCell = findVisitedNeighbor(randomNeighbor, directions, maze.grid(), visited);
 
             // Если нашли посещённую клетку
             if (visitedCell != null) {
@@ -52,10 +52,10 @@ public class GeneratorPrim implements Generator {
 
                 // Создаём проход между посещённой клеткой и соседом
                 Generator.addPassageBetween(new Coordinate(visitedCell.row(), visitedCell.column()),
-                    new Coordinate(randomNeighbor.row(), randomNeighbor.column()), maze.grid);
+                    new Coordinate(randomNeighbor.row(), randomNeighbor.column()), maze.grid());
 
                 // Добавляем новых соседей
-                addNeighbor(randomNeighbor, directions, neighbours, maze.grid, visited);
+                addNeighbor(randomNeighbor, directions, neighbours, maze.grid(), visited);
             }
 
             // Удаляем соседа из множества, так как он уже обработан

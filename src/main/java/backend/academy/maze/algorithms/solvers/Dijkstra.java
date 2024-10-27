@@ -20,7 +20,7 @@ public class Dijkstra extends Solver implements PathFinding {
     private List<Edge> mst;
     private Queue<Coordinate> pqueue;
     private Set<Coordinate> nodes;
-    public Map<Coordinate, Integer> distance;
+    private Map<Coordinate, Integer> distance;
     private int distanceSum;
     private Maze maze;
 

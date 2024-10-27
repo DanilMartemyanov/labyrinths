@@ -11,7 +11,7 @@ import lombok.Setter;
 public final class Maze {
     private final int height;
     private final int width;
-    public Cell[][] grid;
+    private Cell[][] grid;
     private final PrintStream printStream = new PrintStream(System.out, true, StandardCharsets.UTF_8);
 
     public Maze(int height, int width) {

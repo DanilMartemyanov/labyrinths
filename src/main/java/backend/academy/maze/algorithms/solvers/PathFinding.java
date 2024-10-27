@@ -22,8 +22,8 @@ public interface PathFinding {
             int newRow = current.row() + direction.row();
             int newCol = current.column() + direction.column();
 
-            if (Generator.checkBounds(new Coordinate(newRow, newCol), maze.grid)
-                && maze.grid[newRow][newCol].type == CellType.PASSAGE) {
+            if (Generator.checkBounds(new Coordinate(newRow, newCol), maze.grid())
+                && maze.grid()[newRow][newCol].type == CellType.PASSAGE) {
                 neighbors.add(new Coordinate(newRow, newCol));
             }
         }

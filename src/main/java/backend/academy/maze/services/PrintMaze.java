@@ -22,7 +22,7 @@ public class PrintMaze {
         Maze copyMaze = new Maze(maze);
         for (int i = 0; i < copyMaze.height(); i++) {
             for (int j = 0; j < copyMaze.width(); j++) {
-                switch (copyMaze.grid[i][j].type) {
+                switch (copyMaze.grid()[i][j].type) {
                     case PASSAGE:
                         PRINT_STREAM.print(Constant.PASSAGE);
                         break;
@@ -63,13 +63,13 @@ public class PrintMaze {
             int column = from.column() + (to.column() - from.column()) / 2;
             switch (edge.weight() % 2) {
                 case 1:
-                    maze.grid[row][column].type = CellType.GIFT;
+                    maze.grid()[row][column].type = CellType.GIFT;
                     break;
                 case 0:
-                    maze.grid[row][column].type = CellType.BOMB;
+                    maze.grid()[row][column].type = CellType.BOMB;
                     break;
                 default:
-                    maze.grid[row][column].type = CellType.PASSAGE;
+                    maze.grid()[row][column].type = CellType.PASSAGE;
             }
         }
     }
@@ -77,14 +77,14 @@ public class PrintMaze {
     // Метод для вывода пути на сетку
     public static void printPath(ArrayList<Coordinate> path, Coordinate start, Coordinate end, Maze maze) {
         Maze copyMaze = new Maze(maze);
-        copyMaze.grid[start.row()][start.column()].type = CellType.A;
-        copyMaze.grid[end.row()][end.column()].type = CellType.B;
+        copyMaze.grid()[start.row()][start.column()].type = CellType.A;
+        copyMaze.grid()[end.row()][end.column()].type = CellType.B;
 
         path.remove(start);
         path.remove(end);
 
         for (Coordinate coordinate : path) {
-            copyMaze.grid[coordinate.row()][coordinate.column()].type = CellType.GLASS;
+            copyMaze.grid()[coordinate.row()][coordinate.column()].type = CellType.GLASS;
         }
         printMaze(copyMaze);
     }
@@ -99,7 +99,7 @@ public class PrintMaze {
         while (count < Constant.NUMBER_3) {
             Coordinate coordinate = line.get(random.nextInt(line.size()));
             Coordinate newEntrance = null;
-            if (maze.grid[coordinate.row()][coordinate.column()].type == CellType.PASSAGE) {
+            if (maze.grid()[coordinate.row()][coordinate.column()].type == CellType.PASSAGE) {
                 switch (boundType) {
                     case BoundType.UP:
                         newEntrance = new Coordinate(coordinate.row() - 1, coordinate.column());
@@ -119,7 +119,7 @@ public class PrintMaze {
 
                 // Устанавливаем тип клетки на ENTRANCE и добавляем в списки
                 if (newEntrance != null) {
-                    maze.grid[newEntrance.row()][newEntrance.column()].type = CellType.ENTRANCE;
+                    maze.grid()[newEntrance.row()][newEntrance.column()].type = CellType.ENTRANCE;
                     passages.add(coordinate);
                     passagesForPrint.add(newEntrance);
                     count++;

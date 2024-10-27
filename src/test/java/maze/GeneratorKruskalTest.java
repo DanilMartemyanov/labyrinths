@@ -32,7 +32,7 @@ public class GeneratorKruskalTest {
 
     @Test
     void initEdges() {
-        EdgeHandler.initSetEdges(maze.grid, edges);
+        EdgeHandler.initSetEdges(maze.grid(), edges);
 //        generatorKruskal.addEdge(new Coordinate(1,1), maze.grid, edges);
         System.out.println(edges.size());
         System.out.println(new Edge(new Coordinate(0, 0), new Coordinate(0, 1)));
@@ -52,7 +52,6 @@ public class GeneratorKruskalTest {
 
     @Test
     void unionFind() {
-        PrintMaze printMaze = new PrintMaze();
         UnionFindImpl unionFind = new UnionFindImpl(maze.width() * maze.height());
         Coordinate coordinate1 = new Coordinate(1, 1);
         Coordinate coordinate2 = new Coordinate(1, 2);
@@ -75,7 +74,7 @@ public class GeneratorKruskalTest {
         System.out.println(unionFind.getRoot(index2));
         System.out.println(unionFind.getRoot(index3));
         System.out.println(unionFind.getRoot(index4));
-        printMaze.printMaze(maze);
+        PrintMaze.printMaze(maze);
     }
 
     @Test

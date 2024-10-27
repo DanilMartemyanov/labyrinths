@@ -13,10 +13,7 @@ import java.util.ArrayList;
 public class PrintMazeTest {
     private PrintMaze printMaze;
 
-    @BeforeEach
-    public void setUp() {
-        printMaze = new PrintMaze();
-    }
+
 
     @Test
     void getLineTest() {

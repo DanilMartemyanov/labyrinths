@@ -28,30 +28,30 @@ public class GenratorPrimTest {
     }
     @Test
     void checkBoundsRow(){
-        boolean check = Generator.checkBounds(new Coordinate(-1,3), maze.grid);
+        boolean check = Generator.checkBounds(new Coordinate(-1,3), maze.grid());
         Assertions.assertFalse(check);
     }
     @Test
     void checkBoundsColumn(){
-        boolean check = Generator.checkBounds(new Coordinate(5,-1), maze.grid);
+        boolean check = Generator.checkBounds(new Coordinate(5,-1), maze.grid());
         Assertions.assertFalse(check);
     }
 
     @Test
     void checkBounds(){
-        boolean check = Generator.checkBounds(new Coordinate(9,9), maze.grid);
+        boolean check = Generator.checkBounds(new Coordinate(9,9), maze.grid());
         Assertions.assertFalse(check);
     }
 
     @Test
     void addNeighbourPrim(){
-        GeneratorPrim.addNeighbor(new Cell(5,5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid, visited);
-        GeneratorPrim.addNeighbor(new Cell(3,5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid, visited);
+        GeneratorPrim.addNeighbor(new Cell(5,5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid(), visited);
+        GeneratorPrim.addNeighbor(new Cell(3,5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid(), visited);
     }
 
     @Test
     void addNeighbourDFS(){
-        GeneratorPrim.addNeighbor(new Cell(5,5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid, visited);
+        GeneratorPrim.addNeighbor(new Cell(5,5, CellType.PASSAGE), directionsPrim, neighbors, maze.grid(), visited);
     }
 
 }

@@ -27,7 +27,7 @@ public class GeneratorKruskal implements Generator {
         HashSet<Edge> edges = new HashSet<>();
         UnionFindImpl unionFind = new UnionFindImpl(heightMaze * widthMaze);
         // Создаем и заполняем ребра
-        EdgeHandler.initSetEdges(maze.grid, edges);
+        EdgeHandler.initSetEdges(maze.grid(), edges);
 
         // Сортируем ребра
         ArrayList<Edge> sortedEdges = EdgeHandler.sortEdges(edges);
@@ -61,10 +61,10 @@ public class GeneratorKruskal implements Generator {
                 mst.add(edge);
                 unionFind.union(indexCellRow, indexCellCol);
 
-                Generator.addPassageBetween(edge.firstNode(), edge.secondNode(), maze.grid);
+                Generator.addPassageBetween(edge.firstNode(), edge.secondNode(), maze.grid());
 
-                maze.grid[from.row()][from.column()].type = CellType.PASSAGE;
-                maze.grid[to.row()][to.column()].type = CellType.PASSAGE;
+                maze.grid()[from.row()][from.column()].type = CellType.PASSAGE;
+                maze.grid()[to.row()][to.column()].type = CellType.PASSAGE;
             }
         }
         return mst;

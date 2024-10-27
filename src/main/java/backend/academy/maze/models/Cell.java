@@ -8,8 +8,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Cell {
-    int row;
-    int column;
+    private int row;
+    private int column;
     public CellType type;
 
     public Cell(Cell originalCell) {
