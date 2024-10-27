@@ -29,7 +29,7 @@ public class MazeGeneratorBasedOnKruskal implements Generator {
         Set<Edge> edges = new HashSet<>();
         UnionFind unionFind = new UnionFindImpl(heightMaze * widthMaze);
         // Создаем и заполняем ребра
-        EdgeHandler.initSetEdges(maze.grid(), edges);
+        EdgeHandler.initSetEdges(maze, edges);
 
         // Сортируем ребра
         List<Edge> sortedEdges = EdgeHandler.sortEdges(edges);

@@ -30,5 +30,4 @@ public class WorkWithPath {
         path.put(bestPoint, bestDistance);
         return path;
     }
-
 }

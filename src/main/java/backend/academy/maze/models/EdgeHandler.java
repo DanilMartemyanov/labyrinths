@@ -1,7 +1,9 @@
 package backend.academy.maze.models;
 
-import backend.academy.maze.algorithms.generators.Generator;
+
+
 import backend.academy.maze.services.Constant;
+import backend.academy.maze.services.validators.CoordinateValidator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,28 +23,28 @@ public final class EdgeHandler {
      * Создание ребра, при условии, что оно находится в зоне сетки
      */
 
-    public static void addEdge(Coordinate from, Cell[][] grid, Set<Edge> edges) {
+    public static void addEdge(Coordinate from, Maze maze, Set<Edge> edges) {
         for (Coordinate direction : DIRECTIONS) {
-            if (!Generator.checkBounds(from, grid)) {
+            if (!CoordinateValidator.checkBounds(from, maze)) {
                 continue;
             }
             int newRow = from.row() + direction.row();
             int newColumn = from.column() + direction.column();
             Edge edge = new Edge(from, new Coordinate(newRow, newColumn));
-            if (Generator.checkBounds(new Coordinate(newRow, newColumn), grid)) {
+            if (CoordinateValidator.checkBounds(new Coordinate(newRow, newColumn), maze)) {
                 edges.add(edge);
             }
         }
     }
 
     // Инициализация ребер (создание ребер на сетке)
-    public static void initSetEdges(Cell[][] grid, Set<Edge> edges) {
-        int rows = grid.length;
-        int columns = grid[0].length;
+    public static void initSetEdges(Maze maze, Set<Edge> edges) {
+        int rows = maze.grid().length;
+        int columns = maze.grid()[0].length;
         for (int i = 1; i < rows; i = i + 2) {
             for (int j = 1; j < columns; j = j + 2) {
                 Coordinate coordinate = new Coordinate(i, j);
-                addEdge(coordinate, grid, edges);
+                addEdge(coordinate, maze, edges);
             }
         }
     }

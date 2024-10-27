@@ -3,7 +3,7 @@ package backend.academy.maze.models;
 import backend.academy.maze.enums.BoundType;
 import backend.academy.maze.enums.CellType;
 import backend.academy.maze.services.Constant;
-import backend.academy.maze.services.PrintMaze;
+import backend.academy.maze.services.FactoryCoordinate;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
@@ -53,14 +53,14 @@ public final class Maze {
 
     public List<Coordinate> createManyEntrance(BoundType boundType) {
         SecureRandom random = new SecureRandom();
-        List<Coordinate> line = PrintMaze.getLine(this, boundType);
+        List<Coordinate> line = FactoryCoordinate.getLine(this, boundType);
         List<Coordinate> passages = new ArrayList<>();
         List<Coordinate> passagesForPrint = new ArrayList<>();
         int count = 0;
 
         while (count < Constant.NUMBER_3) {
             Coordinate coordinate = line.get(random.nextInt(line.size()));
-            Coordinate newEntrance = null;
+            Coordinate newEntrance;
             if (this.grid()[coordinate.row()][coordinate.column()].type() == CellType.PASSAGE) {
                 switch (boundType) {
                     case BoundType.UP:
@@ -92,4 +92,6 @@ public final class Maze {
         PRINT_STREAM.println(passagesForPrint);
         return passages;
     }
+
+
 }

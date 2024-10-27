@@ -15,17 +15,9 @@ public record Coordinate(int row, int column) implements Comparable<Coordinate> 
         return directions;
     }
 
+    // перевод индекса из двумерного массива в одномерный
     public int toIndex(int width) {
         return row * width + column;
-    }
-
-    public static List<Coordinate> directionsDiagonal(int stepSize) {
-        List<Coordinate> directions = generateDirections(stepSize);
-        directions.add(new Coordinate(stepSize, -stepSize));
-        directions.add(new Coordinate(stepSize, stepSize));
-        directions.add(new Coordinate(-stepSize, stepSize));
-        directions.add(new Coordinate(-stepSize, -stepSize));
-        return directions;
     }
 
     @Override

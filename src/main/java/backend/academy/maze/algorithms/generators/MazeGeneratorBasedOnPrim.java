@@ -5,6 +5,7 @@ import backend.academy.maze.models.Cell;
 import backend.academy.maze.models.Coordinate;
 import backend.academy.maze.models.Maze;
 import backend.academy.maze.services.Constant;
+import backend.academy.maze.services.validators.CoordinateValidator;
 import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.List;
@@ -35,7 +36,7 @@ public class MazeGeneratorBasedOnPrim implements Generator {
         visited.add(startPoint);
 
         // Добавляем начальных соседей
-        addNeighbor(startPoint, directions, neighbours, maze.grid(), visited);
+        addNeighbor(startPoint, directions, neighbours, maze, visited);
 
         while (!neighbours.isEmpty()) {
             // Берём случайного соседа
@@ -43,7 +44,7 @@ public class MazeGeneratorBasedOnPrim implements Generator {
             Cell randomNeighbor = neighbours.stream().toList().get(indexNeighbour);
 
             // Находим посещённую клетку, которая находится на 2 клетки дальше от выбранного соседа
-            Cell visitedCell = findVisitedNeighbor(randomNeighbor, directions, maze.grid(), visited);
+            Cell visitedCell = findVisitedNeighbor(randomNeighbor, directions, maze, visited);
 
             // Если нашли посещённую клетку
             if (visitedCell != null) {
@@ -56,7 +57,7 @@ public class MazeGeneratorBasedOnPrim implements Generator {
                     new Coordinate(randomNeighbor.row(), randomNeighbor.column()), maze);
 
                 // Добавляем новых соседей
-                addNeighbor(randomNeighbor, directions, neighbours, maze.grid(), visited);
+                addNeighbor(randomNeighbor, directions, neighbours, maze, visited);
             }
 
             // Удаляем соседа из множества, так как он уже обработан
@@ -70,15 +71,15 @@ public class MazeGeneratorBasedOnPrim implements Generator {
     public static Cell findVisitedNeighbor(
         Cell cell,
         List<Coordinate> directions,
-        Cell[][] grid,
+        Maze maze,
         Set<Cell> visited
     ) {
         for (Coordinate direction : directions) {
             int newRow = cell.row() + direction.row();
             int newCol = cell.column() + direction.column();
 
-            if (Generator.checkBounds(new Coordinate(newRow, newCol), grid)) {
-                Cell neighbor = grid[newRow][newCol];
+            if (CoordinateValidator.checkBounds(new Coordinate(newRow, newCol), maze)) {
+                Cell neighbor = maze.grid()[newRow][newCol];
                 if (visited.contains(neighbor)) {
                     return neighbor;  // Возвращаем первую найденную посещённую клетку
                 }
@@ -92,7 +93,7 @@ public class MazeGeneratorBasedOnPrim implements Generator {
         Cell cell,
         List<Coordinate> directions,
         Set<Cell> neighbours,
-        Cell[][] grid,
+        Maze maze,
         Set<Cell> visited
     ) {
         for (Coordinate direction : directions) {
@@ -100,15 +101,14 @@ public class MazeGeneratorBasedOnPrim implements Generator {
             int newCol = cell.column() + direction.column();
 
             // Проверяем, что клетка в пределах лабиринта и непосещена
-            if (Generator.checkBounds(new Coordinate(newRow, newCol), grid)) {
-                Cell neighbor = grid[newRow][newCol];
+            if (CoordinateValidator.checkBounds(new Coordinate(newRow, newCol), maze)) {
+                Cell neighbor = maze.grid()[newRow][newCol];
                 if (!visited.contains(neighbor)) {
                     neighbours.add(neighbor);
                 }
             }
         }
     }
-
 }
 
 

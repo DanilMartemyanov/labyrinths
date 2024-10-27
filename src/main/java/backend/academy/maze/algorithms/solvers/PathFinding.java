@@ -1,10 +1,11 @@
 package backend.academy.maze.algorithms.solvers;
 
-import backend.academy.maze.algorithms.generators.Generator;
+
 import backend.academy.maze.enums.CellType;
 import backend.academy.maze.models.Coordinate;
 import backend.academy.maze.models.Maze;
 import backend.academy.maze.services.Constant;
+import backend.academy.maze.services.validators.CoordinateValidator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +23,7 @@ public interface PathFinding {
             int newRow = current.row() + direction.row();
             int newCol = current.column() + direction.column();
 
-            if (Generator.checkBounds(new Coordinate(newRow, newCol), maze.grid())
+            if (CoordinateValidator.checkBounds(new Coordinate(newRow, newCol), maze)
                 && maze.grid()[newRow][newCol].type() == CellType.PASSAGE) {
                 neighbors.add(new Coordinate(newRow, newCol));
             }

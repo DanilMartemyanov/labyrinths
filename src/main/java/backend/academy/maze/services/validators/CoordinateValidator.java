@@ -1,12 +1,13 @@
-package backend.academy.maze.services;
+package backend.academy.maze.services.validators;
 
 import backend.academy.maze.enums.BoundType;
 import backend.academy.maze.models.Coordinate;
+import backend.academy.maze.models.Maze;
 import java.util.List;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class Checker {
+public class CoordinateValidator {
     public static Coordinate makeCorrectCoordinateForEntrance(BoundType boundType, Coordinate coordinate) {
         Coordinate newCoordinate;
         switch (boundType) {
@@ -33,4 +34,14 @@ public class Checker {
         }
         return false;
     }
+
+    // Проверяем границы лабиринта
+    public boolean checkBounds(Coordinate cell, Maze maze) {
+        if (cell.row() > 0 && cell.row() < (maze.grid().length - 1) && cell.column() > 0
+            && cell.column() < (maze.grid()[0].length - 1)) {
+            return true;
+        }
+        return false;
+    }
+
 }

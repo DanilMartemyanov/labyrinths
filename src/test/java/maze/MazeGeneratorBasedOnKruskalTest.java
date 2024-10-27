@@ -30,13 +30,13 @@ public class MazeGeneratorBasedOnKruskalTest {
 
     @Test
     void initEdgesTest() {
-        EdgeHandler.initSetEdges(maze.grid(), edges);
+        EdgeHandler.initSetEdges(maze, edges);
         assertThat(edges.size()).isNotNull();
     }
 
     @Test
     void getMst() {
-        EdgeHandler.initSetEdges(maze.grid(), edges);
+        EdgeHandler.initSetEdges(maze, edges);
 
         List<Edge> sortedEdges = EdgeHandler.sortEdges(edges);
 
@@ -45,6 +45,5 @@ public class MazeGeneratorBasedOnKruskalTest {
         Assertions.assertNotNull(mstSet);
 
     }
-
 
 }

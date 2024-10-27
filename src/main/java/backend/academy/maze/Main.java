@@ -1,6 +1,6 @@
 package backend.academy.maze;
 
-import backend.academy.maze.services.UserInterface;
+import backend.academy.game.UserInterface;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
