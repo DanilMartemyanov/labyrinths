@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 public class UnionFindImplTest {
     private UnionFindImpl unionFind;
 
+
     @BeforeEach
     void setUp() {
         unionFind = new UnionFindImpl(10);
