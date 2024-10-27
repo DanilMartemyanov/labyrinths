@@ -15,6 +15,7 @@ public class DepthFirstSearchTest {
 
     @BeforeEach
     void setUp() {
+        generatorKruskal = new GeneratorKruskal();
         Maze maze = generatorKruskal.generateMaze(11, 11);
         depthFirstSearch = new DepthFirstSearch(maze);
     }

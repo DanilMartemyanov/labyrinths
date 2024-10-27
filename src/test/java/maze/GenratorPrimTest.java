@@ -16,7 +16,6 @@ import java.util.Set;
 public class GenratorPrimTest {
     private Maze maze;
     private List<Coordinate> directionsPrim;
-    private List<Coordinate> directionsDFS;
     private Set<Cell> visited;
     private Set<Cell> neighbors;
 
