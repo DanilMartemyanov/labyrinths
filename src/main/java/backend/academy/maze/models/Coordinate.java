@@ -1,11 +1,12 @@
 package backend.academy.maze.models;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public record Coordinate(int row, int column) implements Comparable<Coordinate> {
-    public static ArrayList<Coordinate> generateDirections(int stepSize) {
-        ArrayList<Coordinate> directions = new ArrayList<>();
+    public static List<Coordinate> generateDirections(int stepSize) {
+        List<Coordinate> directions = new ArrayList<>();
         directions.add(new Coordinate(-stepSize, 0));
         directions.add(new Coordinate(stepSize, 0));
         directions.add(new Coordinate(0, -stepSize));
@@ -18,8 +19,8 @@ public record Coordinate(int row, int column) implements Comparable<Coordinate> 
         return row * width + column;
     }
 
-    public static ArrayList<Coordinate> directionsDiagonal(int stepSize) {
-        ArrayList<Coordinate> directions = generateDirections(stepSize);
+    public static List<Coordinate> directionsDiagonal(int stepSize) {
+        List<Coordinate> directions = generateDirections(stepSize);
         directions.add(new Coordinate(stepSize, -stepSize));
         directions.add(new Coordinate(stepSize, stepSize));
         directions.add(new Coordinate(-stepSize, stepSize));

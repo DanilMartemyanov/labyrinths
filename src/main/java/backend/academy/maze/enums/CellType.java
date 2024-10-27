@@ -8,8 +8,8 @@ public enum CellType {
     PASSAGE("\u2705"),
     GLASS("\uD83D\uDD0E"),
     BOMB("\uD83D\uDCA3"),
-    A("\uD83C\uDF82"),
-    B("\uD83C\uDFC3\u200D♂\uFE0F"),
+    A("\uD83C\uDFC3\u200D♂\uFE0F"),
+    B("\uD83C\uDF82"),
     GIFT("\uD83C\uDF81"),
     ENTRANCE("\uD83D\uDEAA");
 

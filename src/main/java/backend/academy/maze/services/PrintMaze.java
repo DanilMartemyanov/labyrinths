@@ -19,7 +19,6 @@ import lombok.experimental.UtilityClass;
 public class PrintMaze {
     private static final PrintStream PRINT_STREAM = new PrintStream(System.out, true, StandardCharsets.UTF_8);
 
-
     @SuppressFBWarnings("UCPM_USE_CHARACTER_PARAMETERIZED_METHOD")
     public static void printMaze(Maze maze) {
         Maze copyMaze = new Maze(maze);
@@ -27,28 +26,28 @@ public class PrintMaze {
             for (int j = 0; j < copyMaze.width(); j++) {
                 switch (copyMaze.grid()[i][j].type()) {
                     case PASSAGE:
-                        PRINT_STREAM.print(CellType.PASSAGE);
+                        PRINT_STREAM.print(CellType.PASSAGE.value());
                         break;
                     case WALL:
-                        PRINT_STREAM.print(CellType.WALL);
+                        PRINT_STREAM.print(CellType.WALL.value());
                         break;
                     case A:
-                        PRINT_STREAM.print(CellType.A);
+                        PRINT_STREAM.print(CellType.A.value());
                         break;
                     case B:
-                        PRINT_STREAM.print(CellType.B);
+                        PRINT_STREAM.print(CellType.B.value());
                         break;
                     case GLASS:
-                        PRINT_STREAM.print(CellType.GLASS);
+                        PRINT_STREAM.print(CellType.GLASS.value());
                         break;
                     case BOMB:
-                        PRINT_STREAM.print(CellType.BOMB);
+                        PRINT_STREAM.print(CellType.BOMB.value());
                         break;
                     case GIFT:
-                        PRINT_STREAM.print(CellType.GIFT);
+                        PRINT_STREAM.print(CellType.GIFT.value());
                         break;
                     case ENTRANCE:
-                        PRINT_STREAM.print(CellType.ENTRANCE);
+                        PRINT_STREAM.print(CellType.ENTRANCE.value());
                         break;
                     default:
                         break;
@@ -58,7 +57,7 @@ public class PrintMaze {
         }
     }
 
-    public static void changeMazeWithWeight(ArrayList<Edge> edges, Maze maze) {
+    public static void changeMazeWithWeight(List<Edge> edges, Maze maze) {
         for (Edge edge : edges) {
             Coordinate from = edge.firstNode();
             Coordinate to = edge.secondNode();
@@ -78,7 +77,7 @@ public class PrintMaze {
     }
 
     // Метод для вывода пути на сетку
-    public static void printPath(ArrayList<Coordinate> path, Coordinate start, Coordinate end, Maze maze) {
+    public static void printPath(List<Coordinate> path, Coordinate start, Coordinate end, Maze maze) {
         Maze copyMaze = new Maze(maze);
         copyMaze.grid()[start.row()][start.column()].type(CellType.A);
         copyMaze.grid()[end.row()][end.column()].type(CellType.B);
@@ -90,48 +89,6 @@ public class PrintMaze {
             copyMaze.grid()[coordinate.row()][coordinate.column()].type(CellType.GLASS);
         }
         printMaze(copyMaze);
-    }
-
-    public static List<Coordinate> createManyEntrance(Maze maze, BoundType boundType) {
-        SecureRandom random = new SecureRandom();
-        List<Coordinate> line = getLine(maze, boundType);
-        List<Coordinate> passages = new ArrayList<>();
-        List<Coordinate> passagesForPrint = new ArrayList<>();
-        int count = 0;
-
-        while (count < Constant.NUMBER_3) {
-            Coordinate coordinate = line.get(random.nextInt(line.size()));
-            Coordinate newEntrance = null;
-            if (maze.grid()[coordinate.row()][coordinate.column()].type() == CellType.PASSAGE) {
-                switch (boundType) {
-                    case BoundType.UP:
-                        newEntrance = new Coordinate(coordinate.row() - 1, coordinate.column());
-                        break;
-                    case BoundType.DOWN:
-                        newEntrance = new Coordinate(coordinate.row() + 1, coordinate.column());
-                        break;
-                    case BoundType.RIGHT:
-                        newEntrance = new Coordinate(coordinate.row(), coordinate.column() + 1);
-                        break;
-                    case BoundType.LEFT:
-                        newEntrance = new Coordinate(coordinate.row(), coordinate.column() - 1);
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + boundType);
-                }
-
-                // Устанавливаем тип клетки на ENTRANCE и добавляем в списки
-                if (newEntrance != null) {
-                    maze.grid()[newEntrance.row()][newEntrance.column()].type(CellType.ENTRANCE);
-                    passages.add(coordinate);
-                    passagesForPrint.add(newEntrance);
-                    count++;
-                }
-            }
-        }
-        PRINT_STREAM.println("Координаты дверок");
-        PRINT_STREAM.println(passagesForPrint);
-        return passages;
     }
 
     public static List<Coordinate> getLine(Maze maze, BoundType boundType) {

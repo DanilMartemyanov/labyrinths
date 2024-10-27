@@ -5,6 +5,7 @@ import backend.academy.maze.models.Maze;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 public class DepthFirstSearch extends Solver implements PathFinding {
     private Deque<Coordinate> dequeArray;
@@ -15,7 +16,7 @@ public class DepthFirstSearch extends Solver implements PathFinding {
     }
 
     @Override
-    public ArrayList<Coordinate> findPath(Coordinate start, Coordinate end) {
+    public List<Coordinate> findPath(Coordinate start, Coordinate end) {
 
         super.clearCollections();
         dequeArray.clear();

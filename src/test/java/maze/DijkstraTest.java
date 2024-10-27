@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class DijkstraTest {
     private GeneratorKruskal generatorKruskal;
@@ -33,7 +34,7 @@ public class DijkstraTest {
         Maze maze = generatorKruskal.generateMaze(11, 11);
         PrintMaze.printMaze(maze);
         dijkstra = new Dijkstra(generatorKruskal.mst(), maze);
-        ArrayList<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
+        List<Coordinate> path = dijkstra.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
         System.out.println(dijkstra.distanceSum());
         dijkstra.findPath(new Coordinate(1, 1), new Coordinate(1, 3));
         System.out.println(dijkstra.distanceSum());

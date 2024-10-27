@@ -24,7 +24,7 @@ public class Dijkstra extends Solver implements PathFinding {
     private int distanceSum;
     private Maze maze;
 
-    public Dijkstra(ArrayList<Edge> mst, Maze maze) {
+    public Dijkstra(List<Edge> mst, Maze maze) {
         super(maze);
         this.mst = mst;
         pqueue = new PriorityQueue<>();
@@ -34,7 +34,7 @@ public class Dijkstra extends Solver implements PathFinding {
     }
 
     @Override
-    public ArrayList<Coordinate> findPath(Coordinate start, Coordinate end) {
+    public List<Coordinate> findPath(Coordinate start, Coordinate end) {
         distanceSum = 0;
         super.clearCollections();
         pqueue.clear();
@@ -78,7 +78,7 @@ public class Dijkstra extends Solver implements PathFinding {
             }
         }
         if (!distance.get(end).equals(Integer.MAX_VALUE)) {
-            ArrayList<Coordinate> pathWithIntermediates = new ArrayList<>();
+            List<Coordinate> pathWithIntermediates = new ArrayList<>();
             PathFinding.reconstructPath(start, end, super.parentMap(), super.path());
 
             // Добавляем промежуточные точки между ребрами

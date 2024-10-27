@@ -4,6 +4,7 @@ import backend.academy.maze.models.Coordinate;
 import backend.academy.maze.models.Maze;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class BreadthFirstSearch extends Solver implements PathFinding {
@@ -16,7 +17,7 @@ public class BreadthFirstSearch extends Solver implements PathFinding {
     }
 
     @Override
-    public ArrayList<Coordinate> findPath(Coordinate start, Coordinate end) {
+    public List<Coordinate> findPath(Coordinate start, Coordinate end) {
         queue.add(start);
         super.visited().add(start);
 

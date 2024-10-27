@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface PathFinding {
-    ArrayList<Coordinate> findPath(Coordinate start, Coordinate end);
+    List<Coordinate> findPath(Coordinate start, Coordinate end);
 
     // Метод для получения соседей текущей клетки
     static List<Coordinate> getNeighbors(Coordinate current, Maze maze) {
-        ArrayList<Coordinate> directions = Coordinate.generateDirections(Constant.STEP_1);
+        List<Coordinate> directions = Coordinate.generateDirections(Constant.STEP_1);
         List<Coordinate> neighbors = new ArrayList<>();
 
         for (Coordinate direction : directions) {
@@ -35,7 +35,7 @@ public interface PathFinding {
         Coordinate start,
         Coordinate end,
         Map<Coordinate, Coordinate> parentMap,
-        ArrayList<Coordinate> path
+        List<Coordinate> path
     ) {
         Coordinate current = end;
         while (!current.equals(start)) {
@@ -45,5 +45,4 @@ public interface PathFinding {
         path.add(start);
         Collections.reverse(path);
     }
-
 }

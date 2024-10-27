@@ -9,6 +9,7 @@ import backend.academy.maze.services.PrintMaze;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PrintMazeTest {
     private PrintMaze printMaze;
@@ -30,7 +31,7 @@ public class PrintMazeTest {
         GeneratorKruskal generatorKruskal = new GeneratorKruskal();
         maze = generatorKruskal.generateMaze(11, 11);
         System.out.println();
-        PrintMaze.createManyEntrance(maze, BoundType.UP);
+        maze.createManyEntrance(BoundType.UP);
         PrintMaze.printMaze(maze);
     }
 
@@ -39,7 +40,7 @@ public class PrintMazeTest {
         GeneratorKruskal generatorKruskal = new GeneratorKruskal();
         Maze maze = generatorKruskal.generateMaze(11, 11);
         DepthFirstSearch depthFirstSearch = new DepthFirstSearch(maze);
-        ArrayList<Coordinate> path = depthFirstSearch.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
+        List<Coordinate> path = depthFirstSearch.findPath(new Coordinate(1, 1), new Coordinate(9, 9));
         PrintMaze.printMaze(maze);
         PrintMaze.printPath(path, new Coordinate(1, 1), new Coordinate(9, 9), maze);
         PrintMaze.printMaze(maze);

@@ -33,7 +33,7 @@ public class UserInterface {
     public void gameVersion1() {
         GeneratorPrim generatorPrim = new GeneratorPrim();
         BreadthFirstSearch breadthFirstSearch;
-        ArrayList<Coordinate> path;
+        List<Coordinate> path;
         DepthFirstSearch depthFirstSearch;
 
         while (true) {
@@ -131,7 +131,7 @@ public class UserInterface {
                 int width = CheckInputUser.getNumberUserSizeMaze(bufferedReader, printStream);
 
                 Maze maze = generatorKruskal.generateMaze(height, width);
-                ArrayList<Edge> mst = generatorKruskal.mst();
+                List<Edge> mst = generatorKruskal.mst();
                 PrintMaze.printMaze(maze);
 
                 printStream.println("Укажите границу");
@@ -145,7 +145,7 @@ public class UserInterface {
                 // подготовка поля с ловушками и подарками
                 PrintMaze.changeMazeWithWeight(mst, maze);
                 // подготовка входов для игры
-                List<Coordinate> passages = PrintMaze.createManyEntrance(maze, boundType);
+                List<Coordinate> passages = maze.createManyEntrance(boundType);
 
                 PrintMaze.printMaze(maze);
 
@@ -162,7 +162,7 @@ public class UserInterface {
                 // Инициализация алгоритма Дейкстры
                 dijkstra = new Dijkstra(mst, maze);
                 // Путь пользователя
-                ArrayList<Coordinate> pathUser = dijkstra.findPath(startPoint, endPoint);
+                List<Coordinate> pathUser = dijkstra.findPath(startPoint, endPoint);
                 // дистанция пути пользователя
                 int distanceUser = dijkstra.distanceSum();
 

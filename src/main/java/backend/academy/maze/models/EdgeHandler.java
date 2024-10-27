@@ -4,14 +4,14 @@ import backend.academy.maze.algorithms.generators.Generator;
 import backend.academy.maze.services.Constant;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-
+import java.util.List;
+import java.util.Set;
 
 public final class EdgeHandler {
     /**
      * EdgeHandler - класс для работы с рёбрами
      */
-    private static final ArrayList<Coordinate> DIRECTIONS = Coordinate.generateDirections(Constant.STEP_2);
+    private static final List<Coordinate> DIRECTIONS = Coordinate.generateDirections(Constant.STEP_2);
 
     private EdgeHandler() {
     }
@@ -21,7 +21,7 @@ public final class EdgeHandler {
      * Создание ребра, при условии, что оно находится в зоне сетки
      */
 
-    public static void addEdge(Coordinate from, Cell[][] grid, HashSet<Edge> edges) {
+    public static void addEdge(Coordinate from, Cell[][] grid, Set<Edge> edges) {
         for (Coordinate direction : DIRECTIONS) {
             if (!Generator.checkBounds(from, grid)) {
                 continue;
@@ -36,7 +36,7 @@ public final class EdgeHandler {
     }
 
     // Инициализация ребер (создание ребер на сетке)
-    public static void initSetEdges(Cell[][] grid, HashSet<Edge> edges) {
+    public static void initSetEdges(Cell[][] grid, Set<Edge> edges) {
         int rows = grid.length;
         int columns = grid[0].length;
         for (int i = 1; i < rows; i = i + 2) {
@@ -48,8 +48,8 @@ public final class EdgeHandler {
     }
 
     // Сортировка ребер
-    public static ArrayList<Edge> sortEdges(HashSet<Edge> edges) {
-        ArrayList<Edge> sortedEdges = new ArrayList<>(edges);
+    public static List<Edge> sortEdges(Set<Edge> edges) {
+        List<Edge> sortedEdges = new ArrayList<>(edges);
         Collections.sort(sortedEdges);
         return sortedEdges;
     }

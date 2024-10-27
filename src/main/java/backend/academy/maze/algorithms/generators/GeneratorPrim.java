@@ -6,8 +6,9 @@ import backend.academy.maze.models.Coordinate;
 import backend.academy.maze.models.Maze;
 import backend.academy.maze.services.Constant;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class GeneratorPrim implements Generator {
     private final SecureRandom random = new SecureRandom();
@@ -19,7 +20,7 @@ public class GeneratorPrim implements Generator {
         Maze maze = new Maze(heightMaze, widthMaze);
 
         // Направления движения через 2 клетки (чтобы прыгать через стены)
-        ArrayList<Coordinate> directions = Coordinate.generateDirections(Constant.STEP_2);
+        List<Coordinate> directions = Coordinate.generateDirections(Constant.STEP_2);
 
         // Начальная точка
         int randomRow = random.nextInt(heightMaze / 2) * 2 + 1;
@@ -28,9 +29,9 @@ public class GeneratorPrim implements Generator {
         maze.grid()[randomRow][randomColumn] = startPoint;
 
         // Множество соседей
-        HashSet<Cell> neighbours = new HashSet<>();
+        Set<Cell> neighbours = new HashSet<>();
         // Множество посещённых клеток
-        HashSet<Cell> visited = new HashSet<>();
+        Set<Cell> visited = new HashSet<>();
         visited.add(startPoint);
 
         // Добавляем начальных соседей
@@ -68,9 +69,9 @@ public class GeneratorPrim implements Generator {
     // Находим посещённую клетку, которая находится на 2 клетки дальше от текущей
     public static Cell findVisitedNeighbor(
         Cell cell,
-        ArrayList<Coordinate> directions,
+        List<Coordinate> directions,
         Cell[][] grid,
-        HashSet<Cell> visited
+        Set<Cell> visited
     ) {
         for (Coordinate direction : directions) {
             int newRow = cell.row() + direction.row();
@@ -89,10 +90,10 @@ public class GeneratorPrim implements Generator {
     // Добавляем соседей с учётом границ и непосещённых клеток
     public static void addNeighbor(
         Cell cell,
-        ArrayList<Coordinate> directions,
-        HashSet<Cell> neighbours,
+        List<Coordinate> directions,
+        Set<Cell> neighbours,
         Cell[][] grid,
-        HashSet<Cell> visited
+        Set<Cell> visited
     ) {
         for (Coordinate direction : directions) {
             int newRow = cell.row() + direction.row();

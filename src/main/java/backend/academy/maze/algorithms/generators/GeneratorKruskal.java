@@ -4,17 +4,20 @@ import backend.academy.maze.models.Coordinate;
 import backend.academy.maze.models.Edge;
 import backend.academy.maze.models.EdgeHandler;
 import backend.academy.maze.models.Maze;
+import backend.academy.maze.models.UnionFind;
 import backend.academy.maze.models.UnionFindImpl;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class GeneratorKruskal implements Generator {
-    private ArrayList<Edge> mst;
+    private List<Edge> mst;
     private static final SecureRandom RANDOM = new SecureRandom();
     private static final int BOUND_4 = 4;
 
@@ -23,13 +26,13 @@ public class GeneratorKruskal implements Generator {
         int heightMaze = Generator.getNumberOdd(height);
         int widthMaze = Generator.getNumberOdd(width);
         Maze maze = new Maze(heightMaze, widthMaze);
-        HashSet<Edge> edges = new HashSet<>();
-        UnionFindImpl unionFind = new UnionFindImpl(heightMaze * widthMaze);
+        Set<Edge> edges = new HashSet<>();
+        UnionFind unionFind = new UnionFindImpl(heightMaze * widthMaze);
         // Создаем и заполняем ребра
         EdgeHandler.initSetEdges(maze.grid(), edges);
 
         // Сортируем ребра
-        ArrayList<Edge> sortedEdges = EdgeHandler.sortEdges(edges);
+        List<Edge> sortedEdges = EdgeHandler.sortEdges(edges);
 
         // строим лабиринт
         mst = unionCell(sortedEdges, unionFind, maze);
@@ -38,8 +41,8 @@ public class GeneratorKruskal implements Generator {
     }
 
     // Объединяем множества точек
-    public static ArrayList<Edge> unionCell(ArrayList<Edge> edges, UnionFindImpl unionFind, Maze maze) {
-        ArrayList<Edge> mst = new ArrayList<>();
+    public static List<Edge> unionCell(List<Edge> edges, UnionFind unionFind, Maze maze) {
+        List<Edge> mst = new ArrayList<>();
 
         // Кандидаты на ребра в остовное дерево
         for (Edge edge : edges) {

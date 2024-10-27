@@ -5,6 +5,7 @@ import backend.academy.maze.models.Maze;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import lombok.Setter;
 @Setter
 public abstract class Solver {
     private Set<Coordinate> visited;  // Используем Coordinate вместо Cell для отслеживания посещённых клеток
-    private ArrayList<Coordinate> path;
+    private List<Coordinate> path;
     private Maze maze;
     private Map<Coordinate, Coordinate> parentMap;
 

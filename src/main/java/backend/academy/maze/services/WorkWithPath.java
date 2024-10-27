@@ -26,7 +26,7 @@ public class WorkWithPath {
                 bestPoint = coordinate;
             }
         }
-        HashMap<Coordinate, Integer> path = new HashMap<>();
+        Map<Coordinate, Integer> path = new HashMap<>();
         path.put(bestPoint, bestDistance);
         return path;
     }
