@@ -1,6 +1,6 @@
 package backend.academy.maze.services;
 
-import backend.academy.maze.algorithms.solvers.Dijkstra;
+import backend.academy.maze.algorithms.solvers.SearcherPathBasedOnDijkstra;
 import backend.academy.maze.models.Coordinate;
 import java.util.HashMap;
 import java.util.List;
@@ -13,16 +13,16 @@ public class WorkWithPath {
     public static Map<Coordinate, Integer> getBestPath(
         List<Coordinate> passages,
         int distanceUser,
-        Dijkstra dijkstra,
+        SearcherPathBasedOnDijkstra searcherPathBasedOnDijkstra,
         Coordinate start,
         Coordinate end
     ) {
         int bestDistance = distanceUser;
         Coordinate bestPoint = start;
         for (Coordinate coordinate : passages) {
-            dijkstra.findPath(coordinate, end);
-            if (dijkstra.distanceSum() < bestDistance) {
-                bestDistance = dijkstra.distanceSum();
+            searcherPathBasedOnDijkstra.findPath(coordinate, end);
+            if (searcherPathBasedOnDijkstra.distanceSum() < bestDistance) {
+                bestDistance = searcherPathBasedOnDijkstra.distanceSum();
                 bestPoint = coordinate;
             }
         }

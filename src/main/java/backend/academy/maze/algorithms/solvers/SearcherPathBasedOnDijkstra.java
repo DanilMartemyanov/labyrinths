@@ -17,7 +17,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Dijkstra extends Solver implements PathFinding {
+public class SearcherPathBasedOnDijkstra extends Solver implements PathFinding {
     private List<Edge> mst;
     private Queue<Coordinate> pqueue;
     private Set<Coordinate> nodes;
@@ -25,7 +25,7 @@ public class Dijkstra extends Solver implements PathFinding {
     private int distanceSum;
     private Maze maze;
 
-    public Dijkstra(List<Edge> mst, Maze maze) {
+    public SearcherPathBasedOnDijkstra(List<Edge> mst, Maze maze) {
         super(maze);
         this.mst = mst;
         pqueue = new PriorityQueue<>();

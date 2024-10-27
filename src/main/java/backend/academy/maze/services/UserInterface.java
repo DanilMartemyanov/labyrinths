@@ -2,9 +2,9 @@ package backend.academy.maze.services;
 
 import backend.academy.maze.algorithms.generators.MazeGeneratorBasedOnKruskal;
 import backend.academy.maze.algorithms.generators.MazeGeneratorBasedOnPrim;
-import backend.academy.maze.algorithms.solvers.BreadthFirstSearch;
-import backend.academy.maze.algorithms.solvers.DepthFirstSearch;
-import backend.academy.maze.algorithms.solvers.Dijkstra;
+import backend.academy.maze.algorithms.solvers.SearcherPathBasedOnBFS;
+import backend.academy.maze.algorithms.solvers.SearcherPathBasedOnDFS;
+import backend.academy.maze.algorithms.solvers.SearcherPathBasedOnDijkstra;
 import backend.academy.maze.enums.AlgorithmType;
 import backend.academy.maze.enums.AnswerType;
 import backend.academy.maze.enums.BoundType;
@@ -31,9 +31,9 @@ public class UserInterface {
 
     public void gameVersion1() {
         MazeGeneratorBasedOnPrim mazeGeneratorBasedOnPrim = new MazeGeneratorBasedOnPrim();
-        BreadthFirstSearch breadthFirstSearch;
+        SearcherPathBasedOnBFS searcherPathBasedOnBFS;
         List<Coordinate> path;
-        DepthFirstSearch depthFirstSearch;
+        SearcherPathBasedOnDFS searcherPathBasedOnDFS;
 
         while (true) {
 
@@ -84,13 +84,13 @@ public class UserInterface {
 
                     switch (findPathType) {
                         case DFS -> {
-                            depthFirstSearch = new DepthFirstSearch(mazeAttempt);
-                            path = depthFirstSearch.findPath(startPoint, endPoint);
+                            searcherPathBasedOnDFS = new SearcherPathBasedOnDFS(mazeAttempt);
+                            path = searcherPathBasedOnDFS.findPath(startPoint, endPoint);
                         }
 
                         case BFS -> {
-                            breadthFirstSearch = new BreadthFirstSearch(mazeAttempt);
-                            path = breadthFirstSearch.findPath(startPoint, endPoint);
+                            searcherPathBasedOnBFS = new SearcherPathBasedOnBFS(mazeAttempt);
+                            path = searcherPathBasedOnBFS.findPath(startPoint, endPoint);
                         }
                         default -> path = null;
                     }
@@ -114,7 +114,7 @@ public class UserInterface {
     }
 
     public void gameVersion2() {
-        Dijkstra dijkstra;
+        SearcherPathBasedOnDijkstra searcherPathBasedOnDijkstra;
 
         while (true) {
             printStream.println("Хэй хэй хэй ! Новая концепция игры. Готовы продолжить ?");
@@ -159,11 +159,11 @@ public class UserInterface {
                 Coordinate startPoint = Checker.makeCorrectCoordinateForEntrance(boundType, startEntrance);
 
                 // Инициализация алгоритма Дейкстры
-                dijkstra = new Dijkstra(mst, maze);
+                searcherPathBasedOnDijkstra = new SearcherPathBasedOnDijkstra(mst, maze);
                 // Путь пользователя
-                List<Coordinate> pathUser = dijkstra.findPath(startPoint, endPoint);
+                List<Coordinate> pathUser = searcherPathBasedOnDijkstra.findPath(startPoint, endPoint);
                 // дистанция пути пользователя
-                int distanceUser = dijkstra.distanceSum();
+                int distanceUser = searcherPathBasedOnDijkstra.distanceSum();
 
                 // вывод конечного лабиринта вместе с путем пользователя
                 PrintMaze.printPath(pathUser, startPoint, endPoint, maze);
@@ -171,7 +171,7 @@ public class UserInterface {
                 passages.remove(startEntrance);
                 // метод для сравнения путей пользователя и других возможных вариантах
                 Map<Coordinate, Integer> possiblePath =
-                    WorkWithPath.getBestPath(passages, distanceUser, dijkstra, startPoint, endPoint);
+                    WorkWithPath.getBestPath(passages, distanceUser, searcherPathBasedOnDijkstra, startPoint, endPoint);
                 Coordinate bestPoint = possiblePath.entrySet().iterator().next().getKey();
 
                 if (possiblePath.get(bestPoint) < distanceUser) {
